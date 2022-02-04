@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AssetManagement.DesktopUI.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Toolkit.Mvvm.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +16,13 @@ namespace AssetManagement.DesktopUI
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            Ioc.Default.ConfigureServices(
+                new ServiceCollection()
+                .AddSingleton<MainWindowViewModel>()
+                .BuildServiceProvider()
+                );
+        }
     }
 }

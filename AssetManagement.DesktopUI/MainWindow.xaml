@@ -5,8 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AssetManagement.DesktopUI"
         mc:Ignorable="d"
+        DataContext="{Binding Path=MainWindowViewModel, Source={StaticResource ViewModelLocator}}"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
+        <TextBox HorizontalAlignment="Center"
+                 Height="25" Width="100"
+                 TextAlignment="Center"
+                 Text="{Binding DemoProp}"/>
+
+        <TextBox Grid.Column="1"
+                 HorizontalAlignment="Center"
+                 Height="25" Width="100"
+                 TextAlignment="Center"/>
     </Grid>
 </Window>
