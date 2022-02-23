@@ -1,4 +1,5 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+﻿using AssetManagement.DesktopUI.Stores;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,12 +11,15 @@ namespace AssetManagement.DesktopUI.ViewModels
 {
     public class MainWindowViewModel : ObservableObject // base class for ViewModels
     {
-        private string demoProp;
 
-        public string DemoProp
+        private readonly NavigationStore _navigationStore;
+
+
+        public MainWindowViewModel(NavigationStore navigationStore)
         {
-            get => demoProp;
-            set => demoProp = value;
+            _navigationStore = navigationStore;
         }
+
+        public ObservableObject CurrentViewModel => _navigationStore.CurrentViewModel;
     }
 }

@@ -9,6 +9,8 @@ namespace AssetManagement.DesktopUI.ViewModels
 {
     public class ViewModelLocator
     {
-        public MainWindowViewModel MainWindowViewModel => Ioc.Default.GetService<MainWindowViewModel>();
+        public static MainWindowViewModel MainWindowViewModel => Ioc.Default.GetService<MainWindowViewModel>();
+
+        public static LoginViewModel LoginViewModel => Ioc.Default.GetService<LoginViewModel>();
     }
 }
