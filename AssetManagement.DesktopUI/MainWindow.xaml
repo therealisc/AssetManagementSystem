@@ -4,28 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AssetManagement.DesktopUI"
-        mc:Ignorable="d"
-        DataContext="{Binding Path=MainWindowViewModel, Source={StaticResource ViewModelLocator}}"
+        xmlns:viewmodels="clr-namespace:AssetManagement.DesktopUI.ViewModels"
+        xmlns:views="clr-namespace:AssetManagement.DesktopUI.Views"
+        mc:Ignorable="d"        
         Title="MainWindow" Height="450" Width="800">
+        <!--DataContext="{Binding Path=MainWindowViewModel, Source={StaticResource ViewModelLocator}}"-->
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
+                <views:LoginView/>
+            </DataTemplate>
+        </Grid.Resources>
 
-        <TextBox HorizontalAlignment="Center"
-                 Height="25" Width="100"
-                 TextAlignment="Center"
-                 Text="{Binding DemoProp}"/>
 
-        <TextBox Grid.Column="1"
-                 HorizontalAlignment="Center"
-                 Height="25" Width="100"
-                 TextAlignment="Center"/>
+        <ContentControl Content="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>
