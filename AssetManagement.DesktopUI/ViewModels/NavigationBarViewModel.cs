@@ -1,14 +1,14 @@
-﻿using Microsoft.Toolkit.Mvvm.Input;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace AssetManagement.DesktopUI.ViewModels
 {
-    public class NavigationBarViewModel
+    public class NavigationBarViewModel : ViewModelBase
     {
-        public RelayCommand NavigateHomeCommand { get; }
+        public ICommand NavigateHomeCommand { get; }
     }
 }

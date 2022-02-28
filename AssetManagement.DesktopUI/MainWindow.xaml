@@ -7,8 +7,7 @@
         xmlns:viewmodels="clr-namespace:AssetManagement.DesktopUI.ViewModels"
         xmlns:views="clr-namespace:AssetManagement.DesktopUI.Views"
         mc:Ignorable="d"        
-        Title="MainWindow" Height="450" Width="800">
-        <!--DataContext="{Binding Path=MainWindowViewModel, Source={StaticResource ViewModelLocator}}"-->
+        Title="MainWindow" Height="600" Width="1000">
     <Grid>
         <Grid.Resources>
             <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">

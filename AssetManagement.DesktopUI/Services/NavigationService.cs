@@ -1,5 +1,5 @@
 ﻿using AssetManagement.DesktopUI.Stores;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
+using AssetManagement.DesktopUI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AssetManagement.DesktopUI.Services
 {
-    public class NavigationService<TViewModel> : INavigationService where TViewModel : ObservableObject
+    public class NavigationService<TViewModel> : INavigationService where TViewModel : ViewModelBase
     {
         private readonly NavigationStore _navigationStore;
         private readonly Func<TViewModel> _createViewModel;

@@ -4,6 +4,6 @@
              xmlns:vm="clr-namespace:AssetManagement.DesktopUI.ViewModels"
              x:Name="App">
     <Application.Resources>
-        <vm:ViewModelLocator x:Key="ViewModelLocator"/>
+        
     </Application.Resources>
 </Application>

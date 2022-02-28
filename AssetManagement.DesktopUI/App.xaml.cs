@@ -2,7 +2,6 @@
 using AssetManagement.DesktopUI.Stores;
 using AssetManagement.DesktopUI.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -18,37 +17,32 @@ namespace AssetManagement.DesktopUI
     /// </summary>
     public partial class App : Application
     {
+        private readonly IServiceProvider _serviceProvider;
+
         public App()
         {
-            Ioc.Default.ConfigureServices(
-                new ServiceCollection()
+            IServiceCollection services = new ServiceCollection();
 
-                .AddSingleton<ViewModelLocator>()
-                .AddSingleton<NavigationStore>()
+            services.AddSingleton<AccountStore>();
+            services.AddSingleton<NavigationStore>();
+            services.AddSingleton<INavigationService>(s => CreateLoginNavigationService(s));
+            services.AddTransient<LoginViewModel>();
+            services.AddSingleton<MainWindowViewModel>();
+            services.AddSingleton<MainWindow>(s => new MainWindow()
+            {
+                DataContext = s.GetRequiredService<MainWindowViewModel>()
+            });
 
-                .AddSingleton<INavigationService>(s => CreateLoginNavigationService(s))
-
-
-                .AddTransient<LoginViewModel>()
-
-                .AddSingleton<MainWindowViewModel>()
-                .AddSingleton<MainWindow>(s => new MainWindow()
-                {
-                    DataContext = s.GetRequiredService<MainWindowViewModel>()
-                })
-
-                .BuildServiceProvider()
-                );
+            _serviceProvider = services.BuildServiceProvider();
+            
         }
 
-
-        // x:Name must be added in App.xaml in order to override OnStartup() method and have ViewModelLocator working
         protected override void OnStartup(StartupEventArgs e) 
         {
-            INavigationService initialNavigationService = Ioc.Default.GetRequiredService<INavigationService>();
+            INavigationService initialNavigationService = _serviceProvider.GetRequiredService<INavigationService>();
             initialNavigationService.Navigate();
 
-            MainWindow = Ioc.Default.GetRequiredService<MainWindow>();
+            MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
             MainWindow.Show();
 
             base.OnStartup(e);
@@ -62,10 +56,5 @@ namespace AssetManagement.DesktopUI
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<LoginViewModel>());
         }
-
-        //private LoginViewModel CreateLoginViewModel(IServiceProvider serviceProvider)
-        //{
-
-        //}
     }
 }
