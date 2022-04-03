@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssetManagement.DesktopUI", "AssetManagement.DesktopUI\AssetManagement.DesktopUI.csproj", "{BF226D27-8F63-4660-A92F-B5B843FAED6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetManagement.Library", "AssetManagement.Library\AssetManagement.Library.csproj", "{D6FCC62B-080B-4428-971A-741F0D6703AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssetManagement.Library", "AssetManagement.Library\AssetManagement.Library.csproj", "{D6FCC62B-080B-4428-971A-741F0D6703AA}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "AssetManagement.Data", "AssetManagement.Data\AssetManagement.Data.sqlproj", "{A693A28B-12AB-44E7-A12A-4CC48B3011F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,12 @@ Global
 		{D6FCC62B-080B-4428-971A-741F0D6703AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6FCC62B-080B-4428-971A-741F0D6703AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6FCC62B-080B-4428-971A-741F0D6703AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A693A28B-12AB-44E7-A12A-4CC48B3011F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A693A28B-12AB-44E7-A12A-4CC48B3011F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A693A28B-12AB-44E7-A12A-4CC48B3011F1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A693A28B-12AB-44E7-A12A-4CC48B3011F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A693A28B-12AB-44E7-A12A-4CC48B3011F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A693A28B-12AB-44E7-A12A-4CC48B3011F1}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
