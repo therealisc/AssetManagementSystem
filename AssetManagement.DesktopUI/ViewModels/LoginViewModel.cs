@@ -25,7 +25,7 @@ namespace AssetManagement.DesktopUI.ViewModels
         }
 
 
-        private string _password;
+        private string _password = "asdf";
 
         public string Password
         {
@@ -37,7 +37,7 @@ namespace AssetManagement.DesktopUI.ViewModels
             }
         }
 
-        public ICommand LoginCommand { get; set; }
+        public ICommand LoginCommand { get; }
 
         public LoginViewModel(AccountStore accountStore, INavigationService accountNavigationService)
         {

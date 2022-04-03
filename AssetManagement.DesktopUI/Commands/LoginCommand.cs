@@ -25,10 +25,13 @@ namespace AssetManagement.DesktopUI.Commands
 
         public override void Execute(object parameter)
         {
+            //TODO: Check Password hash in the database
+
             AccountModel account = new()
             {
-                Email = $"{_viewModel.Username}.@test.com",
-                Username = _viewModel.Username
+                //Email = $"{_viewModel.Username}.@test.com",
+                Username = _viewModel.Username,
+                Password = _viewModel.Password
             };
 
             _accountStore.CurrentAccount = account;

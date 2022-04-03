@@ -13,6 +13,7 @@
             <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
                 <views:LoginView/>
             </DataTemplate>
+            
         </Grid.Resources>
 
 
