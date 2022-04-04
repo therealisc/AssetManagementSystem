@@ -4,9 +4,11 @@ using AssetManagement.DesktopUI.Stores;
 using AssetManagement.DesktopUI.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace AssetManagement.DesktopUI.Commands
 {
@@ -16,11 +18,12 @@ namespace AssetManagement.DesktopUI.Commands
         private readonly AccountStore _accountStore;
         private readonly INavigationService _navigationService;
 
-        public LoginCommand(LoginViewModel viewModel, AccountStore accountStore, INavigationService navigationService)
+        public LoginCommand(LoginViewModel viewModel, AccountStore accountStore, INavigationService homeNavigationService)
         {
             _viewModel = viewModel;
             _accountStore = accountStore;
-            _navigationService = navigationService;
+            _navigationService = homeNavigationService;
+            _viewModel.PropertyChanged += ViewModel_PropertyChanged;
         }
 
         public override void Execute(object parameter)
@@ -37,6 +40,17 @@ namespace AssetManagement.DesktopUI.Commands
             _accountStore.CurrentAccount = account;
 
             _navigationService.Navigate();
+        }
+
+        public override bool CanExecute(object parameter)
+        {
+            return !string.IsNullOrWhiteSpace(_viewModel.Username) &&
+                !string.IsNullOrWhiteSpace(_viewModel.Password);
+        }
+
+        private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnCanExecuteChanged();
         }
     }
 }

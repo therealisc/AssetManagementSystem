@@ -11,11 +11,14 @@ namespace AssetManagement.DesktopUI.Commands
     {
         public event EventHandler CanExecuteChanged;
 
-        public bool CanExecute(object parameter) => true;
+        public virtual bool CanExecute(object parameter)
+        {
+            return true;
+        }
 
         public abstract void Execute(object parameter);
 
-        protected void OnCanExecuteChenged()
+        protected void OnCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, new EventArgs());
         }

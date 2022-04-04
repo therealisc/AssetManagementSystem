@@ -17,8 +17,16 @@ namespace AssetManagement.DesktopUI.ViewModels
         public MainWindowViewModel(NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;
+            _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
+
         }
 
         public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
+
+
+        private void OnCurrentViewModelChanged()
+        {
+            OnPropertyChanged(nameof(CurrentViewModel));
+        }
     }
 }

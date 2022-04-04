@@ -17,8 +17,8 @@ namespace AssetManagement.DesktopUI.ViewModels
         public string Username
         {
             get { return _username; }
-            set 
-            { 
+            set
+            {
                 _username = value;
                 OnPropertyChanged(nameof(Username));
             }
@@ -30,8 +30,8 @@ namespace AssetManagement.DesktopUI.ViewModels
         public string Password
         {
             get { return _password; }
-            set 
-            { 
+            set
+            {
                 _password = value;
                 OnPropertyChanged(nameof(Password));
             }
@@ -39,9 +39,9 @@ namespace AssetManagement.DesktopUI.ViewModels
 
         public ICommand LoginCommand { get; }
 
-        public LoginViewModel(AccountStore accountStore, INavigationService accountNavigationService)
+        public LoginViewModel(AccountStore accountStore, INavigationService homeNavigationService)
         {
-            LoginCommand = new LoginCommand(this, accountStore, accountNavigationService);
+            LoginCommand = new LoginCommand(this, accountStore, homeNavigationService);
         }
 
     }

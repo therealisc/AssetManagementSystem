@@ -25,19 +25,23 @@ namespace AssetManagement.DesktopUI
 
             services.AddSingleton<AccountStore>();
             services.AddSingleton<NavigationStore>();
-            services.AddSingleton<INavigationService>(s => CreateLoginNavigationService(s));
-            services.AddTransient<LoginViewModel>();
+            services.AddSingleton<INavigationService>(CreateLoginNavigationService);
+            services.AddSingleton<LoginViewModel>(CreateLoginViewModel);
             services.AddSingleton<MainWindowViewModel>();
             services.AddSingleton<MainWindow>(s => new MainWindow()
             {
                 DataContext = s.GetRequiredService<MainWindowViewModel>()
             });
 
+            services.AddTransient<HomeViewModel>();
+
+            services.AddTransient<NavigationBarViewModel>(CreateNavigationBarViewModel);
+
+
             _serviceProvider = services.BuildServiceProvider();
-            
         }
 
-        protected override void OnStartup(StartupEventArgs e) 
+        protected override void OnStartup(StartupEventArgs e)
         {
             INavigationService initialNavigationService = _serviceProvider.GetRequiredService<INavigationService>();
             initialNavigationService.Navigate();
@@ -48,13 +52,40 @@ namespace AssetManagement.DesktopUI
             base.OnStartup(e);
         }
 
-
-
         private INavigationService CreateLoginNavigationService(IServiceProvider serviceProvider)
         {
             return new NavigationService<LoginViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<LoginViewModel>());
+        }
+
+        private INavigationService CreateHomeNavigationService(IServiceProvider serviceProvider)
+        {
+            return new LayoutNavigationService<HomeViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<HomeViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+        }
+
+        private LoginViewModel CreateLoginViewModel(IServiceProvider serviceProvider)
+        {
+            LayoutNavigationService<HomeViewModel> navigationService = new(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<HomeViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+
+            return new LoginViewModel(
+                serviceProvider.GetRequiredService<AccountStore>(),
+                navigationService);
+        }
+
+        private NavigationBarViewModel CreateNavigationBarViewModel(IServiceProvider serviceProvider)
+        {
+            return new NavigationBarViewModel(
+                serviceProvider.GetRequiredService<AccountStore>(),
+                CreateHomeNavigationService(serviceProvider),
+                null,
+                null);
         }
     }
 }

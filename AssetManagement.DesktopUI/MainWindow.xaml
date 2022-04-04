@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AssetManagement.DesktopUI"
         xmlns:viewmodels="clr-namespace:AssetManagement.DesktopUI.ViewModels"
-        xmlns:views="clr-namespace:AssetManagement.DesktopUI.Views"
+        xmlns:views="clr-namespace:AssetManagement.DesktopUI.Views" 
+        xmlns:components="clr-namespace:AssetManagement.DesktopUI.Components"
         mc:Ignorable="d"        
         Title="MainWindow" Height="600" Width="1000">
     <Grid>
@@ -13,7 +14,15 @@
             <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
                 <views:LoginView/>
             </DataTemplate>
-            
+
+            <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
+                <views:HomeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:LayoutViewModel}">
+                <components:Layout/>
+            </DataTemplate>
+
         </Grid.Resources>
 
 
