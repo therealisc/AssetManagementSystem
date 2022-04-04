@@ -63,7 +63,10 @@
     <Folder Include="PublishLocations" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Clienti.sql" />
+    <Build Include="dbo\Tables\Clients.sql" />
+    <Build Include="dbo\Tables\Users.sql" />
+    <Build Include="dbo\Tables\Roles.sql" />
+    <Build Include="dbo\Tables\UserRoles.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishLocations\AssetManagement.Data.publish.xml" />
