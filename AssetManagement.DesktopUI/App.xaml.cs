@@ -1,11 +1,13 @@
 ﻿using AssetManagement.DesktopUI.Services;
 using AssetManagement.DesktopUI.Stores;
 using AssetManagement.DesktopUI.ViewModels;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -34,10 +36,15 @@ namespace AssetManagement.DesktopUI
             });
 
             services.AddTransient<HomeViewModel>();
-
             services.AddTransient<NavigationBarViewModel>(CreateNavigationBarViewModel);
 
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json");
 
+            IConfiguration config = builder.Build();
+
+            services.AddSingleton(config);
             _serviceProvider = services.BuildServiceProvider();
         }
 
