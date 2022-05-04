@@ -16,12 +16,13 @@
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <TargetLanguage>CS</TargetLanguage>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -63,12 +64,26 @@
     <Folder Include="PublishLocations" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Clients.sql" />
     <Build Include="dbo\Tables\Users.sql" />
     <Build Include="dbo\Tables\Roles.sql" />
     <Build Include="dbo\Tables\UserRoles.sql" />
+    <Build Include="dbo\Tables\Clienti.sql" />
+    <Build Include="dbo\Tables\ClientiInLucru.sql" />
+    <Build Include="dbo\Tables\MijloaceFixe.sql" />
+    <Build Include="dbo\Tables\TipuriClasificare.sql" />
+    <Build Include="dbo\Tables\TipuriDocumente.sql" />
+    <Build Include="dbo\Tables\Furnizori.sql" />
+    <Build Include="dbo\Tables\TipuriOperatii.sql" />
+    <Build Include="dbo\Tables\Operatii.sql" />
+    <Build Include="dbo\Tables\Documente.sql" />
+    <Build Include="dbo\Tables\DocumenteMijloaceFixe.sql" />
+    <Build Include="dbo\Tables\CatalogCoduriClasificare.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishLocations\AssetManagement.Data.publish.xml" />
+    <None Include="AssetManagement.Data.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="AssetManagement.Data.refactorlog" />
   </ItemGroup>
 </Project>

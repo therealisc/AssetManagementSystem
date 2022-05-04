@@ -1,7 +1,6 @@
 ﻿CREATE TABLE [dbo].[Users] (
-    [Id]                   NVARCHAR (128) NOT NULL,
+    [Id]                   INT NOT NULL IDENTITY, 
     [Email]                NVARCHAR (256) NULL,
-    [EmailConfirmed]       BIT            NOT NULL,
     [PasswordHash]         NVARCHAR (MAX) NULL,
     [PhoneNumber]          NVARCHAR (MAX) NULL,
     [UserName]             NVARCHAR (256) NOT NULL,

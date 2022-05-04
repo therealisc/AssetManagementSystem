@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="2a32ee81-5813-4294-80cb-804a9ad48cf3" ChangeDateTime="05/04/2022 07:37:55">
+    <Property Name="ElementName" Value="[dbo].[MijloaceFixe].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MijloaceFixe]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="NumarInventar" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7ac4baab-aec0-4450-b510-6ada3a0341cd" ChangeDateTime="05/04/2022 07:40:08">
+    <Property Name="ElementName" Value="[dbo].[MijloaceFixe].[DurataAmortizareContabila]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MijloaceFixe]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DurataAmortizareContabila" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="424ffde5-3296-4cd0-a4e0-370feb7e8f26" ChangeDateTime="05/04/2022 07:40:19">
+    <Property Name="ElementName" Value="[dbo].[MijloaceFixe].[Durat]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MijloaceFixe]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DurataAmortizareFiscala" />
+  </Operation>
+</Operations>
