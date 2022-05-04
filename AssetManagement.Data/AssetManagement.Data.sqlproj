@@ -80,10 +80,9 @@
     <Build Include="dbo\Tables\CatalogCoduriClasificare.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="PublishLocations\AssetManagement.Data.publish.xml" />
-    <None Include="AssetManagement.Data.publish.xml" />
+    <RefactorLog Include="AssetManagement.Data.refactorlog" />
   </ItemGroup>
   <ItemGroup>
-    <RefactorLog Include="AssetManagement.Data.refactorlog" />
+    <None Include="PublishLocations\AssetManagement.Data.publish.xml" />
   </ItemGroup>
 </Project>
