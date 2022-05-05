@@ -31,7 +31,7 @@ namespace AssetManagement.DesktopUI
             services.AddSingleton<AccountStore>();
             services.AddSingleton<NavigationStore>();
             services.AddSingleton<INavigationService>(CreateLoginNavigationService);
-            services.AddSingleton<LoginViewModel>(CreateLoginViewModel);
+            services.AddTransient<LoginViewModel>(CreateLoginViewModel); //transient pentru avea mereu o noua instanta
             services.AddSingleton<MainWindowViewModel>();
             services.AddSingleton<MainWindow>(s => new MainWindow()
             {
@@ -102,7 +102,7 @@ namespace AssetManagement.DesktopUI
                 serviceProvider.GetRequiredService<AccountStore>(),
                 CreateHomeNavigationService(serviceProvider),
                 null,
-                null);
+                CreateLoginNavigationService(serviceProvider));
         }
     }
 }

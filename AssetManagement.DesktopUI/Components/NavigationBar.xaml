@@ -55,21 +55,21 @@
                     Content="Home"
                     Margin="5"/>
 
-        <Button Grid.Column="2"
+        <!--<Button Grid.Column="2"
                     Command="{Binding NavigatePeopleListingCommand}"
                     Content="People"
-                    Margin="5"/>
+                    Margin="5"/>-->
 
-        <Button Grid.Column="3"
+        <!--<Button Grid.Column="3"
                     Command="{Binding NavigateLoginCommand}"
                     Content="Login"
-                    Margin="5"/>
+                    Margin="5"/>-->
 
-        <Button Grid.Column="4" 
+        <!--<Button Grid.Column="4" 
                     Command="{Binding NavigateAccountCommand}"
                     Content="Account"
                     Margin="5"
-                    Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}" />-->
 
         <Button Grid.Column="5" 
                     Command="{Binding LogoutCommand}"

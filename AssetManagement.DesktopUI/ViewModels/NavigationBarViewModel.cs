@@ -31,7 +31,7 @@ namespace AssetManagement.DesktopUI.ViewModels
             NavigateAccountCommand = new NavigateCommand(accountNavigationService);
             NavigateLoginCommand = new NavigateCommand(loginNavigationService);
             _accountStore = accountStore;
-            //LogoutCommand = new LogoutCommand(_accountStore);
+            LogoutCommand = new LogoutCommand(_accountStore, loginNavigationService);
 
             _accountStore.CurrentAccountChanged += OnCurrentAccountChanged;
         }
