@@ -16,11 +16,11 @@ namespace AssetManagement.Library.DataAccess
             _sqlData = sqlData;
         }
 
-        public UserModel GetUserByUsername(string username)
+        public List<UserModel> GetUserByUsername(string username)
         {
             var output = _sqlData.LoadData<UserModel, dynamic>("dbo.spUser_GetByUsername", new { Username = username }, "AssetManagement");
 
-            return output.First();
+            return output;
         }
     }
 }

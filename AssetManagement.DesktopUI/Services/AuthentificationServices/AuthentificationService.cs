@@ -22,14 +22,15 @@ namespace AssetManagement.DesktopUI.Services.AuthentificationServices
 
         public AccountModel Login(string username, string password)
         {
-            var user = _userData.GetUserByUsername(username);
+            var rawData = _userData.GetUserByUsername(username);
 
+            //TODO: find out how to map objects properly
             AccountModel account = new AccountModel
             {
-                Username = user.Username,
-                PasswordHash = user.PasswordHash,
-                Email = user.Email, 
-                Roles = user.Roles
+                Username = rawData.First().Username,
+                PasswordHash = rawData.First().PasswordHash,
+                Email = rawData.First().Email,
+                Roles = rawData.Select(x => x.Role).ToList()
             };
 
             PasswordVerificationResult result = _passwordHasher.VerifyHashedPassword(account.PasswordHash, password);
