@@ -1,25 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using Microsoft.Extensions.Configuration;
 
 namespace AssetManagement.Library.DataAccess
 {
-    internal class SqlDataAccess
+    public class SqlDataAccess
     {
-        private string GetConnectionString(string connectionStringName)
+        private readonly IConfiguration _config;
+
+        public SqlDataAccess(IConfiguration config)
         {
-            return ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
+            _config = config;
         }
 
         public async Task<List<T>> LoadData<T, U>(string sqlStatement, U parameters, string connectionStringName)
         {
-            string connectionString  = GetConnectionString(connectionStringName);
+            string connectionString  = _config.GetConnectionString(connectionStringName);
 
             using(IDbConnection connection = new SqlConnection(connectionString))
             {
@@ -31,7 +33,7 @@ namespace AssetManagement.Library.DataAccess
 
         public void SaveData<T>(string sqlStatement, T parameters, string connectionStringName)
         {
-            string connectionString = GetConnectionString(connectionStringName);
+            string connectionString = _config.GetConnectionString(connectionStringName);
 
             using(IDbConnection connection = new SqlConnection(connectionString))
             {

@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using AssetManagement.Library.DataAccess;
 
 namespace AssetManagement.DesktopUI
 {
@@ -37,6 +38,8 @@ namespace AssetManagement.DesktopUI
 
             services.AddTransient<HomeViewModel>();
             services.AddTransient<NavigationBarViewModel>(CreateNavigationBarViewModel);
+
+            services.AddTransient<SqlDataAccess>();
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
