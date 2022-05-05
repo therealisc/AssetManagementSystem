@@ -4,6 +4,8 @@
              xmlns:vm="clr-namespace:AssetManagement.DesktopUI.ViewModels"
              x:Name="App">
     <Application.Resources>
-        
+        <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

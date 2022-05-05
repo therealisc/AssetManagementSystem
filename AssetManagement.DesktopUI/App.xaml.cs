@@ -12,6 +12,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using AssetManagement.Library.DataAccess;
+using AssetManagement.DesktopUI.Services.AuthentificationServices;
+using Microsoft.AspNet.Identity;
 
 namespace AssetManagement.DesktopUI
 {
@@ -36,10 +38,14 @@ namespace AssetManagement.DesktopUI
                 DataContext = s.GetRequiredService<MainWindowViewModel>()
             });
 
+            services.AddSingleton<IPasswordHasher, PasswordHasher>();
+
             services.AddTransient<HomeViewModel>();
             services.AddTransient<NavigationBarViewModel>(CreateNavigationBarViewModel);
 
             services.AddTransient<SqlDataAccess>();
+            services.AddTransient<UserData>();
+            services.AddTransient<AuthentificationService>();
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -86,7 +92,8 @@ namespace AssetManagement.DesktopUI
 
             return new LoginViewModel(
                 serviceProvider.GetRequiredService<AccountStore>(),
-                navigationService);
+                navigationService,
+                serviceProvider.GetRequiredService<AuthentificationService>());
         }
 
         private NavigationBarViewModel CreateNavigationBarViewModel(IServiceProvider serviceProvider)

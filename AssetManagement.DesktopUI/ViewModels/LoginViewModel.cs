@@ -1,5 +1,6 @@
 ﻿using AssetManagement.DesktopUI.Commands;
 using AssetManagement.DesktopUI.Services;
+using AssetManagement.DesktopUI.Services.AuthentificationServices;
 using AssetManagement.DesktopUI.Stores;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace AssetManagement.DesktopUI.ViewModels
         }
 
 
-        private string _password = "asdf";
+        private string _password;
 
         public string Password
         {
@@ -37,12 +38,24 @@ namespace AssetManagement.DesktopUI.ViewModels
             }
         }
 
-        public ICommand LoginCommand { get; }
+        private bool _wrongCredentials;
 
-        public LoginViewModel(AccountStore accountStore, INavigationService homeNavigationService)
+        public bool WrongCredentials
         {
-            LoginCommand = new LoginCommand(this, accountStore, homeNavigationService);
+            get { return _wrongCredentials; }
+            set 
+            { 
+                _wrongCredentials = value;
+                OnPropertyChanged(nameof(WrongCredentials));
+            }
         }
 
+
+        public ICommand LoginCommand { get; }
+
+        public LoginViewModel(AccountStore accountStore, INavigationService homeNavigationService, AuthentificationService authentificationService)
+        {
+            LoginCommand = new LoginCommand(this, accountStore, homeNavigationService, authentificationService);
+        }
     }
 }

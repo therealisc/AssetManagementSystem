@@ -19,15 +19,15 @@ namespace AssetManagement.Library.DataAccess
             _config = config;
         }
 
-        public async Task<List<T>> LoadData<T, U>(string sqlStatement, U parameters, string connectionStringName)
+        public List<T> LoadData<T, U>(string sqlStatement, U parameters, string connectionStringName)
         {
             string connectionString  = _config.GetConnectionString(connectionStringName);
 
             using(IDbConnection connection = new SqlConnection(connectionString))
             {
-                IEnumerable<T> rows = await connection.QueryAsync<T>(sqlStatement, parameters, commandType: CommandType.StoredProcedure);
+                List<T> rows = connection.Query<T>(sqlStatement, parameters, commandType: CommandType.StoredProcedure).ToList();
 
-                return rows.ToList();
+                return rows;
             }
         }
 

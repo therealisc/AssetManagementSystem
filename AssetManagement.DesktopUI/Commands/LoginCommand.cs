@@ -1,5 +1,6 @@
 ﻿using AssetManagement.DesktopUI.Models;
 using AssetManagement.DesktopUI.Services;
+using AssetManagement.DesktopUI.Services.AuthentificationServices;
 using AssetManagement.DesktopUI.Stores;
 using AssetManagement.DesktopUI.ViewModels;
 using System;
@@ -17,27 +18,30 @@ namespace AssetManagement.DesktopUI.Commands
         private readonly LoginViewModel _viewModel;
         private readonly AccountStore _accountStore;
         private readonly INavigationService _navigationService;
+        private readonly AuthentificationService _authentificationService;
 
-        public LoginCommand(LoginViewModel viewModel, AccountStore accountStore, INavigationService homeNavigationService)
+        public LoginCommand(LoginViewModel viewModel, AccountStore accountStore, INavigationService homeNavigationService, AuthentificationService authentificationService)
         {
             _viewModel = viewModel;
             _accountStore = accountStore;
             _navigationService = homeNavigationService;
             _viewModel.PropertyChanged += ViewModel_PropertyChanged;
+            _authentificationService = authentificationService;
         }
 
         public override void Execute(object parameter)
         {
-            //TODO: Check Password hash in the database
-
-            AccountModel account = new()
+            try
             {
-                //Email = $"{_viewModel.Username}.@test.com",
-                Username = _viewModel.Username,
-                Password = _viewModel.Password
-            };
-
-            _accountStore.CurrentAccount = account;
+                AccountModel account = _authentificationService.Login(_viewModel.Username, _viewModel.Password);
+                _accountStore.CurrentAccount = account;
+                _viewModel.WrongCredentials = false;
+            }
+            catch (Exception ex)
+            {
+                _viewModel.WrongCredentials = true;
+                return;
+            }
 
             _navigationService.Navigate();
         }
