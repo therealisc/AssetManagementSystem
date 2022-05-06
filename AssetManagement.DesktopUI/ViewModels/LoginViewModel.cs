@@ -26,7 +26,7 @@ namespace AssetManagement.DesktopUI.ViewModels
         }
 
 
-        private string _password = "Hug00531$";
+        private string _password;
 
         public string Password
         {
@@ -49,7 +49,6 @@ namespace AssetManagement.DesktopUI.ViewModels
                 OnPropertyChanged(nameof(WrongCredentials));
             }
         }
-
 
         public ICommand LoginCommand { get; }
 

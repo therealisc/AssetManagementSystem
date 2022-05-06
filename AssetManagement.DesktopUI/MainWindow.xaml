@@ -8,7 +8,7 @@
         xmlns:views="clr-namespace:AssetManagement.DesktopUI.Views" 
         xmlns:components="clr-namespace:AssetManagement.DesktopUI.Components"
         mc:Ignorable="d"        
-        Title="MainWindow" Height="600" Width="1000">
+        Title="MainWindow" Height="600" Width="1000" MinHeight="465" MinWidth="685">
     <Grid>
         <Grid.Resources>
             <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
@@ -17,6 +17,10 @@
 
             <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
                 <views:HomeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:AccountViewModel}">
+                <views:AccountView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:LayoutViewModel}">

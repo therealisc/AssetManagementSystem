@@ -38,7 +38,7 @@ namespace AssetManagement.Library.DataAccess
 
             using(IDbConnection connection = new SqlConnection(connectionString))
             {
-                connection.ExecuteAsync(sqlStatement, parameters, commandType: CommandType.StoredProcedure);
+                connection.Execute(sqlStatement, parameters, commandType: CommandType.StoredProcedure);
             }
         }
     }

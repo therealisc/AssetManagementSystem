@@ -65,11 +65,11 @@
                     Content="Login"
                     Margin="5"/>-->
 
-        <!--<Button Grid.Column="4" 
+        <Button Grid.Column="4" 
                     Command="{Binding NavigateAccountCommand}"
                     Content="Account"
                     Margin="5"
-                    Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}" />-->
+                    Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
         <Button Grid.Column="5" 
                     Command="{Binding LogoutCommand}"

@@ -27,6 +27,7 @@ namespace AssetManagement.DesktopUI.Services.AuthentificationServices
             //TODO: find out how to map objects properly
             AccountModel account = new AccountModel
             {
+                UserId = rawData.First().Id,
                 Username = rawData.First().Username,
                 PasswordHash = rawData.First().PasswordHash,
                 Email = rawData.First().Email,
@@ -37,10 +38,18 @@ namespace AssetManagement.DesktopUI.Services.AuthentificationServices
 
             if (result != PasswordVerificationResult.Success)
             {
-                throw new Exception("wrong credentials");
+                throw new Exception("PasswordVerificationFailed");
             }
 
             return account;
+        }
+       
+        //Other class??
+        public void ChangePassword(int userId, string password)
+        {
+            string newPasswordHash = _passwordHasher.HashPassword(password);
+
+            _userData.ChangeUserPassword(userId, newPasswordHash);
         }
     }
 }

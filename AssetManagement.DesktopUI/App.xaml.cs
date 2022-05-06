@@ -41,6 +41,7 @@ namespace AssetManagement.DesktopUI
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
 
             services.AddTransient<HomeViewModel>();
+            services.AddTransient<AccountViewModel>();
             services.AddTransient<NavigationBarViewModel>(CreateNavigationBarViewModel);
 
             services.AddTransient<SqlDataAccess>();
@@ -96,12 +97,20 @@ namespace AssetManagement.DesktopUI
                 serviceProvider.GetRequiredService<AuthentificationService>());
         }
 
+        private INavigationService CreateAccountNavigationService(IServiceProvider serviceProvider)
+        {
+            return new LayoutNavigationService<AccountViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<AccountViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+        }
+
         private NavigationBarViewModel CreateNavigationBarViewModel(IServiceProvider serviceProvider)
         {
             return new NavigationBarViewModel(
                 serviceProvider.GetRequiredService<AccountStore>(),
                 CreateHomeNavigationService(serviceProvider),
-                null,
+                CreateAccountNavigationService(serviceProvider),
                 CreateLoginNavigationService(serviceProvider));
         }
     }

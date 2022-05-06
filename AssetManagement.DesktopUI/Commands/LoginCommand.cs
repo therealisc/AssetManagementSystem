@@ -37,7 +37,7 @@ namespace AssetManagement.DesktopUI.Commands
                 _accountStore.CurrentAccount = account;
                 _viewModel.WrongCredentials = false;
             }
-            catch (Exception ex)
+            catch (Exception ex) when (ex.Message == "PasswordVerificationFailed")
             {
                 _viewModel.WrongCredentials = true;
                 return;

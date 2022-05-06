@@ -22,5 +22,10 @@ namespace AssetManagement.Library.DataAccess
 
             return output;
         }
+
+        public void ChangeUserPassword(int userId, string passwordHash)
+        {
+            _sqlData.SaveData("dbo.spUser_UpdatePassword", new { UserId = userId, PasswordHash = passwordHash}, "AssetManagement");
+        }
     }
 }

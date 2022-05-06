@@ -15,8 +15,7 @@
         <local:NavigationBar Grid.Row="0" DataContext="{Binding NavigationBarViewModel}"/>
 
         <ContentControl Grid.Row="1"
-                        MaxWidth="1000"
-                        Margin="20"
+                        Margin="10"
                         Content="{Binding ContentViewModel}" />
 
     </Grid>
