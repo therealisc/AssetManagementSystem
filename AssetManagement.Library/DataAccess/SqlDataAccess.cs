@@ -5,7 +5,6 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AssetManagement.Library.SqlHelpers;
 using Dapper;
 using Microsoft.Extensions.Configuration;
 

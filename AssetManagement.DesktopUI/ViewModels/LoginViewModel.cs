@@ -26,7 +26,7 @@ namespace AssetManagement.DesktopUI.ViewModels
         }
 
 
-        private string _password;
+        private string _password = "1234";
 
         public string Password
         {

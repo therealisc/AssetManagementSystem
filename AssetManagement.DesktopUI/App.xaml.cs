@@ -42,10 +42,12 @@ namespace AssetManagement.DesktopUI
 
             services.AddTransient<HomeViewModel>();
             services.AddTransient<AccountViewModel>();
+            services.AddTransient<ClientsViewModel>();
             services.AddTransient<NavigationBarViewModel>(CreateNavigationBarViewModel);
 
             services.AddTransient<SqlDataAccess>();
             services.AddTransient<UserData>();
+            services.AddTransient<ClientData>();
             services.AddTransient<AuthentificationService>();
 
             var builder = new ConfigurationBuilder()
@@ -97,6 +99,14 @@ namespace AssetManagement.DesktopUI
                 serviceProvider.GetRequiredService<AuthentificationService>());
         }
 
+        private INavigationService CreateClientsNavigationService(IServiceProvider serviceProvider)
+        {
+            return new LayoutNavigationService<ClientsViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<ClientsViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+        }
+
         private INavigationService CreateAccountNavigationService(IServiceProvider serviceProvider)
         {
             return new LayoutNavigationService<AccountViewModel>(
@@ -110,6 +120,7 @@ namespace AssetManagement.DesktopUI
             return new NavigationBarViewModel(
                 serviceProvider.GetRequiredService<AccountStore>(),
                 CreateHomeNavigationService(serviceProvider),
+                CreateClientsNavigationService(serviceProvider),
                 CreateAccountNavigationService(serviceProvider),
                 CreateLoginNavigationService(serviceProvider));
         }

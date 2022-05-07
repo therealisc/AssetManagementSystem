@@ -15,6 +15,7 @@ namespace AssetManagement.DesktopUI.ViewModels
         private readonly AccountStore _accountStore;
 
         public ICommand NavigateHomeCommand { get; }
+        public ICommand NavigateClientsCommand { get; set; }
         public ICommand NavigateAccountCommand { get; }
         public ICommand NavigateLoginCommand { get; }
         public ICommand LogoutCommand { get; }
@@ -24,10 +25,12 @@ namespace AssetManagement.DesktopUI.ViewModels
         public NavigationBarViewModel(
             AccountStore accountStore,
             INavigationService homeNavigationService,
+            INavigationService clientsNavigationService,
             INavigationService accountNavigationService,
             INavigationService loginNavigationService)
         {
             NavigateHomeCommand = new NavigateCommand(homeNavigationService);
+            NavigateClientsCommand = new NavigateCommand(clientsNavigationService);
             NavigateAccountCommand = new NavigateCommand(accountNavigationService);
             NavigateLoginCommand = new NavigateCommand(loginNavigationService);
             _accountStore = accountStore;
