@@ -52,28 +52,28 @@
 
         <Button Grid.Column="1"
                     Command="{Binding NavigateHomeCommand}"
-                    Content="Home"
+                    Content="Pagina principala"
                     Margin="7 5"/>
 
         <Button Grid.Column="2"
                     Command="{Binding NavigateClientsCommand}"
-                    Content="Clients"
+                    Content="Clienti"
                     Margin="7 5"/>
 
         <Button Grid.Column="3"
                     Command="{Binding NavigateLoginCommand}"
-                    Content="Users"
+                    Content="Utilizatori"
                     Margin="7 5" IsEnabled="False"/>
 
         <Button Grid.Column="4" 
                     Command="{Binding NavigateAccountCommand}"
-                    Content="Account"
+                    Content="Cont"
                     Margin="7 5"
                     Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
         <Button Grid.Column="5" 
                     Command="{Binding LogoutCommand}"
-                    Content="Logout"
+                    Content="Deconectare"
                     Margin="7 5"
                     Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 

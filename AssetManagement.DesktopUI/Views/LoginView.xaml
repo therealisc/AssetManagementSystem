@@ -17,24 +17,24 @@
 
 
         <StackPanel Grid.Row="1">
-            <TextBlock Text="Login"
+            <TextBlock Text="Autentificare"
                        FontSize="20"
                        HorizontalAlignment="Center"/>
 
             <StackPanel Width="200" Margin="0 10">
-                <TextBlock Text="Wrong credentials" 
+                <TextBlock Text="Date de autentificare invalide" 
                            Foreground="Red" 
                            HorizontalAlignment="Center" 
                            Margin="5" 
                            Visibility="{Binding WrongCredentials, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}"/>
-                <TextBlock Text="Username"/>
+                <TextBlock Text="Nume utilizator"/>
                 <TextBox Text="{Binding Username}"/>
             </StackPanel>
 
             <StackPanel Width="200">
-                <TextBlock Text="Password" />
+                <TextBlock Text="Parola" />
                 <components:BindablePasswordBox Password="{Binding Password}" />
-                <Button Content="Login"
+                <Button Content="Conectare"
                         Margin="0 20"
                         Command="{Binding LoginCommand}"/>
                 

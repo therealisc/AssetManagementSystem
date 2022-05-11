@@ -22,5 +22,21 @@ namespace AssetManagement.Library.DataAccess
 
             return output;
         }
+
+        public void SaveClient(ClientModel client)
+        {
+            _sqlData.SaveData("dbo.spClient_Insert", new { client.ClientName, client.FiscalCode, client.Address }, "AssetManagement");
+        }
+
+        public void DeleteClient(ClientModel client)
+        {
+            _sqlData.SaveData("dbo.spClient_Delete", new { ClientId = client.Id }, "AssetManagement");
+        }
+
+        public void UpdateClient(ClientModel client)    //@Id INT,//@ClientName NVARCHAR(50),//@FiscalCode VARCHAR(20), //@Address NVARCHAR(max)
+        {
+            _sqlData.SaveData("dbo.spClient_Update", 
+                new { Id = client.Id, ClientName = client.ClientName, FiscalCode = client.FiscalCode, Address = client.Address }, "AssetManagement");
+        }
     }
 }

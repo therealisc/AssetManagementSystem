@@ -27,7 +27,7 @@ namespace AssetManagement.DesktopUI.Commands
                 _authentificationService.ChangePassword(_viewModel.LoggedInUser.UserId, _viewModel.ReenteredPassword);
                 _viewModel.NewPassword = string.Empty;
                 _viewModel.ReenteredPassword = string.Empty;
-                MessageBox.Show("Password changed successfully!");
+                MessageBox.Show("Parola a fost modificata cu succes!");
             }
             catch (Exception ex)
             {

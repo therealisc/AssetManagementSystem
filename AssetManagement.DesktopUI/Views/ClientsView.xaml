@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AssetManagement.DesktopUI.Views"
+             xmlns:local="clr-namespace:AssetManagement.DesktopUI.Views" xmlns:validationrules="clr-namespace:AssetManagement.DesktopUI.ValidationRules"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
         <Grid Background="White">
             <Grid.Resources>
                 <Style TargetType="TextBlock">
@@ -19,11 +19,33 @@
                     <Setter Property="Margin" Value="0 0 5 0"/>
                     <Setter Property="Width" Value="250"/>
                     <Setter Property="VerticalAlignment" Value="Top"/>
+                    <Setter Property="Validation.ErrorTemplate">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <StackPanel>
+                                    <AdornedElementPlaceholder/>
+                                    <ItemsControl Margin="1" FontSize="10" ItemsSource="{Binding}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Red" Text="{Binding ErrorContent}"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
                 </Style>
 
                 <Style TargetType="Button">
                     <Setter Property="Width" Value="60"/>
-                    <Setter Property="Margin" Value="0 10 5 0"/>
+                    <Setter Property="Margin" Value="0 20 5 0"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=txtDenumire, Path=(Validation.HasError)}" Value="True">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                    
                 </Style>
             </Grid.Resources>
 
@@ -33,36 +55,62 @@
             </Grid.RowDefinitions>
 
             <StackPanel>
-                <TextBlock Text="Clients" 
+                <TextBlock Text="Clienti" 
                            FontSize="20" 
                            Margin="0 20 0 10"/>
 
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Name"/>
-                        <TextBox Text="{Binding SelectedClient.ClientName}"/>
+                        <TextBlock Name="txtDenumire" Text="Denumire"/>
+                        <TextBox>
+                            <TextBox.Text>
+                                <Binding Path="SelectedClientName" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <validationrules:TextBoxValidationRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Fiscal Code"/>
-                        <TextBox Text="{Binding SelectedClient.FiscalCode}"/>
+                        <TextBlock Text="Cod Fiscal"/>
+                        <TextBox Text="{Binding SelectedClientFiscalCode}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Address"/>
-                        <TextBox Text="{Binding SelectedClient.Address}"/>
+                        <TextBlock Text="Adresa"/>
+                        <TextBox Text="{Binding SelectedClientAddress}"/>
                     </StackPanel>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="Save"/>
-                    <Button Content="Modify"/>
-                    <Button Content="Delete"/>
+                    <Button Content="Adauga" Command="{Binding SaveClientCommand}"/>
+                    <Button Content="Modifica" Command="{Binding UpdateClientCommand}"/>
+                    <Button Content="Sterge" Command="{Binding DeleteClientCommand}"/>
                 </StackPanel>
 
             </StackPanel>
 
-            <DataGrid Grid.Row="1" ItemsSource="{Binding Clients}" SelectedItem="{Binding SelectedClient}" Margin="0 5 0 0" IsReadOnly="True"/>
+
+            <ListView Grid.Row="1" ItemsSource="{Binding Clients}" SelectedItem="{Binding SelectedClient}" Margin="0 5 0 0">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Denumire"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=FiscalCode}" Header="Cod Fiscal"/>
+                        <GridViewColumn Header="Adresa" Width="400">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Address}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+
+                </ListView.View>
+
+            </ListView>
+
 
         </Grid>
     </ScrollViewer>

@@ -8,7 +8,7 @@
         xmlns:views="clr-namespace:AssetManagement.DesktopUI.Views" 
         xmlns:components="clr-namespace:AssetManagement.DesktopUI.Components"
         mc:Ignorable="d"        
-        Title="MainWindow" Height="600" Width="1000" MinHeight="465" MinWidth="685">
+        Title="" Height="600" Width="1000" MinHeight="465" MinWidth="685">
     <Grid>
         <Grid.Resources>
             <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
