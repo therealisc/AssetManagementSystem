@@ -61,9 +61,9 @@
                     Margin="7 5"/>
 
         <Button Grid.Column="3"
-                    Command="{Binding NavigateLoginCommand}"
+                    Command="{Binding NavigateUsersCommand}"
                     Content="Utilizatori"
-                    Margin="7 5" IsEnabled="False"/>
+                    Margin="7 5"/>
 
         <Button Grid.Column="4" 
                     Command="{Binding NavigateAccountCommand}"
