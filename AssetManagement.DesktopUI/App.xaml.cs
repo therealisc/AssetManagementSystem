@@ -50,6 +50,7 @@ namespace AssetManagement.DesktopUI
             services.AddTransient<UserData>();
             services.AddTransient<ClientData>();
             services.AddTransient<AuthentificationService>();
+            services.AddTransient<UsersMappingService>();
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())

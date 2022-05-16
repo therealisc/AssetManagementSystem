@@ -27,5 +27,19 @@ namespace AssetManagement.Library.DataAccess
         {
             _sqlData.SaveData("dbo.spUser_UpdatePassword", new { UserId = userId, PasswordHash = passwordHash}, "AssetManagement");
         }
+
+        public List<UserModel> GetUsers()
+        {
+            var output = _sqlData.LoadData<UserModel, dynamic>("dbo.spUsers_GetAll", new { }, "AssetManagement");
+
+            return output;
+        }
+
+        public List<RoleModel> GetUnassignedRoles(int userId)
+        {
+            var output = _sqlData.LoadData<RoleModel, dynamic>("dbo.spRoles_GetUnassigned", new { userId }, "AssetManagement");
+
+            return output;
+        }
     }
 }

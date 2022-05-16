@@ -10,7 +10,7 @@
         <Grid Background="White">
             <Grid.Resources>
                 <Style TargetType="TextBlock">
-                    <Setter Property="Margin" Value="0 5 0 0"/>
+                    <Setter Property="Margin" Value="0 0 0 0"/>
                     <Setter Property="Width" Value="160"/>
                     <Setter Property="HorizontalAlignment" Value="Left"/>
                 </Style>
@@ -40,7 +40,7 @@
 
                 <Style TargetType="Button">
                     <Setter Property="Width" Value="60"/>
-                    <Setter Property="Margin" Value="0 10 5 0"/>
+                    <Setter Property="Margin" Value="0 20 5 0"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding ElementName=txtDenumire, Path=(Validation.HasError)}" Value="True">
                             <Setter Property="IsEnabled" Value="False"/>
@@ -64,27 +64,27 @@
 
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Nume utilizator"/>
-                        <TextBox Text="{Binding d}"/>
+                        <TextBox Text="{Binding SelectedUserUsername}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Email"/>
-                        <TextBox Text="{Binding d}"/>
+                        <TextBox Text="{Binding SelectedUserEmail}"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal">
+                    <!--<StackPanel Orientation="Horizontal">
                         <StackPanel>
                             <TextBlock Text="Roluri disponibile"/>
-                            <ComboBox Height="20"/>
+                            <ComboBox Height="18"/>
                         </StackPanel>
 
                         <Button Content="Selecteaza" Width="auto" Margin="5 0" VerticalAlignment="Bottom"/>
 
                         <StackPanel>
-                            <TextBlock Text="Roluri selectate"/>
+                            <TextBlock Text="Roluri atribuite"/>
                             <ListBox ItemsSource="{Binding LoggedInUser.Roles}"
                                      BorderThickness="1"
-                                     IsEnabled="False">
+                                     IsEnabled="False" Height="18">
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel IsItemsHost="True"/>
@@ -95,8 +95,54 @@
 
                         <Button Content="Elimina rol" Margin="5 0" VerticalAlignment="Bottom"/>
 
-                    </StackPanel>
+                    </StackPanel>-->
                 </StackPanel>
+
+                <Grid Height="100" Margin="0 20 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="250"/>
+                    </Grid.ColumnDefinitions>
+
+                    <DockPanel>
+                        <TextBlock Text="Roluri atribuite" DockPanel.Dock="Top"/>
+                        <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding AssignedRoles}" SelectedItem="{Binding SelectedAssignedRole}" DisplayMemberPath="Role"/>
+                    </DockPanel>
+
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <Button Content="&lt;" Margin="5" Command="{Binding AssignRoleCommand}"/>
+                        <Button Content=">" Margin="0" Command="{Binding UnassignRoleCommand}"/>
+                    </StackPanel>
+
+                    <DockPanel Grid.Column="2">
+                        <TextBlock Text="Roluri disponibile" DockPanel.Dock="Top"/>
+                        <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding UnassignedRoles}" SelectedItem="{Binding SelectedUnassigedRole}" DisplayMemberPath="Role"/>
+                    </DockPanel>
+                </Grid>
+
+                <Grid Height="100" Margin="0 20 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="250"/>
+                    </Grid.ColumnDefinitions>
+
+                    <DockPanel>
+                        <TextBlock Text="Clienti atribuiti" DockPanel.Dock="Top"/>
+                        <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding SelectedUserClients}"/>
+                    </DockPanel>
+
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <Button Content="&lt;" Margin="5"/>
+                        <Button Content=">" Margin="0"/>
+                    </StackPanel>
+
+                    <DockPanel Grid.Column="2">
+                        <TextBlock Text="Clienti disponibili" DockPanel.Dock="Top"/>
+                        <ListBox DockPanel.Dock="Bottom"/>
+                    </DockPanel>
+                </Grid>
 
                 <StackPanel Orientation="Horizontal">
                     <Button Content="Adauga" Command="{Binding SaveClientCommand}"/>
@@ -107,15 +153,16 @@
             </StackPanel>
 
 
-            <ListView Grid.Row="1" ItemsSource="{Binding Clients}" SelectedItem="{Binding SelectedClient}" Margin="0 5 0 0">
+            <ListView Grid.Row="1" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}" Margin="0 5 0 0">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Nume utilizator"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=FiscalCode}" Header="Email"/>
-                        <GridViewColumn Header="Adresa" Width="400">
+                        <GridViewColumn DisplayMemberBinding="{Binding Username}" Header="Nume utilizator"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Email}" Header="Email"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding AssignedRoles}" Header="Roluri"/>
+                        <GridViewColumn Header="Clienti atribuiti" Width="400">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Address}"/>
+                                    <TextBlock Text="{Binding AssignedClients, Mode=OneWay}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

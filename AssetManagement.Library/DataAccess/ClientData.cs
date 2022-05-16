@@ -33,7 +33,7 @@ namespace AssetManagement.Library.DataAccess
             _sqlData.SaveData("dbo.spClient_Delete", new { ClientId = client.Id }, "AssetManagement");
         }
 
-        public void UpdateClient(ClientModel client)    //@Id INT,//@ClientName NVARCHAR(50),//@FiscalCode VARCHAR(20), //@Address NVARCHAR(max)
+        public void UpdateClient(ClientModel client)
         {
             _sqlData.SaveData("dbo.spClient_Update", 
                 new { Id = client.Id, ClientName = client.ClientName, FiscalCode = client.FiscalCode, Address = client.Address }, "AssetManagement");

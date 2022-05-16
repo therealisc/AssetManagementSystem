@@ -84,6 +84,8 @@
     <Build Include="dbo\Stored Procedures\spClient_Insert.sql" />
     <Build Include="dbo\Stored Procedures\spClient_Delete.sql" />
     <Build Include="dbo\Stored Procedures\spClient_Update.sql" />
+    <Build Include="dbo\Stored Procedures\spUsers_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spRoles_GetUnassigned.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="AssetManagement.Data.refactorlog" />
