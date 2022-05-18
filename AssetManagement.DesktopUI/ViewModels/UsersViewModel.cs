@@ -25,6 +25,8 @@ namespace AssetManagement.DesktopUI.ViewModels
             DisplayUsers();
             AssignRoleCommand = new AssignRoleCommand(this);
             UnassignRoleCommand = new UnassignRoleCommand(this);
+
+            UnassignClientCommand = new UnassignClientCommand(this);
         }
 
         private void DisplayUsers()
@@ -34,6 +36,8 @@ namespace AssetManagement.DesktopUI.ViewModels
 
         public ICommand AssignRoleCommand { get; set; }
         public ICommand UnassignRoleCommand { get; set; }
+
+        public ICommand UnassignClientCommand { get; set; }
 
         private BindingList<UserDisplayModel> _users;
 
@@ -60,9 +64,9 @@ namespace AssetManagement.DesktopUI.ViewModels
                     SelectedUserUsername = value.Username;
                     SelectedUserEmail = value.Email;
                     AssignedRoles = new BindingList<RoleModel>(value.Roles);
-                    SelectedUserClients = new BindingList<string>(value.Clients);
-
                     UnassignedRoles = new BindingList<RoleModel>(_userData.GetUnassignedRoles(value.Id));
+                    AssignedClients = new BindingList<string>(value.Clients);
+                    UnassignedClients = new BindingList<string>();
 
                     OnPropertyChanged(nameof(SelectedUser));
                 }
@@ -118,17 +122,30 @@ namespace AssetManagement.DesktopUI.ViewModels
         }
 
 
-        private BindingList<string> _selectedUserClients;
+        private BindingList<string> _assignedClients;
 
-        public BindingList<string> SelectedUserClients
+        public BindingList<string> AssignedClients
         {
-            get { return _selectedUserClients; }
+            get { return _assignedClients; }
             set
             {
-                _selectedUserClients = value;
-                OnPropertyChanged(nameof(SelectedUserClients));
+                _assignedClients = value;
+                OnPropertyChanged(nameof(AssignedClients));
             }
         }
+
+        private string _selectedAssignedClient;
+
+        public string SelectedAssignedClient
+        {
+            get { return _selectedAssignedClient; }
+            set
+            {
+                _selectedAssignedClient = value;
+                OnPropertyChanged(nameof(SelectedAssignedClient));
+            }
+        }
+
 
         private BindingList<RoleModel> _unassignedRoles;
 
@@ -153,6 +170,32 @@ namespace AssetManagement.DesktopUI.ViewModels
                 OnPropertyChanged(nameof(SelectedUnassigedRole));
             }
         }
+
+        private BindingList<string> _unassignedClients;
+
+        public BindingList<string> UnassignedClients
+        {
+            get { return _unassignedClients; }
+            set
+            {
+                _unassignedClients = value;
+                OnPropertyChanged(nameof(UnassignedClients));
+            }
+        }
+
+        private string _selectedUnassignedClient;
+
+        public string SelectedUnassignedClient
+        {
+            get { return _selectedUnassignedClient; }
+            set
+            {
+                _selectedUnassignedClient = value;
+                OnPropertyChanged(nameof(SelectedUnassignedClient));
+            }
+        }
+
+
 
 
 

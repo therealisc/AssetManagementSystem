@@ -130,17 +130,17 @@
 
                     <DockPanel>
                         <TextBlock Text="Clienti atribuiti" DockPanel.Dock="Top"/>
-                        <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding SelectedUserClients}"/>
+                        <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding AssignedClients}" SelectedItem="{Binding SelectedAssignedClient}"/>
                     </DockPanel>
 
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
                         <Button Content="&lt;" Margin="5"/>
-                        <Button Content=">" Margin="0"/>
+                        <Button Content=">" Margin="0" Command="{Binding UnassignClientCommand}"/>
                     </StackPanel>
 
                     <DockPanel Grid.Column="2">
                         <TextBlock Text="Clienti disponibili" DockPanel.Dock="Top"/>
-                        <ListBox DockPanel.Dock="Bottom"/>
+                        <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding UnassignedClients}" SelectedItem="{Binding SelectedUnassignedClient}"/>
                     </DockPanel>
                 </Grid>
 
