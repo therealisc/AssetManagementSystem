@@ -17,7 +17,7 @@ namespace AssetManagement.DesktopUI.Commands
 
         public override void Execute(object parameter)
         {
-            ClientModel client = new ClientModel
+            FullClientModel client = new FullClientModel
             {
                 Id = _viewModel.SelectedClient.Id,
                 ClientName = _viewModel.SelectedClientName,

@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace AssetManagement.DesktopUI.Commands
 {
-    public class SaveClientCommand : CommandBase
+    public class AddClientCommand : CommandBase
     {
 
         private readonly ClientData _clientData;
         private readonly ClientsViewModel _viewModel;
 
-        public SaveClientCommand(ClientsViewModel viewModel, ClientData clientData)
+        public AddClientCommand(ClientsViewModel viewModel, ClientData clientData)
         {
             _clientData = clientData;
             _viewModel = viewModel;
@@ -23,14 +23,14 @@ namespace AssetManagement.DesktopUI.Commands
 
         public override void Execute(object parameter)
         {
-            ClientModel client = new ClientModel()
+            FullClientModel client = new FullClientModel()
             {
                 ClientName = _viewModel.SelectedClientName,
                 FiscalCode = _viewModel.SelectedClientFiscalCode,
                 Address = _viewModel.SelectedClientAddress
             };
 
-            _clientData.SaveClient(client);
+            _clientData.AddClient(client);
             _viewModel.DisplayClients();
         }
     }

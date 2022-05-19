@@ -10,12 +10,13 @@ namespace AssetManagement.DesktopUI.Services
 {
     internal class UsersMappingService
     {
-        public List<UserDisplayModel> MapToUserDisplayModel(List<UserModel> users)
+        public List<UserDisplayModel> MapToUserDisplayModel(List<FullUserModel> users)
         {
             List<UserDisplayModel> mappedUsers = new List<UserDisplayModel>();
 
             foreach (var user in users.OrderBy(x => x.Id))
-            {
+            {   
+                // check if a user has been added previously
                 if (mappedUsers.All(x => x.Id != user.Id))
                 {
                     mappedUsers.Add(new UserDisplayModel()
@@ -23,12 +24,20 @@ namespace AssetManagement.DesktopUI.Services
                         Id = user.Id,
                         Username = user.Username,
                         Email = user.Email,
-                        Roles = users.GroupBy(x => x.RoleId).Select(x => x.First()).Select(x => new RoleModel()
+
+                        // select all matching roles based on the user id
+                        Roles = users.Where(x => x.Id == user.Id).GroupBy(x => x.RoleId).Select(x => new RoleModel()
                         {
                             Id = x.RoleId,
                             Role = x.Role
                         }).ToList(),
-                        Clients = users.Where(x => x.Id == user.Id).Select(x => x.ClientName).Distinct().ToList()
+
+                        // select all mathcing clients based on the user id
+                        Clients = users.Where(x => x.Id == user.Id).GroupBy(x => x.ClientId).Select(x => new ClientModel()
+                        {
+                            Id = x.ClientId,
+                            ClientName = x.ClientName
+                        }).ToList()
                     });
                 }
             }

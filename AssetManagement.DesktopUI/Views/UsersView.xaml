@@ -41,11 +41,12 @@
                 <Style TargetType="Button">
                     <Setter Property="Width" Value="60"/>
                     <Setter Property="Margin" Value="0 20 5 0"/>
+                    <!--
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding ElementName=txtDenumire, Path=(Validation.HasError)}" Value="True">
                             <Setter Property="IsEnabled" Value="False"/>
                         </DataTrigger>
-                    </Style.Triggers>
+                    </Style.Triggers>  -->
 
                 </Style>
             </Grid.Resources>
@@ -130,22 +131,22 @@
 
                     <DockPanel>
                         <TextBlock Text="Clienti atribuiti" DockPanel.Dock="Top"/>
-                        <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding AssignedClients}" SelectedItem="{Binding SelectedAssignedClient}"/>
+                        <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding AssignedClients}" SelectedItem="{Binding SelectedAssignedClient}" DisplayMemberPath="ClientName"/>
                     </DockPanel>
 
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <Button Content="&lt;" Margin="5"/>
+                        <Button Content="&lt;" Margin="5" Command="{Binding AssignClientCommand}"/>
                         <Button Content=">" Margin="0" Command="{Binding UnassignClientCommand}"/>
                     </StackPanel>
 
                     <DockPanel Grid.Column="2">
                         <TextBlock Text="Clienti disponibili" DockPanel.Dock="Top"/>
-                        <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding UnassignedClients}" SelectedItem="{Binding SelectedUnassignedClient}"/>
+                        <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding UnassignedClients}" SelectedItem="{Binding SelectedUnassignedClient}" DisplayMemberPath="ClientName"/>
                     </DockPanel>
                 </Grid>
 
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="Adauga" Command="{Binding SaveClientCommand}"/>
+                    <Button Content="Adauga" Command="{Binding AddUserCommand}"/>
                     <Button Content="Modifica" Command="{Binding UpdateClientCommand}"/>
                     <Button Content="Sterge" Command="{Binding DeleteClientCommand}"/>
                 </StackPanel>

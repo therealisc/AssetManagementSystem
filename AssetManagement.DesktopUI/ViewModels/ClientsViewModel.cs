@@ -20,23 +20,23 @@ namespace AssetManagement.DesktopUI.ViewModels
         {
             _clientData = clientData;
             DisplayClients();
-            SaveClientCommand = new SaveClientCommand(this, _clientData);
+            SaveClientCommand = new AddClientCommand(this, _clientData);
             DeleteClientCommand = new DeleteClientCommand(this, _clientData);
             UpdateClientCommand = new UpdateClientCommand(this, _clientData);
         }
 
         internal void DisplayClients()
         {
-            Clients = new BindingList<ClientModel>(_clientData.GetClients());
+            Clients = new BindingList<FullClientModel>(_clientData.GetClients());
         }
 
         public ICommand SaveClientCommand { get; set; }
         public ICommand DeleteClientCommand { get; set; }
         public ICommand UpdateClientCommand { get; set; }
 
-        private BindingList<ClientModel> _clients;
+        private BindingList<FullClientModel> _clients;
 
-        public BindingList<ClientModel> Clients
+        public BindingList<FullClientModel> Clients
         {
             get { return _clients; }
             set
@@ -46,9 +46,9 @@ namespace AssetManagement.DesktopUI.ViewModels
             }
         }
 
-        private ClientModel _selectedClient;
+        private FullClientModel _selectedClient;
 
-        public ClientModel SelectedClient
+        public FullClientModel SelectedClient
         {
             get { return _selectedClient; }
             set 

@@ -16,24 +16,24 @@ namespace AssetManagement.Library.DataAccess
             _sqlData = sqlData;
         }
 
-        public List<ClientModel> GetClients()
+        public List<FullClientModel> GetClients()
         {
-            var output = _sqlData.LoadData<ClientModel, dynamic>("dbo.spClients_GetAll", new { }, "AssetManagement");
+            var output = _sqlData.LoadData<FullClientModel, dynamic>("dbo.spClients_GetAll", new { }, "AssetManagement");
 
             return output;
         }
 
-        public void SaveClient(ClientModel client)
+        public void AddClient(FullClientModel client)
         {
             _sqlData.SaveData("dbo.spClient_Insert", new { client.ClientName, client.FiscalCode, client.Address }, "AssetManagement");
         }
 
-        public void DeleteClient(ClientModel client)
+        public void DeleteClient(FullClientModel client)
         {
             _sqlData.SaveData("dbo.spClient_Delete", new { ClientId = client.Id }, "AssetManagement");
         }
 
-        public void UpdateClient(ClientModel client)
+        public void UpdateClient(FullClientModel client)
         {
             _sqlData.SaveData("dbo.spClient_Update", 
                 new { Id = client.Id, ClientName = client.ClientName, FiscalCode = client.FiscalCode, Address = client.Address }, "AssetManagement");

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AssetManagement.DesktopUI.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="30" d:DesignWidth="500">
+             d:DesignHeight="34.825" d:DesignWidth="588.596">
     <UserControl.Resources>
         <Style TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
@@ -37,18 +37,18 @@
 
     <Grid VerticalAlignment="Center" Background="IndianRed">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Asset Management System" 
+        <!--<TextBlock Text="Asset Management System" 
                        Foreground="White"
                        FontSize="12"
-                       Margin="7 5" />
+                       Margin="7 5" />-->
 
         <Button Grid.Column="1"
                     Command="{Binding NavigateHomeCommand}"
@@ -74,7 +74,7 @@
         <Button Grid.Column="5" 
                     Command="{Binding LogoutCommand}"
                     Content="Deconectare"
-                    Margin="7 5"
+                    Margin="7 5" HorizontalAlignment="Right"
                     Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
     </Grid>

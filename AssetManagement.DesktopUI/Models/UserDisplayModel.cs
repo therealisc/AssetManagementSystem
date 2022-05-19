@@ -13,7 +13,7 @@ namespace AssetManagement.DesktopUI.Models
         public string Username { get; set; }
         public string Email { get; set; }
         public List<RoleModel> Roles { get; set; }
-        public List<string> Clients { get; set; }
+        public List<ClientModel> Clients { get; set; }
 
         public string AssignedRoles 
         {
@@ -27,7 +27,7 @@ namespace AssetManagement.DesktopUI.Models
         {
             get
             {
-                return string.Join(", ", Clients);
+                return string.Join(", ", Clients.Select(x => x.ClientName));
             }
         }
 

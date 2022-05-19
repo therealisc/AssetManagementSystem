@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace AssetManagement.Library.Models
 {
-    public class ClientModel
+    public class FullUserModel : UserModel
     {
-        public int Id { get; set; }
+        public int RoleId { get; set; }
+        public string Role { get; set; }
+        public int ClientId { get; set; }
         public string ClientName { get; set; }
     }
 }

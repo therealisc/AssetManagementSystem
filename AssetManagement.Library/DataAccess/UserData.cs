@@ -16,9 +16,9 @@ namespace AssetManagement.Library.DataAccess
             _sqlData = sqlData;
         }
 
-        public List<UserModel> GetUserByUsername(string username)
+        public List<FullUserModel> GetUserByUsername(string username)
         {
-            var output = _sqlData.LoadData<UserModel, dynamic>("dbo.spUser_GetByUsername", new { Username = username }, "AssetManagement");
+            var output = _sqlData.LoadData<FullUserModel, dynamic>("dbo.spUser_GetByUsername", new { Username = username }, "AssetManagement");
 
             return output;
         }
@@ -28,18 +28,51 @@ namespace AssetManagement.Library.DataAccess
             _sqlData.SaveData("dbo.spUser_UpdatePassword", new { UserId = userId, PasswordHash = passwordHash}, "AssetManagement");
         }
 
-        public List<UserModel> GetUsers()
+        public List<FullUserModel> GetUsers()
         {
-            var output = _sqlData.LoadData<UserModel, dynamic>("dbo.spUsers_GetAll", new { }, "AssetManagement");
+            var output = _sqlData.LoadData<FullUserModel, dynamic>("dbo.spUsers_GetAll", new { }, "AssetManagement");
 
             return output;
         }
 
-        public List<RoleModel> GetUnassignedRoles(int userId)
+        public List<RoleModel> GetRoles()
         {
-            var output = _sqlData.LoadData<RoleModel, dynamic>("dbo.spRoles_GetUnassigned", new { userId }, "AssetManagement");
+            var output = _sqlData.LoadData<RoleModel, dynamic>("dbo.spRoles_GetUnassigned", new { }, "AssetManagement");
 
             return output;
+        }
+
+        public void AddUser(UserModel user, List<RoleModel> roles, List<ClientModel> clients)
+        {
+            try
+            {
+                _sqlData.StartTransaction("AssetManagement");
+
+                //Save the user model
+                _sqlData.SaveDataInTransaction("dbo.spUser_Insert", new { user.Username, user.Email, user.PasswordHash });
+
+                //Get the newly inserted user id from the database
+                user.Id = _sqlData.LoadDataInTransaction<int, dynamic>("dbo.spUser_Lookup", new { }).FirstOrDefault();
+
+                //Add assigned roles
+                foreach (var role in roles)
+                {
+                    _sqlData.SaveDataInTransaction("dbo.spUserRole_Insert", new { UserId = user.Id, RoleId = role.Id });
+                }
+
+                //Add assigned clients
+                foreach (var client in clients)
+                {
+                    _sqlData.SaveDataInTransaction("dbo.spUserClient_Insert", new { UserId = user.Id, ClientId = client.Id });
+                }
+
+                _sqlData.CommitTransaction();
+            }
+            catch (Exception)
+            {
+                _sqlData.RollbackTransaction();
+                throw;
+            }
         }
     }
 }

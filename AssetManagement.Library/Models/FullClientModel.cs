@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace AssetManagement.Library.Models
 {
-    public class ClientModel
-    {
-        public int Id { get; set; }
-        public string ClientName { get; set; }
+    public class FullClientModel : ClientModel
+    { 
+        public string FiscalCode { get; set; }
+        public string Address { get; set; }
     }
 }
