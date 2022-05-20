@@ -91,6 +91,9 @@
     <Build Include="dbo\Stored Procedures\spUserClient_Insert.sql" />
     <Build Include="dbo\Stored Procedures\spUser_Lookup.sql" />
     <Build Include="dbo\Stored Procedures\spUser_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\spUser_Update.sql" />
+    <Build Include="dbo\Stored Procedures\spUserRoles_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\spUserClients_Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="AssetManagement.Data.refactorlog" />

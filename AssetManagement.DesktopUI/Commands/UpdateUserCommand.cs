@@ -1,23 +1,22 @@
 ﻿using AssetManagement.DesktopUI.ViewModels;
 using AssetManagement.Library.DataAccess;
-using AssetManagement.DesktopUI.Models;
+using AssetManagement.Library.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AssetManagement.Library.Models;
 using System.Windows;
 
 namespace AssetManagement.DesktopUI.Commands
 {
-    internal class AddUserCommand : CommandBase
+    internal class UpdateUserCommand : CommandBase
     {
-        private UsersViewModel _viewModel;
+        private readonly UsersViewModel _viewModel;
         private readonly UserData _userData;
 
-        public AddUserCommand(UsersViewModel viewModel, UserData userData)
+        public UpdateUserCommand(UsersViewModel viewModel, UserData userData)
         {
             _viewModel = viewModel;
             _viewModel.PropertyChanged += ViewModel_PropertyChanged;
@@ -30,25 +29,26 @@ namespace AssetManagement.DesktopUI.Commands
             {
                 UserModel user = new UserModel()
                 {
+                    Id = _viewModel.SelectedUser.Id,
                     Username = _viewModel.SelectedUserUsername,
                     Email = _viewModel.SelectedUserEmail,
-                    PasswordHash = "ALZN+HSfh3PTKuEcdrion6b9LuLd96hZfb6si/OlEedzFiBAhMm/oUiqC3pLPBjQBw=="
                 };
 
-                _userData.AddUser(user, _viewModel.AssignedRoles.ToList(), _viewModel.AssignedClients.ToList());
+                _userData.UpdateUser(user, _viewModel.AssignedRoles.ToList(), _viewModel.AssignedClients.ToList());
                 _viewModel.DisplayUsers();
+                _viewModel.SelectedUser = _viewModel.Users.FirstOrDefault();
             }
             catch (Exception)
             {
-                MessageBox.Show("Eroare la adaugarea utilizatorului!");
+                MessageBox.Show("Eroare la modificarea utilizatorului!");
             }
-
         }
 
         public override bool CanExecute(object parameter)
         {
-            return string.IsNullOrWhiteSpace(_viewModel.SelectedUserUsername) == false &&
-                string.IsNullOrWhiteSpace(_viewModel.SelectedUserEmail) == false && 
+            return _viewModel.SelectedUser != null &&
+                string.IsNullOrWhiteSpace(_viewModel.SelectedUserUsername) == false &&
+                string.IsNullOrWhiteSpace(_viewModel.SelectedUserEmail) == false &&
                 _viewModel.AssignedRoles.Count > 0 &&
                 _viewModel.AssignedClients.Count > 0;
         }

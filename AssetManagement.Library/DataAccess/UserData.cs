@@ -75,6 +75,33 @@ namespace AssetManagement.Library.DataAccess
             }
         }
 
+        public void UpdateUser(UserModel user, List<RoleModel> roles, List<ClientModel> clients)
+        {
+            try
+            {
+                _sqlData.StartTransaction("AssetManagement");
+                _sqlData.SaveDataInTransaction("dbo.spUser_Update", new { UserId = user.Id, user.Username, user.Email});
+
+                _sqlData.SaveDataInTransaction("dbo.spUserRoles_Delete", new { UserId = user.Id });
+                foreach (var role in roles)
+                {
+                    _sqlData.SaveDataInTransaction("dbo.spUserRole_Insert", new { UserId = user.Id, RoleId = role.Id });
+                }
+
+                _sqlData.SaveDataInTransaction("dbo.spUserClients_Delete", new { UserId = user.Id });
+                foreach (var client in clients)
+                {
+                    _sqlData.SaveDataInTransaction("dbo.spUserClient_Insert", new { UserId = user.Id, ClientId = client.Id });
+                }
+                _sqlData.CommitTransaction();
+            }
+            catch (Exception)
+            {
+                _sqlData.RollbackTransaction();
+                throw;
+            }
+        }
+
         public void DeleteUser(int userId)
         {
             _sqlData.SaveData("dbo.spUser_Delete", new { UserId = userId }, "AssetManagement");

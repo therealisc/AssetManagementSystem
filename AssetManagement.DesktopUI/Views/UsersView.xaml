@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:AssetManagement.DesktopUI.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
-        <Grid Background="White">
+    <Grid Background="White">
             <Grid.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="Margin" Value="0 0 0 0"/>
@@ -177,6 +176,5 @@
 
 
         </Grid>
-    </ScrollViewer>
 
 </UserControl>

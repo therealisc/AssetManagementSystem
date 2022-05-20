@@ -25,7 +25,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel>
-            <TextBlock Text="Contul meu" 
+            <TextBlock Text="Profilul meu" 
                            FontSize="20" 
                            Margin="0 20 0 10"/>
 

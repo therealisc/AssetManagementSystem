@@ -30,7 +30,7 @@ namespace AssetManagement.DesktopUI.ViewModels
             AssignClientCommand = new AssignClientCommand(this);
             UnassignClientCommand = new UnassignClientCommand(this);
             AddUserCommand = new AddUserCommand(this, userData);
-
+            UpdateUserCommand = new UpdateUserCommand(this, userData);
             DeleteUserCommand = new DeleteUserCommand(this, userData);
         }
 

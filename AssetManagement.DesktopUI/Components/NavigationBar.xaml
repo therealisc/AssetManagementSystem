@@ -67,7 +67,7 @@
 
         <Button Grid.Column="4" 
                     Command="{Binding NavigateAccountCommand}"
-                    Content="Cont"
+                    Content="Profil"
                     Margin="7 5"
                     Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
