@@ -26,14 +26,14 @@ namespace AssetManagement.DesktopUI.Services
                         Email = user.Email,
 
                         // select all matching roles based on the user id
-                        Roles = users.Where(x => x.Id == user.Id).GroupBy(x => x.RoleId).Select(x => new RoleModel()
+                        Roles = users.Where(x => x.Id == user.Id).GroupBy(x => x.RoleId).Select(x => x.First()).Select(x => new RoleModel()
                         {
                             Id = x.RoleId,
                             Role = x.Role
                         }).ToList(),
 
                         // select all mathcing clients based on the user id
-                        Clients = users.Where(x => x.Id == user.Id).GroupBy(x => x.ClientId).Select(x => new ClientModel()
+                        Clients = users.Where(x => x.Id == user.Id).GroupBy(x => x.ClientId).Select(x => x.First()).Select(x => new ClientModel()
                         {
                             Id = x.ClientId,
                             ClientName = x.ClientName

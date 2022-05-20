@@ -31,7 +31,7 @@ namespace AssetManagement.DesktopUI.Services.AuthentificationServices
                 Username = rawData.First().Username,
                 PasswordHash = rawData.First().PasswordHash,
                 Email = rawData.First().Email,
-                Roles = rawData.Select(x => x.Role).ToList()
+                Roles = rawData.Select(x => x.Role).Distinct().ToList()
             };
 
             PasswordVerificationResult result = _passwordHasher.VerifyHashedPassword(account.PasswordHash, password);
