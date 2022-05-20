@@ -24,6 +24,11 @@ namespace AssetManagement.DesktopUI.Services.AuthentificationServices
         {
             var rawData = _userData.GetUserByUsername(username);
 
+            if (rawData.Count < 1)
+            {
+                throw new Exception("PasswordVerificationFailed");
+            }
+
             //TODO: find out how to map objects properly
             AccountModel account = new AccountModel
             {

@@ -21,7 +21,8 @@ namespace AssetManagement.DesktopUI.ViewModels
         public ICommand NavigateLoginCommand { get; }
         public ICommand LogoutCommand { get; }
 
-        public bool IsLoggedIn => _accountStore.IsLoggedIn;
+        public bool IsManager => _accountStore.CurrentAccount.Roles.Contains("Manager");
+        public bool IsAccountant => _accountStore.CurrentAccount.Roles.Contains("Accountant");
 
         public NavigationBarViewModel(
             AccountStore accountStore,
@@ -44,7 +45,7 @@ namespace AssetManagement.DesktopUI.ViewModels
 
         private void OnCurrentAccountChanged()
         {
-            OnPropertyChanged(nameof(IsLoggedIn));
+            //OnPropertyChanged(nameof(IsLoggedIn));
         }
 
         internal override void Dispose()
