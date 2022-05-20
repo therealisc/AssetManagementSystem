@@ -30,6 +30,8 @@ namespace AssetManagement.DesktopUI.ViewModels
             AssignClientCommand = new AssignClientCommand(this);
             UnassignClientCommand = new UnassignClientCommand(this);
             AddUserCommand = new AddUserCommand(this, userData);
+
+            DeleteUserCommand = new DeleteUserCommand(this, userData);
         }
 
         internal void DisplayUsers()

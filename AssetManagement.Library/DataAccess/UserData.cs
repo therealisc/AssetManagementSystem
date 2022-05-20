@@ -74,5 +74,10 @@ namespace AssetManagement.Library.DataAccess
                 throw;
             }
         }
+
+        public void DeleteUser(int userId)
+        {
+            _sqlData.SaveData("dbo.spUser_Delete", new { UserId = userId }, "AssetManagement");
+        }
     }
 }

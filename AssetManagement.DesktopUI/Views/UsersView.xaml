@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:AssetManagement.DesktopUI.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
         <Grid Background="White">
             <Grid.Resources>
                 <Style TargetType="TextBlock">
@@ -98,57 +98,59 @@
 
                     </StackPanel>-->
                 </StackPanel>
+                <WrapPanel>
+                    <Grid Height="100" Margin="0 20 5 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="250"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="250"/>
+                        </Grid.ColumnDefinitions>
 
-                <Grid Height="100" Margin="0 20 0 0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="250"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="250"/>
-                    </Grid.ColumnDefinitions>
+                        <DockPanel>
+                            <TextBlock Text="Roluri atribuite" DockPanel.Dock="Top"/>
+                            <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding AssignedRoles}" SelectedItem="{Binding SelectedAssignedRole}" DisplayMemberPath="Role"/>
+                        </DockPanel>
 
-                    <DockPanel>
-                        <TextBlock Text="Roluri atribuite" DockPanel.Dock="Top"/>
-                        <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding AssignedRoles}" SelectedItem="{Binding SelectedAssignedRole}" DisplayMemberPath="Role"/>
-                    </DockPanel>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <Button Content="&lt;" Margin="5" Command="{Binding AssignRoleCommand}"/>
+                            <Button Content=">" Margin="0" Command="{Binding UnassignRoleCommand}"/>
+                        </StackPanel>
 
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <Button Content="&lt;" Margin="5" Command="{Binding AssignRoleCommand}"/>
-                        <Button Content=">" Margin="0" Command="{Binding UnassignRoleCommand}"/>
-                    </StackPanel>
+                        <DockPanel Grid.Column="2">
+                            <TextBlock Text="Roluri disponibile" DockPanel.Dock="Top"/>
+                            <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding UnassignedRoles}" SelectedItem="{Binding SelectedUnassigedRole}" DisplayMemberPath="Role"/>
+                        </DockPanel>
+                    </Grid>
 
-                    <DockPanel Grid.Column="2">
-                        <TextBlock Text="Roluri disponibile" DockPanel.Dock="Top"/>
-                        <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding UnassignedRoles}" SelectedItem="{Binding SelectedUnassigedRole}" DisplayMemberPath="Role"/>
-                    </DockPanel>
-                </Grid>
+                    <Grid Height="100" Margin="0 20 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="250"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="250"/>
+                        </Grid.ColumnDefinitions>
 
-                <Grid Height="100" Margin="0 20 0 0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="250"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="250"/>
-                    </Grid.ColumnDefinitions>
+                        <DockPanel>
+                            <TextBlock Text="Clienti atribuiti" DockPanel.Dock="Top"/>
+                            <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding AssignedClients}" SelectedItem="{Binding SelectedAssignedClient}" DisplayMemberPath="ClientName"/>
+                        </DockPanel>
 
-                    <DockPanel>
-                        <TextBlock Text="Clienti atribuiti" DockPanel.Dock="Top"/>
-                        <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding AssignedClients}" SelectedItem="{Binding SelectedAssignedClient}" DisplayMemberPath="ClientName"/>
-                    </DockPanel>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <Button Content="&lt;" Margin="5" Command="{Binding AssignClientCommand}"/>
+                            <Button Content=">" Margin="0" Command="{Binding UnassignClientCommand}"/>
+                        </StackPanel>
 
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <Button Content="&lt;" Margin="5" Command="{Binding AssignClientCommand}"/>
-                        <Button Content=">" Margin="0" Command="{Binding UnassignClientCommand}"/>
-                    </StackPanel>
+                        <DockPanel Grid.Column="2">
+                            <TextBlock Text="Clienti disponibili" DockPanel.Dock="Top"/>
+                            <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding UnassignedClients}" SelectedItem="{Binding SelectedUnassignedClient}" DisplayMemberPath="ClientName"/>
+                        </DockPanel>
+                    </Grid>
 
-                    <DockPanel Grid.Column="2">
-                        <TextBlock Text="Clienti disponibili" DockPanel.Dock="Top"/>
-                        <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding UnassignedClients}" SelectedItem="{Binding SelectedUnassignedClient}" DisplayMemberPath="ClientName"/>
-                    </DockPanel>
-                </Grid>
+                </WrapPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <Button Content="Adauga" Command="{Binding AddUserCommand}"/>
-                    <Button Content="Modifica" Command="{Binding UpdateClientCommand}"/>
-                    <Button Content="Sterge" Command="{Binding DeleteClientCommand}"/>
+                    <Button Content="Modifica" Command="{Binding UpdateUserCommand}"/>
+                    <Button Content="Sterge" Command="{Binding DeleteUserCommand}"/>
                 </StackPanel>
 
             </StackPanel>

@@ -75,7 +75,7 @@ namespace AssetManagement.Library.DataAccess
         public void CommitTransaction()
         {
             _transaction?.Commit();
-            //_connection.Close();
+            _connection.Close();
 
             isClosed = true;
         }
