@@ -1,6 +1,7 @@
 ﻿using AssetManagement.DesktopUI.ViewModels;
 using AssetManagement.Library.DataAccess;
 using AssetManagement.Library.Models;
+using System.ComponentModel;
 
 namespace AssetManagement.DesktopUI.Commands
 {
@@ -13,6 +14,7 @@ namespace AssetManagement.DesktopUI.Commands
         {
             _viewModel = viewModel;
             _clientData = clientData;
+            _viewModel.PropertyChanged += ViewModel_PropertyChanged;
         }
 
         public override void Execute(object parameter)
@@ -27,6 +29,16 @@ namespace AssetManagement.DesktopUI.Commands
 
             _clientData.UpdateClient(client);
             _viewModel.DisplayClients();
+        }
+
+        public override bool CanExecute(object parameter)
+        {
+            return _viewModel.SelectedClient != null;
+        }
+
+        private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnCanExecuteChanged();
         }
     }
 }
