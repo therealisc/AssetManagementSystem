@@ -46,6 +46,7 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -63,25 +64,30 @@
                 Visibility="{Binding IsAccountant, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         
         <Button Grid.Column="3"
+                Command="{Binding NavigateDocumentsCommand}"
+                Content="Documente"
+                Visibility="{Binding IsAccountant, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+        <Button Grid.Column="4"
                 Command="{Binding NavigateSuppliersCommand}"
                 Content="Furnizori"
                 Visibility="{Binding IsAccountant, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
-        <Button Grid.Column="4"
+        <Button Grid.Column="5"
                 Command="{Binding NavigateClientsCommand}"
                 Content="Clienti"
                 Visibility="{Binding IsManager, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
-        <Button Grid.Column="5"
+        <Button Grid.Column="6"
                 Command="{Binding NavigateUsersCommand}"
                 Content="Utilizatori"
                 Visibility="{Binding IsManager, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
-        <Button Grid.Column="6" 
+        <Button Grid.Column="7" 
                 Command="{Binding NavigateAccountCommand}"
                 Content="Profil" />
 
-        <Button Grid.Column="7" 
+        <Button Grid.Column="8" 
                 Command="{Binding LogoutCommand}"
                 Content="Deconectare"
                 HorizontalAlignment="Right" />
