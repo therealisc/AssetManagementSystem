@@ -19,6 +19,10 @@
                 <views:HomeView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:SuppliersViewModel}">
+                <views:SuppliersView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodels:ClientsViewModel}">
                 <views:ClientsView/>
             </DataTemplate>

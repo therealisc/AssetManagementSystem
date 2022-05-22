@@ -42,12 +42,14 @@ namespace AssetManagement.DesktopUI
 
             services.AddTransient<HomeViewModel>();
             services.AddTransient<AccountViewModel>();
+            services.AddTransient<SuppliersViewModel>();
             services.AddTransient<ClientsViewModel>();
             services.AddTransient<UsersViewModel>();
             services.AddTransient<NavigationBarViewModel>(CreateNavigationBarViewModel);
 
             services.AddTransient<SqlDataAccess>();
             services.AddTransient<UserData>();
+            services.AddTransient<SupplierData>();
             services.AddTransient<ClientData>();
             services.AddTransient<AuthentificationService>();
             services.AddTransient<UsersMappingService>();
@@ -101,6 +103,14 @@ namespace AssetManagement.DesktopUI
                 serviceProvider.GetRequiredService<AuthentificationService>());
         }
 
+        private INavigationService CreateSuppliersNavigationService(IServiceProvider serviceProvider)
+        {
+            return new LayoutNavigationService<SuppliersViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<SuppliersViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+        }
+
         private INavigationService CreateClientsNavigationService(IServiceProvider serviceProvider)
         {
             return new LayoutNavigationService<ClientsViewModel>(
@@ -130,6 +140,7 @@ namespace AssetManagement.DesktopUI
             return new NavigationBarViewModel(
                 serviceProvider.GetRequiredService<AccountStore>(),
                 CreateHomeNavigationService(serviceProvider),
+                CreateSuppliersNavigationService(serviceProvider),
                 CreateClientsNavigationService(serviceProvider),
                 CreateUsersNavigationService(serviceProvider),
                 CreateAccountNavigationService(serviceProvider),

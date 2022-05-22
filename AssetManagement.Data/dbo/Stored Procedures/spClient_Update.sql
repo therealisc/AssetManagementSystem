@@ -5,6 +5,8 @@
 	@Address NVARCHAR(max)
 AS
 BEGIN
+	SET NOCOUNT ON;
+
 	UPDATE dbo.Clienti 
 	SET DenumireClient = @ClientName, CodFiscalClient = @FiscalCode, AdresaClient = @Address
 	WHERE IdClient = @Id;
