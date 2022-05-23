@@ -9,11 +9,6 @@
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
         <Grid Background="White">
             <Grid.Resources>
-                <Style TargetType="TextBlock">
-                    <Setter Property="Margin" Value="0 0 0 0"/>
-                    <Setter Property="Width" Value="150"/>
-                    <Setter Property="HorizontalAlignment" Value="Left"/>
-                </Style>
 
                 <!--<Style TargetType="TextBox">
                     <Setter Property="Margin" Value="0 0 5 0"/>
@@ -37,7 +32,7 @@
                     </Setter>
                 </Style>-->
 
-                <Style TargetType="Button">
+                <Style TargetType="Button" x:Key="ActionButtonStyle">
                     <Setter Property="Width" Value="60"/>
                     <Setter Property="Margin" Value="0 20 5 0"/>
                     <Style.Triggers>
@@ -62,9 +57,9 @@
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Name="txtNumarDocument" Text="Numar document"/>
-                        <TextBox>
+                        <TextBox Width="150">
                             <TextBox.Text>
-                                <Binding Path="SelectedClientName" UpdateSourceTrigger="PropertyChanged">
+                                <Binding Path="SelectedDocumentNumber" UpdateSourceTrigger="PropertyChanged">
                                     <!--<Binding.ValidationRules>
                                         <validationrules:TextBoxValidationRule/>
                                     </Binding.ValidationRules>-->
@@ -81,55 +76,44 @@
 
                         </StackPanel.Resources>-->
                         <TextBlock Text="Data document" />
-                        <DatePicker>
-                            <DatePicker.CalendarStyle>
-                                <Style TargetType="{x:Type Calendar}">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type Calendar}">
-                                                <CalendarItem Background="{TemplateBinding Control.Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" />
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </DatePicker.CalendarStyle>
-                        </DatePicker>
+                        <DatePicker IsTodayHighlighted="True" SelectedDate="{Binding SelectedDocumentDate}" Width="150"/>
+
 
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Margin="5 0">
                         <TextBlock Text="Tip document"/>
-                        <ComboBox Text="{Binding SelectedClientAddress}"/>
+                        <ComboBox ItemsSource="{Binding DocumentTypes}" DisplayMemberPath="DocumentTypeInfo" SelectedItem="{Binding SelectedDocumentType}" MinWidth="150"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Furnizor"/>
                         <StackPanel Orientation="Horizontal">
-                            <ComboBox Text="{Binding SelectedClientAddress}" VerticalAlignment="Top" Width="150"/>
-                            <Button Content="..." VerticalAlignment="Center" Margin="5 0 0 0" Width="25"/>
+                            <ComboBox ItemsSource="{Binding Suppliers}" SelectedItem="{Binding SelectedSupplier}" DisplayMemberPath="SupplierInfo" VerticalAlignment="Top" MinWidth="150"/>
+                            <Button Content="..." Command="{Binding NavigateSuppliersCommand}" VerticalAlignment="Center" Margin="5 0 0 0" Width="25"/>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="Adauga" Command="{Binding SaveClientCommand}"/>
-                    <Button Content="Modifica" Command="{Binding UpdateClientCommand}"/>
-                    <Button Content="Sterge" Command="{Binding DeleteClientCommand}"/>
+                    <Button Content="Adauga" Style="{StaticResource ActionButtonStyle}" Command="{Binding AddDocumentCommand}"/>
+                    <Button Content="Modifica" Style="{StaticResource ActionButtonStyle}" Command="{Binding UpdateClientCommand}"/>
+                    <Button Content="Sterge" Style="{StaticResource ActionButtonStyle}" Command="{Binding DeleteDocumentCommand}"/>
                 </StackPanel>
 
             </StackPanel>
 
 
-            <ListView Grid.Row="1" ItemsSource="{Binding Clients}" SelectedItem="{Binding SelectedClient}" Margin="0 5 0 0">
+            <ListView Grid.Row="1" ItemsSource="{Binding Documents}" SelectedItem="{Binding SelectedDocument}" Margin="0 5 0 0">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Numar document"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=FiscalCode}" Header="Data document"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=FiscalCode}" Header="Tip document"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding DocumentNumber}" Header="Numar document"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding DocumentDate}" Header="Data document"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding DocumentType.DocumentTypeInfo}" Header="Tip document"/>
                         <GridViewColumn Header="Furnizor" Width="400">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Address}"/>
+                                    <TextBlock Text="{Binding Supplier.SupplierInfo}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

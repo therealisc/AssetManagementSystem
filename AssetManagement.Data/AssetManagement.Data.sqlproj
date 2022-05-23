@@ -98,6 +98,10 @@
     <Build Include="dbo\Stored Procedures\spSuppliers_GetAll.sql" />
     <Build Include="dbo\Stored Procedures\spSupplier_Delete.sql" />
     <Build Include="dbo\Stored Procedures\spSupplier_Update.sql" />
+    <Build Include="dbo\Stored Procedures\spDocumentTypes_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spDocument_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spDocuments_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spDocument_Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="AssetManagement.Data.refactorlog" />

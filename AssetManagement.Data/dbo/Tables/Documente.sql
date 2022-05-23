@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Documente]
 (
 	[IdDocument] INT NOT NULL PRIMARY KEY IDENTITY, 
-    [NumarDocument] INT NOT NULL, 
+    [NumarDocument] VARCHAR(50) NOT NULL, 
     [DataDocument] DATETIME2 NOT NULL, 
     [IdTipDocument] INT NOT NULL,
     [IdFurnizor] INT NULL, 

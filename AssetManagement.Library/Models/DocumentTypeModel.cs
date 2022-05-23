@@ -6,18 +6,16 @@ using System.Threading.Tasks;
 
 namespace AssetManagement.Library.Models
 {
-    public class SupplierModel
+    public class DocumentTypeModel
     {
         public int Id { get; set; }
-        public string SupplierName { get; set; }
-        public string FiscalCode { get; set; }
-        public string Address { get; set; }
-
-        public string SupplierInfo
+        public string DocumentOperationType { get; set; }
+        public string DocumentDescription { get; set; }
+        public string DocumentTypeInfo
         {
             get
             {
-                return $"{SupplierName} - {FiscalCode}";
+                return $"{DocumentDescription} [{DocumentOperationType}]";
             }
         }
     }

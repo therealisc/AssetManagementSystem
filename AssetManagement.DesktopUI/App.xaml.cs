@@ -42,7 +42,7 @@ namespace AssetManagement.DesktopUI
 
             services.AddTransient<HomeViewModel>();
             services.AddTransient<AccountViewModel>();
-            services.AddTransient<DocumentsViewModel>();
+            services.AddTransient<DocumentsViewModel>(CreateDocumentsViewModel);
             services.AddTransient<SuppliersViewModel>();
             services.AddTransient<ClientsViewModel>();
             services.AddTransient<UsersViewModel>();
@@ -51,6 +51,7 @@ namespace AssetManagement.DesktopUI
             services.AddTransient<SqlDataAccess>();
             services.AddTransient<UserData>();
             services.AddTransient<SupplierData>();
+            services.AddTransient<DocumentData>();
             services.AddTransient<ClientData>();
             services.AddTransient<AuthentificationService>();
             services.AddTransient<UsersMappingService>();
@@ -155,6 +156,14 @@ namespace AssetManagement.DesktopUI
                 CreateUsersNavigationService(serviceProvider),
                 CreateAccountNavigationService(serviceProvider),
                 CreateLoginNavigationService(serviceProvider));
+        }
+
+        private DocumentsViewModel CreateDocumentsViewModel(IServiceProvider serviceProvider)
+        {
+            return new DocumentsViewModel(
+                CreateSuppliersNavigationService(serviceProvider), 
+                serviceProvider.GetRequiredService<SupplierData>(),
+                serviceProvider.GetRequiredService<DocumentData>());
         }
     }
 }
