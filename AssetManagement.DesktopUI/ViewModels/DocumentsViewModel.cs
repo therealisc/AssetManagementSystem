@@ -25,6 +25,7 @@ namespace AssetManagement.DesktopUI.ViewModels
 
             AddDocumentCommand = new AddDocumentCommand(this, documentData);
             DeleteDocumentCommand = new DeleteDocumentCommand(this, documentData);
+            UpdateDocumentCommand = new UpdateDocumentCommand(this, documentData);
 
             DisplayDocuments();
             Suppliers = new BindingList<SupplierModel>(_supplierData.GetSuppliers());
@@ -92,7 +93,11 @@ namespace AssetManagement.DesktopUI.ViewModels
         public SupplierModel SelectedSupplier
         {
             get { return _selectedSupplier; }
-            set { _selectedSupplier = value; }
+            set 
+            { 
+                _selectedSupplier = value;
+                OnPropertyChanged(nameof(SelectedSupplier));
+            }
         }
 
         private BindingList<DocumentTypeModel> _documentTypes;

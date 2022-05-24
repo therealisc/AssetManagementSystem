@@ -83,21 +83,27 @@
 
                     <StackPanel Orientation="Vertical" Margin="5 0">
                         <TextBlock Text="Tip document"/>
-                        <ComboBox ItemsSource="{Binding DocumentTypes}" DisplayMemberPath="DocumentTypeInfo" SelectedItem="{Binding SelectedDocumentType}" MinWidth="150"/>
+                        <ComboBox ItemsSource="{Binding DocumentTypes}" 
+                                  DisplayMemberPath="DocumentTypeInfo" 
+                                  SelectedItem="{Binding SelectedDocumentType, Mode=TwoWay}" MinWidth="150" 
+                                  Text="{Binding SelectedDocumentType.DocumentTypeInfo, Mode=OneWay}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Furnizor"/>
                         <StackPanel Orientation="Horizontal">
-                            <ComboBox ItemsSource="{Binding Suppliers}" SelectedItem="{Binding SelectedSupplier}" DisplayMemberPath="SupplierInfo" VerticalAlignment="Top" MinWidth="150"/>
-                            <Button Content="..." Command="{Binding NavigateSuppliersCommand}" VerticalAlignment="Center" Margin="5 0 0 0" Width="25"/>
+                            <ComboBox ItemsSource="{Binding Suppliers}" 
+                                      SelectedItem="{Binding SelectedSupplier, Mode=TwoWay}" 
+                                      DisplayMemberPath="SupplierInfo" MinWidth="150"
+                                      Text="{Binding SelectedSupplier.SupplierInfo, Mode=OneWay}"/>
+                            <Button Content="..." Command="{Binding NavigateSuppliersCommand}" VerticalAlignment="Center" Margin="5 0 0 0" Width="25" />
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <Button Content="Adauga" Style="{StaticResource ActionButtonStyle}" Command="{Binding AddDocumentCommand}"/>
-                    <Button Content="Modifica" Style="{StaticResource ActionButtonStyle}" Command="{Binding UpdateClientCommand}"/>
+                    <Button Content="Modifica" Style="{StaticResource ActionButtonStyle}" Command="{Binding UpdateDocumentCommand}"/>
                     <Button Content="Sterge" Style="{StaticResource ActionButtonStyle}" Command="{Binding DeleteDocumentCommand}"/>
                 </StackPanel>
 
@@ -109,8 +115,14 @@
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding DocumentNumber}" Header="Numar document"/>
                         <GridViewColumn DisplayMemberBinding="{Binding DocumentDate}" Header="Data document"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding DocumentType.DocumentTypeInfo}" Header="Tip document"/>
-                        <GridViewColumn Header="Furnizor" Width="400">
+                        <GridViewColumn Header="Tip document" Width="400">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DocumentType.DocumentTypeInfo}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Furnizor" Width="300">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Supplier.SupplierInfo}"/>

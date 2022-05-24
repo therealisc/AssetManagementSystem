@@ -61,6 +61,13 @@ namespace AssetManagement.Library.DataAccess
             _sqlData.SaveData("dbo.spDocument_Delete", new { DocumentId = document.Id }, "AssetManagement");
         }
 
+        public void UpdateDocument(DocumentModel document)
+        {
+            var parameters = new { document.Id, document.DocumentNumber, document.DocumentDate, DocumentTypeId = document.DocumentType.Id, SupplierId = document.Supplier.Id };
+
+            _sqlData.SaveData("dbo.spDocument_Update", parameters, "AssetManagement");
+        }
+
 
     }
 }
