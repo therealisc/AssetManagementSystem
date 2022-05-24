@@ -42,6 +42,7 @@ namespace AssetManagement.DesktopUI
 
             services.AddTransient<HomeViewModel>();
             services.AddTransient<AccountViewModel>();
+            services.AddTransient<ClasificationCodesViewModel>();
             services.AddTransient<DocumentsViewModel>(CreateDocumentsViewModel);
             services.AddTransient<SuppliersViewModel>();
             services.AddTransient<ClientsViewModel>();
@@ -50,6 +51,7 @@ namespace AssetManagement.DesktopUI
 
             services.AddTransient<SqlDataAccess>();
             services.AddTransient<UserData>();
+            services.AddTransient<ClasificationCodeData>();
             services.AddTransient<SupplierData>();
             services.AddTransient<DocumentData>();
             services.AddTransient<ClientData>();
@@ -105,6 +107,14 @@ namespace AssetManagement.DesktopUI
                 serviceProvider.GetRequiredService<AuthentificationService>());
         }
 
+        private INavigationService CreateClasificationCodesNavigationService(IServiceProvider serviceProvider)
+        {
+            return new LayoutNavigationService<ClasificationCodesViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<ClasificationCodesViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+        }
+
         private INavigationService CreateDocumentsNavigationService(IServiceProvider serviceProvider)
         {
             return new LayoutNavigationService<DocumentsViewModel>(
@@ -150,6 +160,7 @@ namespace AssetManagement.DesktopUI
             return new NavigationBarViewModel(
                 serviceProvider.GetRequiredService<AccountStore>(),
                 CreateHomeNavigationService(serviceProvider),
+                CreateClasificationCodesNavigationService(serviceProvider),
                 CreateDocumentsNavigationService(serviceProvider),
                 CreateSuppliersNavigationService(serviceProvider),
                 CreateClientsNavigationService(serviceProvider),
