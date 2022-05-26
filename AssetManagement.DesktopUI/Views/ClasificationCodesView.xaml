@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AssetManagement.DesktopUI.Views"
+             xmlns:local="clr-namespace:AssetManagement.DesktopUI.Views" xmlns:validationrules="clr-namespace:AssetManagement.DesktopUI.ValidationRules"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <!--<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
@@ -15,12 +15,6 @@
             <Style TargetType="Button" x:Key="ActionButtonStyle">
                 <Setter Property="Width" Value="60"/>
                 <Setter Property="Margin" Value="0 20 5 0"/>
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding ElementName=txtDenumire, Path=(Validation.HasError)}" Value="True">
-                        <Setter Property="IsEnabled" Value="False"/>
-                    </DataTrigger>
-                </Style.Triggers>
-
             </Style>
         </Grid.Resources>
 
@@ -31,41 +25,66 @@
 
         <StackPanel>
             <TextBlock Text="Coduri de clasificare" 
-                           FontSize="20" 
-                           Margin="0 20 0 10"/>
+                       FontSize="20" 
+                       Margin="0 20 0 10"/>
             
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Cod de clasificare"/>
-                        <TextBox Width="128" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical" Margin="5 0">
-                        <TextBlock Text="Descriere cod clasificare"/>
-                        <TextBox Width="300" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Ani de functionare minima"/>
-                        <TextBox />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical" Margin="5 0">
-                        <TextBlock Text="Ani de functionare maxima"/>
-                        <TextBox />
-                    </StackPanel>
 
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Tip clasificare"/>
-                        <ComboBox Height="18" Width="100"/>
+                        <ComboBox Width="100" ItemsSource="{Binding ClasificationCodeTypes}" SelectedItem="{Binding SelectedAvailableClasification}" DisplayMemberPath="ClasificationType"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Margin="5 0">
+                        <TextBlock Text="Cod de clasificare"/>
+                        <TextBox Style="{StaticResource TextBoxWithValidationStyle}" x:Name="ClasificationCodeTextBox">
+                            <TextBox.Text>
+                                <Binding Path="SelectedClasificationCode" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <validationrules:ClasificationCodeValidationRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Descriere cod clasificare"/>
+                        <TextBox Text="{Binding SelectedClasificationCodeDescription, UpdateSourceTrigger=PropertyChanged}" Width="300" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical"  Margin="5 0">
+                        <TextBlock Text="Ani de functionare minima"/>
+                        <TextBox Style="{StaticResource TextBoxWithValidationStyle}" x:Name="MinimumLifetimeTextBox">
+                            <TextBox.Text>
+                                <Binding Path="SelectedMinimumLifetime" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <validationrules:NumericTextBoxValidationRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Ani de functionare maxima"/>
+                        <TextBox Style="{StaticResource TextBoxWithValidationStyle}" x:Name="MaximumLifetimeTextBox">
+                            <TextBox.Text>
+                                <Binding Path="SelectedMaximumLifetime" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <validationrules:NumericTextBoxValidationRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                     </StackPanel>
                 </StackPanel>
 
             </StackPanel>
 
 
-            <StackPanel Margin="0 5 0 0">
+            <StackPanel Margin="0 20 0 0">
                 <Expander BorderBrush="LightGray" HorizontalAlignment="Left" Header="Tipuri de clasificare" ExpandDirection="Down">
 
                     <Grid Margin="0 5 0 0">
@@ -80,8 +99,13 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0">
-                            <TextBlock Name="txtNumarDocument" Text="Tip Clasificare"/>
+                        <StackPanel Orientation="Vertical" Margin="0 0 5 0 " Grid.Column="0" Grid.Row="0">
+                            <TextBlock Text="Nivel clasificare" />
+                            <TextBox Width="150" Text="{Binding SelectedClasificationRank, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0">
+                            <TextBlock Name="txtNumarDocument" Text="Tip Clasificare" />
                             <TextBox Width="150">
                                 <TextBox.Text>
                                     <Binding Path="SelectedClasificationCodeType" UpdateSourceTrigger="PropertyChanged">
@@ -93,15 +117,10 @@
                             </TextBox>
                         </StackPanel>
 
-                        <StackPanel Orientation="Vertical" Margin="5 0 0 0" Grid.Column="1" Grid.Row="0">
-                            <TextBlock Text="Nivel clasificare" />
-                            <TextBox Width="150" Text="{Binding SelectedClasificationRank, UpdateSourceTrigger=PropertyChanged}"/>
-                        </StackPanel>
-
                         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2">
                             <Button Content="Adauga" Style="{StaticResource ActionButtonStyle}" Command="{Binding AddClasificationCodeTypeCommand}"/>
-                            <Button Content="Modifica" Style="{StaticResource ActionButtonStyle}" Command="{Binding UpdateDocumentCommand}"/>
-                            <Button Content="Sterge" Style="{StaticResource ActionButtonStyle}" Command="{Binding DeleteDocumentCommand}"/>
+                            <Button Content="Modifica" Style="{StaticResource ActionButtonStyle}" Command="{Binding UpdateClasificationCodeTypeCommand}"/>
+                            <Button Content="Sterge" Style="{StaticResource ActionButtonStyle}" Command="{Binding DeleteClasificationCodeTypeCommand}"/>
                         </StackPanel>
 
                         <ListBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Height="80" Margin="0 5 0 0"
@@ -114,30 +133,45 @@
 
 
             <StackPanel Orientation="Horizontal">
-                <Button Content="Adauga" Style="{StaticResource ActionButtonStyle}" Command="{Binding AddDocumentCommand}"/>
+                <Button Content="Adauga" Command="{Binding AddClasificationCodeCommand}">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource ActionButtonStyle}">
+                            <Setter Property="IsEnabled" Value="False" />
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=MinimumLifetimeTextBox}" Value="False" />
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=MaximumLifetimeTextBox}" Value="False" />
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ClasificationCodeTextBox}" Value="False" />
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="IsEnabled" Value="True" />
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
                 <Button Content="Modifica" Style="{StaticResource ActionButtonStyle}" Command="{Binding UpdateDocumentCommand}"/>
-                <Button Content="Sterge" Style="{StaticResource ActionButtonStyle}" Command="{Binding DeleteDocumentCommand}"/>
+                <Button Content="Sterge" Style="{StaticResource ActionButtonStyle}" Command="{Binding DeleteClasificationCodeCommand}"/>
             </StackPanel>
 
         </StackPanel>
 
 
-        <ListView Grid.Row="1" ItemsSource="{Binding Documents}" SelectedItem="{Binding SelectedDocument}" Margin="0 5 0 0">
+        <ListView Grid.Row="1" ItemsSource="{Binding ClasificationCodes}" SelectedItem="{Binding SelectedClasificationCodeModel}" Margin="0 5 0 0">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding DocumentNumber}" Header="Cod clasificare"/>
-                    <GridViewColumn Header="Descriere cod clasificare" Width="400">
+                    <GridViewColumn DisplayMemberBinding="{Binding ClasificationCodeType.ClasificationType}" Header="Tip clasificare"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding ClasificationCode}" Header="Cod clasificare"/>
+                    <GridViewColumn Header="Descriere cod clasificare" Width="600">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding DocumentType.DocumentTypeInfo}"/>
+                                <TextBlock Text="{Binding ClasificationCodeDescription}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn DisplayMemberBinding="{Binding DocumentNumber}" Header="Durata minima"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding DocumentNumber}" Header="Durata maxima"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding DocumentNumber}" Header="Tip clasificare"/>
-                    
+                    <GridViewColumn DisplayMemberBinding="{Binding MinimumLifetime}" Header="Durata minima"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding MaximumLifetime}" Header="Durata maxima"/>
                 </GridView>
             </ListView.View>
         </ListView>

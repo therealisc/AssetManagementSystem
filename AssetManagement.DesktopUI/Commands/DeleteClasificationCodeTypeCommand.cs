@@ -27,9 +27,14 @@ namespace AssetManagement.DesktopUI.Commands
             _viewModel.DisplayClasificationCodeTypes();
         }
 
+        public override bool CanExecute(object parameter)
+        {
+            return _viewModel.SelectedClasification != null;
+        }
+
         private void ViewMode_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            OnCanExecuteChanged();
         }
     }
 }

@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AssetManagement.DesktopUI.Views" xmlns:validationrules="clr-namespace:AssetManagement.DesktopUI.ValidationRules"
+             xmlns:local="clr-namespace:AssetManagement.DesktopUI.Views" 
+             xmlns:validationrules="clr-namespace:AssetManagement.DesktopUI.ValidationRules"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
@@ -65,9 +66,9 @@
                         <TextBox>
                             <TextBox.Text>
                                 <Binding Path="SelectedSupplierName" UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
+                                    <!--<Binding.ValidationRules>
                                         <validationrules:TextBoxValidationRule/>
-                                    </Binding.ValidationRules>
+                                    </Binding.ValidationRules>-->
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>

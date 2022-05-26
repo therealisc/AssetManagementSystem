@@ -10,39 +10,34 @@ using System.Threading.Tasks;
 
 namespace AssetManagement.DesktopUI.Commands
 {
-    internal class AddClasificationCodeTypeCommand : CommandBase
+    internal class UpdateClasificationCodeTypeCommand : CommandBase
     {
         private readonly ClasificationCodesViewModel _viewModel;
-        private readonly ClasificationCodeData _clasificationCodeData;
+        private readonly ClasificationCodeData _clasificatinoCodeData;
 
-        public AddClasificationCodeTypeCommand(ClasificationCodesViewModel viewModel, ClasificationCodeData clasificationCodeData)
+        public UpdateClasificationCodeTypeCommand(ClasificationCodesViewModel viewModel, ClasificationCodeData clasificatinoCodeData)
         {
             _viewModel = viewModel;
-            _clasificationCodeData = clasificationCodeData;
             _viewModel.PropertyChanged += ViewModel_PropertyChanged;
+            _clasificatinoCodeData = clasificatinoCodeData;
         }
 
         public override void Execute(object parameter)
         {
             ClasificationCodeTypeModel codeType = new ClasificationCodeTypeModel()
             {
-                ClasificationType =  _viewModel.SelectedClasificationCodeType,
-                ClasificationRank = _viewModel.SelectedClasificationRank,
+                Id = _viewModel.SelectedClasification.Id,
+                ClasificationType = _viewModel.SelectedClasificationCodeType,
+                ClasificationRank = _viewModel.SelectedClasificationRank
             };
 
-            _clasificationCodeData.AddClasificationCodeType(codeType);
+            _clasificatinoCodeData.UpdateClasificationCodeType(codeType);
             _viewModel.DisplayClasificationCodeTypes();
         }
-
         public override bool CanExecute(object parameter)
         {
-            return string.IsNullOrWhiteSpace(_viewModel.SelectedClasificationCodeType) == false &&
-                _viewModel.ClasificationCodeTypes
-                .OrderByDescending(x => x.ClasificationRank)
-                .Select(x => x.ClasificationRank)
-                .Any(x => x + 1 == _viewModel.SelectedClasificationRank);
+            return _viewModel.SelectedClasification != null;
         }
-
         private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             OnCanExecuteChanged();

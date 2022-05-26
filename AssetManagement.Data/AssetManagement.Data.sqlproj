@@ -107,6 +107,10 @@
     <Build Include="dbo\Stored Procedures\spClasificationCodeType_Delete.sql" />
     <Build Include="dbo\Stored Procedures\spClasificatoinCodeType_Update.sql" />
     <Build Include="dbo\Stored Procedures\spClasificationCodeTypes_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spClasificationCodes_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spClasificationCode_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spClasificationCode_Update.sql" />
+    <Build Include="dbo\Stored Procedures\spClasificationCode_Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="AssetManagement.Data.refactorlog" />

@@ -25,34 +25,53 @@ namespace AssetManagement.Library.DataAccess
 
         public void AddClasificationCodeType(ClasificationCodeTypeModel clasificationCodeType)
         {
-            _sqlData.SaveData("dbo.spClasificationCodeType_Insert", new { clasificationCodeType.ClasificationType, clasificationCodeType.ClasificationRank }, "AssetManagement");
+            var parameters = new { clasificationCodeType.ClasificationType, clasificationCodeType.ClasificationRank };
+            _sqlData.SaveData("dbo.spClasificationCodeType_Insert", parameters, "AssetManagement");
         }
 
         public void DeleteClasificationCodeType(ClasificationCodeTypeModel clasificationCodeType)
         {
-            _sqlData.SaveData("dbo.spClasificationCodeType_Delete", new { }, "AssetManagement");
+            _sqlData.SaveData("dbo.spClasificationCodeType_Delete", new { clasificationCodeType.Id }, "AssetManagement");
         }
 
         public void UpdateClasificationCodeType(ClasificationCodeTypeModel clasificationCodeType)
         {
-            _sqlData.SaveData("dbo.spClasificatoinCodeType_Update", new { }, "AssetManagement");
+            var parameters = new { clasificationCodeType.Id, clasificationCodeType.ClasificationType, clasificationCodeType.ClasificationRank };
+            _sqlData.SaveData("dbo.spClasificatoinCodeType_Update", parameters, "AssetManagement");
         }
 
         public List<ClasificationCodeModel> GetClasificationCodes()
         {
-            var output = _sqlData.LoadData<ClasificationCodeModel, dynamic>("dbo.spClasificationCodes_GetAll", new { }, "AssetManagement");
+            var dynamicData = _sqlData.LoadData<dynamic, dynamic>("dbo.spClasificationCodes_GetAll", new { }, "AssetManagement");
+
+            List<ClasificationCodeModel> output = dynamicData.Select(item => new ClasificationCodeModel
+            {
+                ClasificationCode = item.ClasificationCode,
+                ClasificationCodeDescription = item.ClasificationCodeDescription,
+                MinimumLifetime = item.MinimumLifetime,
+                MaximumLifetime = item.MaximumLifetime,
+                ClasificationCodeType = new ClasificationCodeTypeModel
+                {
+                    Id = item.ClasificationTypeId,
+                    ClasificationType = item.ClasificationType,
+                }
+            }).ToList();
 
             return output;
         }
 
         public void AddClasificationCode(ClasificationCodeModel clasificationCode)
         {
-            _sqlData.SaveData("dbo.spClasificationCode_Insert", new { }, "AssetManagement");
+            var parameters = new { clasificationCode.ClasificationCode, clasificationCode.ClasificationCodeDescription,
+                clasificationCode.MinimumLifetime, clasificationCode.MaximumLifetime,
+                ClasificationTypeId = clasificationCode.ClasificationCodeType.Id };
+
+            _sqlData.SaveData("dbo.spClasificationCode_Insert", parameters, "AssetManagement");
         }
 
         public void DeleteClasificationCode(ClasificationCodeModel clasificationCode)
         {
-            _sqlData.SaveData("dbo.spClasificationCode_Delete", new { }, "AssetManagement");
+            _sqlData.SaveData("dbo.spClasificationCode_Delete", new { clasificationCode.ClasificationCode }, "AssetManagement");
         }
 
         public void UpdateClasificationCode(ClasificationCodeModel clasificationCode)

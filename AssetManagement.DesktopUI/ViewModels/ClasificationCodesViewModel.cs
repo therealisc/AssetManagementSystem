@@ -20,10 +20,22 @@ namespace AssetManagement.DesktopUI.ViewModels
             _clasificationCodeData = clasificationCodeData;
 
             DisplayClasificationCodeTypes();
+            DisplayClasificationCodes();
             AddClasificationCodeTypeCommand = new AddClasificationCodeTypeCommand(this, clasificationCodeData);
+            DeleteClasificationCodeTypeCommand = new DeleteClasificationCodeTypeCommand(this, clasificationCodeData);
+            UpdateClasificationCodeTypeCommand = new UpdateClasificationCodeTypeCommand(this, clasificationCodeData);
+
+            AddClasificationCodeCommand = new AddClasificationCode(this, clasificationCodeData);
+            DeleteClasificationCodeCommand = new DeleteClasificationCodeCommand(this, clasificationCodeData); 
         }
 
-        public ICommand AddClasificationCodeTypeCommand{ get; set; }
+        public ICommand AddClasificationCodeTypeCommand { get; }
+        public ICommand DeleteClasificationCodeTypeCommand { get; }
+        public ICommand UpdateClasificationCodeTypeCommand { get; }
+
+        public ICommand AddClasificationCodeCommand { get; }
+        public ICommand DeleteClasificationCodeCommand { get; }
+        public ICommand UpdateClasificationCodeCommand { get; }
 
         internal void DisplayClasificationCodeTypes()
         {
@@ -32,7 +44,7 @@ namespace AssetManagement.DesktopUI.ViewModels
 
         internal void DisplayClasificationCodes()
         {
-
+            ClasificationCodes = new BindingList<ClasificationCodeModel>(_clasificationCodeData.GetClasificationCodes());
         }
 
         private BindingList<ClasificationCodeTypeModel> _clasificationCodeTypes;
@@ -56,6 +68,18 @@ namespace AssetManagement.DesktopUI.ViewModels
             {
                 _selectedClasification = value;
                 OnPropertyChanged(nameof(SelectedClasification));
+            }
+        }
+
+        private ClasificationCodeTypeModel _selectedAvailableClasification;
+
+        public ClasificationCodeTypeModel SelectedAvailableClasification
+        {
+            get { return _selectedAvailableClasification; }
+            set
+            {
+                _selectedAvailableClasification = value;
+                OnPropertyChanged(nameof(SelectedAvailableClasification));
             }
         }
 
@@ -84,6 +108,91 @@ namespace AssetManagement.DesktopUI.ViewModels
             }
         }
 
+        private BindingList<ClasificationCodeModel> _clasificationCodes;
+
+        public BindingList<ClasificationCodeModel> ClasificationCodes
+        {
+            get { return _clasificationCodes; }
+            set
+            {
+                _clasificationCodes = value;
+                OnPropertyChanged(nameof(ClasificationCodes));
+            }
+        }
+
+        private ClasificationCodeModel _selectedClasficationCodeModel;
+
+        public ClasificationCodeModel SelectedClasificationCodeModel
+        {
+            get { return _selectedClasficationCodeModel; }
+            set
+            {
+                _selectedClasficationCodeModel = value;
+                OnPropertyChanged(nameof(SelectedClasificationCodeModel));
+            }
+        }
+
+        private string _selectedClasificationCode;
+
+        public string SelectedClasificationCode
+        {
+            get { return _selectedClasificationCode; }
+            set
+            {
+                _selectedClasificationCode = value;
+                OnPropertyChanged(nameof(SelectedClasificationCode));
+            }
+        }
+
+        private string _selectedClasificationCodeDesription;
+
+        public string SelectedClasificationCodeDescription
+        {
+            get { return _selectedClasificationCodeDesription; }
+            set
+            {
+                _selectedClasificationCodeDesription = value;
+                OnPropertyChanged(nameof(SelectedClasificationCodeDescription));
+            }
+        }
+
+        private int? _selectedMinimumLifetime;
+
+        public int? SelectedMinimumLifetime
+        {
+            get { return _selectedMinimumLifetime; }
+            set
+            {
+                if (value == _selectedMinimumLifetime)
+                    return;
+                _selectedMinimumLifetime = value;
+                OnPropertyChanged(nameof(SelectedMinimumLifetime));
+            }
+        }
+
+        private int? _selectedMaximumLifetime;
+
+        public int? SelectedMaximumLifetime
+        {
+            get { return _selectedMaximumLifetime; }
+            set
+            {
+                _selectedMaximumLifetime = value;
+                OnPropertyChanged(nameof(SelectedMaximumLifetime));
+            }
+        }
+
+        private ClasificationCodeTypeModel _selectedClasificationType;
+
+        public ClasificationCodeTypeModel SelectedClasificationType
+        {
+            get { return _selectedClasificationType; }
+            set
+            {
+                _selectedClasificationType = value;
+                OnPropertyChanged(nameof(SelectedClasificationType));
+            }
+        }
 
 
     }
