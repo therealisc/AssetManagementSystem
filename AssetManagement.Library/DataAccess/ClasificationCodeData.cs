@@ -76,7 +76,9 @@ namespace AssetManagement.Library.DataAccess
 
         public void UpdateClasificationCode(ClasificationCodeModel clasificationCode)
         {
-            _sqlData.SaveData("dbo.spClasificationCode_Update", new { }, "AssetManagement");
+            var parameters = new { clasificationCode.ClasificationCode, clasificationCode.ClasificationCodeDescription, clasificationCode.MinimumLifetime, 
+                clasificationCode.MaximumLifetime, ClasificationTypeId = clasificationCode.ClasificationCodeType.Id};
+            _sqlData.SaveData("dbo.spClasificationCode_Update", parameters, "AssetManagement");
         }
     }
 }

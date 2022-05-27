@@ -33,7 +33,10 @@
 
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Tip clasificare"/>
-                        <ComboBox Width="100" ItemsSource="{Binding ClasificationCodeTypes}" SelectedItem="{Binding SelectedAvailableClasification}" DisplayMemberPath="ClasificationType"/>
+                        <ComboBox Width="100" ItemsSource="{Binding ClasificationCodeTypes}" 
+                                  SelectedItem="{Binding SelectedAvailableClasification}" 
+                                  DisplayMemberPath="ClasificationType"
+                                  Text="{Binding SelectedAvailableClasification.ClasificationType}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Margin="5 0">
@@ -150,7 +153,24 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button Content="Modifica" Style="{StaticResource ActionButtonStyle}" Command="{Binding UpdateDocumentCommand}"/>
+                
+                <Button Content="Modifica" Command="{Binding UpdateClasificationCodeCommand}">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource ActionButtonStyle}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=MinimumLifetimeTextBox}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=MaximumLifetimeTextBox}" Value="False"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="IsEnabled" Value="True" />
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                
                 <Button Content="Sterge" Style="{StaticResource ActionButtonStyle}" Command="{Binding DeleteClasificationCodeCommand}"/>
             </StackPanel>
 

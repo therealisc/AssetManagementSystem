@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace AssetManagement.DesktopUI.Commands
 {
@@ -23,8 +24,19 @@ namespace AssetManagement.DesktopUI.Commands
 
         public override void Execute(object parameter)
         {
-            _clasificatinCodeData.DeleteClasificationCode(_viewModel.SelectedClasificationCodeModel);
-            _viewModel.DisplayClasificationCodes();
+            try
+            {
+                MessageBoxResult result = MessageBox.Show("Sigur doresti sa stergi codul de clasificare?","Atentie!", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    _clasificatinCodeData.DeleteClasificationCode(_viewModel.SelectedClasificationCodeModel);
+                    _viewModel.DisplayClasificationCodes();
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Eroare la stergerea codului de clasificare");
+            }
         }
 
         public override bool CanExecute(object parameter)

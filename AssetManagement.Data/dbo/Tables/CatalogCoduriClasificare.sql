@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[CatalogCoduriClasificare]
 (
 	[CodClasificare] VARCHAR(10) NOT NULL PRIMARY KEY, 
-    [DescriereCodClasificare] VARCHAR(MAX) NOT NULL, 
+    [DescriereCodClasificare] NVARCHAR(MAX) NOT NULL, 
     [DurataFunctionareMinima] INT NOT NULL, 
     [DurataFunctionareMaxima] INT NOT NULL, 
     [IdTipClasificare] int NOT NULL,

@@ -29,14 +29,15 @@ namespace AssetManagement.DesktopUI.Commands
             {
                 ClasificationCode = _viewModel.SelectedClasificationCode,
                 ClasificationCodeDescription = _viewModel.SelectedClasificationCodeDescription,
-                MinimumLifetime = _viewModel.SelectedMinimumLifetime.Value,
-                MaximumLifetime = _viewModel.SelectedMaximumLifetime.Value,
+                MinimumLifetime = _viewModel.SelectedMinimumLifetime,
+                MaximumLifetime = _viewModel.SelectedMaximumLifetime,
                 ClasificationCodeType = new ClasificationCodeTypeModel() { Id = _viewModel.SelectedAvailableClasification.Id }
             };
 
             try
             {
-                CheckToBeUnique(clasificationCode.ClasificationCode, _viewModel.ClasificationCodes.ToList());
+                CheckToBeUnique(clasificationCode, _viewModel.ClasificationCodes.ToList());
+                CheckClasificationOrder(clasificationCode, _viewModel.ClasificationCodes.ToList(), _viewModel.ClasificationCodeTypes.ToList());
                 _clasificationCodeData.AddClasificationCode(clasificationCode);
                 _viewModel.DisplayClasificationCodes();
             }
@@ -51,8 +52,8 @@ namespace AssetManagement.DesktopUI.Commands
             return _viewModel.SelectedAvailableClasification != null &&
                 string.IsNullOrWhiteSpace(_viewModel.SelectedClasificationCodeDescription) == false &&
                 string.IsNullOrWhiteSpace(_viewModel.SelectedClasificationCode) == false &&
-                _viewModel.SelectedMinimumLifetime >= 0 && 
-                _viewModel.SelectedMaximumLifetime > _viewModel.SelectedMinimumLifetime;
+                (_viewModel.SelectedMaximumLifetime > _viewModel.SelectedMinimumLifetime ||
+                _viewModel.SelectedMinimumLifetime == 0);
         }
 
         private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -60,13 +61,28 @@ namespace AssetManagement.DesktopUI.Commands
             OnCanExecuteChanged();
         }
 
-        private void CheckToBeUnique(string clasificationCode, List<ClasificationCodeModel> existingClasificationCodes)
+        private void CheckToBeUnique(ClasificationCodeModel clasificationCode, List<ClasificationCodeModel> existingClasificationCodes)
         {
-            if (existingClasificationCodes.Select(x => x.ClasificationCode).Contains(clasificationCode))
+            if (existingClasificationCodes.Select(x => x.ClasificationCode).Contains(clasificationCode.ClasificationCode))
             {
                 throw new Exception("Cod de clasificare existent!");
             }
         }
 
+        private void CheckClasificationOrder(ClasificationCodeModel clasificationCode,
+            List<ClasificationCodeModel> existingClasificationCodes,
+            List<ClasificationCodeTypeModel> existingClasificationTypes)
+        {
+            //var lastCodeType = existingClasificationCodes
+            //    .Where(x => x.ClasificationCode[..1] == clasificationCode.ClasificationCode[..1]) ?
+            //    .Select(x => x.ClasificationCodeType)
+            //    .OrderBy(x => x.ClasificationRank)
+            //    .Last();
+
+            //if (clasificationCode.ClasificationCodeType.ClasificationRank > lastCodeType.ClasificationRank + 1)
+            //{
+            //    throw new Exception($"Adauga mai intai o {existingClasificationTypes[existingClasificationTypes.IndexOf(clasificationCode.ClasificationCodeType)]}");
+            //}
+        }
     }
 }

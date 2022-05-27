@@ -26,7 +26,8 @@ namespace AssetManagement.DesktopUI.ViewModels
             UpdateClasificationCodeTypeCommand = new UpdateClasificationCodeTypeCommand(this, clasificationCodeData);
 
             AddClasificationCodeCommand = new AddClasificationCode(this, clasificationCodeData);
-            DeleteClasificationCodeCommand = new DeleteClasificationCodeCommand(this, clasificationCodeData); 
+            DeleteClasificationCodeCommand = new DeleteClasificationCodeCommand(this, clasificationCodeData);
+            UpdateClasificationCodeCommand = new UpdateClasificationCode(this, clasificationCodeData);
         }
 
         public ICommand AddClasificationCodeTypeCommand { get; }
@@ -127,8 +128,16 @@ namespace AssetManagement.DesktopUI.ViewModels
             get { return _selectedClasficationCodeModel; }
             set
             {
-                _selectedClasficationCodeModel = value;
-                OnPropertyChanged(nameof(SelectedClasificationCodeModel));
+                if(value != null)
+                {
+                    SelectedClasificationCode = value.ClasificationCode;
+                    SelectedClasificationCodeDescription = value.ClasificationCodeDescription;
+                    SelectedAvailableClasification = value.ClasificationCodeType;
+                    SelectedMinimumLifetime = value.MinimumLifetime;
+                    SelectedMaximumLifetime = value.MaximumLifetime;
+                    _selectedClasficationCodeModel = value;
+                    OnPropertyChanged(nameof(SelectedClasificationCodeModel));
+                }
             }
         }
 
@@ -156,9 +165,9 @@ namespace AssetManagement.DesktopUI.ViewModels
             }
         }
 
-        private int? _selectedMinimumLifetime;
+        private int _selectedMinimumLifetime;
 
-        public int? SelectedMinimumLifetime
+        public int SelectedMinimumLifetime
         {
             get { return _selectedMinimumLifetime; }
             set
@@ -170,9 +179,9 @@ namespace AssetManagement.DesktopUI.ViewModels
             }
         }
 
-        private int? _selectedMaximumLifetime;
+        private int _selectedMaximumLifetime;
 
-        public int? SelectedMaximumLifetime
+        public int SelectedMaximumLifetime
         {
             get { return _selectedMaximumLifetime; }
             set
@@ -193,7 +202,5 @@ namespace AssetManagement.DesktopUI.ViewModels
                 OnPropertyChanged(nameof(SelectedClasificationType));
             }
         }
-
-
     }
 }
