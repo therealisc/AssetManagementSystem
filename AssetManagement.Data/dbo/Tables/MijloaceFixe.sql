@@ -6,6 +6,7 @@
     [DurataAmortizareContabila] DATETIME2 NOT NULL, 
     [DurataAmortizareFiscala] DATETIME2 NOT NULL, 
     [MetodaAmortizareContabila] NVARCHAR(10) NOT NULL, 
+    [MetodaAmortizareFiscala] NVARCHAR(10) NOT NULL, 
     [ValoareIntrare] DECIMAL(18, 2) NOT NULL, 
     [IdClient] INT NOT NULL, 
     [CodClasificare] VARCHAR(10) NOT NULL,

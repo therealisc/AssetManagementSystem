@@ -36,11 +36,8 @@ namespace AssetManagement.DesktopUI.Commands
 
         public override bool CanExecute(object parameter)
         {
-            return string.IsNullOrWhiteSpace(_viewModel.SelectedClasificationCodeType) == false &&
-                _viewModel.ClasificationCodeTypes
-                .OrderByDescending(x => x.ClasificationRank)
-                .Select(x => x.ClasificationRank)
-                .Any(x => x + 1 == _viewModel.SelectedClasificationRank);
+            return _viewModel.ClasificationCodeTypes.Select(x => x.ClasificationType).Contains(_viewModel.SelectedClasificationCodeType) == false &&
+                _viewModel.ClasificationCodeTypes.Select(x => x.ClasificationRank).Contains(_viewModel.SelectedClasificationRank) == false;
         }
 
         private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)

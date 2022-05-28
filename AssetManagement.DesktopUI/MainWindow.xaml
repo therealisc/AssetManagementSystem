@@ -19,6 +19,10 @@
                 <views:HomeView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:FixedAssetsViewModel}">
+                <views:FixedAssetsView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodels:ClasificationCodesViewModel}">
                 <views:ClasificationCodesView/>
             </DataTemplate>

@@ -41,6 +41,7 @@ namespace AssetManagement.DesktopUI
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
 
             services.AddTransient<HomeViewModel>();
+            services.AddTransient<FixedAssetsViewModel>();
             services.AddTransient<AccountViewModel>();
             services.AddTransient<ClasificationCodesViewModel>();
             services.AddTransient<DocumentsViewModel>(CreateDocumentsViewModel);
@@ -91,6 +92,14 @@ namespace AssetManagement.DesktopUI
             return new LayoutNavigationService<HomeViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<HomeViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+        }
+
+        private INavigationService CreateFixedAssetsNavigationService(IServiceProvider serviceProvider)
+        {
+            return new LayoutNavigationService<FixedAssetsViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<FixedAssetsViewModel>(),
                 () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
         }
 
@@ -160,6 +169,7 @@ namespace AssetManagement.DesktopUI
             return new NavigationBarViewModel(
                 serviceProvider.GetRequiredService<AccountStore>(),
                 CreateHomeNavigationService(serviceProvider),
+                CreateFixedAssetsNavigationService(serviceProvider),
                 CreateClasificationCodesNavigationService(serviceProvider),
                 CreateDocumentsNavigationService(serviceProvider),
                 CreateSuppliersNavigationService(serviceProvider),

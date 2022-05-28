@@ -40,7 +40,11 @@
         <Button Command="{Binding NavigateHomeCommand}"
                 Content="Pagina principala"/>
 
-        <Button Content="Mijloace Fixe"                
+        <Button Command="{Binding NavigateFixedAssetsCommand}"
+                Content="Mijloace Fixe"                
+                Visibility="{Binding IsAccountant, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        
+        <Button Content="Operatii"
                 Visibility="{Binding IsAccountant, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
         <Button Command="{Binding NavigateClasificationCodesCommand}" 
