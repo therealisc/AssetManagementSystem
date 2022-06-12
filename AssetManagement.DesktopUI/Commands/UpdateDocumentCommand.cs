@@ -1,5 +1,6 @@
 ﻿using AssetManagement.DesktopUI.ViewModels;
 using AssetManagement.Library.DataAccess;
+using AssetManagement.Library.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,6 +24,7 @@ namespace AssetManagement.DesktopUI.Commands
 
         public override void Execute(object parameter)
         {
+            _viewModel.SelectedDocument.DocumentNumber = _viewModel.SelectedDocumentNumber;
             _viewModel.SelectedDocument.Supplier = _viewModel.SelectedSupplier;
             _viewModel.SelectedDocument.DocumentType = _viewModel.SelectedDocumentType;
             _documentData.UpdateDocument(_viewModel.SelectedDocument);

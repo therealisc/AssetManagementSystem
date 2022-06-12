@@ -111,6 +111,12 @@
     <Build Include="dbo\Stored Procedures\spClasificationCode_Insert.sql" />
     <Build Include="dbo\Stored Procedures\spClasificationCode_Update.sql" />
     <Build Include="dbo\Stored Procedures\spClasificationCode_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\spFixedAsset_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spFixedAsset_Lookup.sql" />
+    <Build Include="dbo\Stored Procedures\spFixedAssetDocument_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spFixedAssets_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spClients_GetAllAssigned.sql" />
+    <Build Include="dbo\Stored Procedures\spFixedAsset_Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="AssetManagement.Data.refactorlog" />

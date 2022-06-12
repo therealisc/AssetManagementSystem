@@ -13,5 +13,12 @@ namespace AssetManagement.Library.Models
         public int MinimumLifetime { get; set; }
         public int MaximumLifetime { get; set; }
         public ClasificationCodeTypeModel ClasificationCodeType { get; set; }
+        public string ClasificationCodeInfo
+        {
+            get
+            {
+                return $"{ClasificationCode} {ClasificationCodeDescription} [{MinimumLifetime} - {MaximumLifetime}]";
+            }
+        }
     }
 }

@@ -9,6 +9,8 @@
 
             <Style TargetType="TextBox" x:Key="TextBoxWithValidationStyle">
                 <Setter Property="VerticalAlignment" Value="Top"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Height" Value="22"/>
                 <Setter Property="Validation.ErrorTemplate">
                     <Setter.Value>
                         <ControlTemplate>

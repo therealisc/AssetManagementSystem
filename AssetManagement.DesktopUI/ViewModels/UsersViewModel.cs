@@ -214,13 +214,5 @@ namespace AssetManagement.DesktopUI.ViewModels
                 OnPropertyChanged(nameof(SelectedUnassignedClient));
             }
         }
-
-
-
-
-
-
-
-
     }
 }

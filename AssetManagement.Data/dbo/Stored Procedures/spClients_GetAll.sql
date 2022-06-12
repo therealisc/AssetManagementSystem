@@ -2,5 +2,5 @@
 AS
 BEGIN
 	SELECT IdClient AS [Id] , DenumireClient AS [ClientName], CodFiscalClient AS [FiscalCode], AdresaClient AS [Address] 
-	FROM Clienti
+	FROM Clienti;
 END

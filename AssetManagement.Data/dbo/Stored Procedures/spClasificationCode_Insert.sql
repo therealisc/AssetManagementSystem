@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[spClasificationCode_Insert]
-	@ClasificationCode varchar(10),
+	@ClasificationCode varchar(15),
 	@ClasificationCodeDescription nvarchar(max),
 	@Minimumlifetime int, 
 	@Maximumlifetime int,

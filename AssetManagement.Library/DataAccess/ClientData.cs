@@ -1,6 +1,7 @@
 ﻿using AssetManagement.Library.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,13 @@ namespace AssetManagement.Library.DataAccess
         public List<FullClientModel> GetClients()
         {
             var output = _sqlData.LoadData<FullClientModel, dynamic>("dbo.spClients_GetAll", new { }, "AssetManagement");
+
+            return output;
+        }
+
+        public List<FullClientModel> GetClients(int userId)
+        {
+            var output = _sqlData.LoadData<FullClientModel, dynamic>("dbo.spClients_GetAllAssigned", new { userId }, "AssetManagement");
 
             return output;
         }

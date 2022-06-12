@@ -52,12 +52,14 @@ namespace AssetManagement.DesktopUI
 
             services.AddTransient<SqlDataAccess>();
             services.AddTransient<UserData>();
+            services.AddTransient<FixedAssetData>();
             services.AddTransient<ClasificationCodeData>();
             services.AddTransient<SupplierData>();
             services.AddTransient<DocumentData>();
             services.AddTransient<ClientData>();
             services.AddTransient<AuthentificationService>();
             services.AddTransient<UsersMappingService>();
+            services.AddTransient<FixedAssetsMappingService>();
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())

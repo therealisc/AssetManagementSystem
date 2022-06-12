@@ -13,5 +13,12 @@ namespace AssetManagement.Library.Models
         public DateTime DocumentDate { get; set; }
         public DocumentTypeModel DocumentType { get; set; }
         public SupplierModel Supplier { get; set; }
+        public string DocumentInfo
+        {
+            get
+            {
+                return $"{DocumentDate} {DocumentNumber} {Supplier.SupplierName} {DocumentType.DocumentTypeInfo}";
+            }
+        }
     }
 }
