@@ -7,7 +7,7 @@
     [DurataAmortizareFiscala] INT NOT NULL, 
     [MetodaAmortizareContabila] NVARCHAR(10) NOT NULL, 
     [MetodaAmortizareFiscala] NVARCHAR(10) NOT NULL, 
-    [ValoareIntrare] DECIMAL(18, 2) NOT NULL, 
+    [ValoareIntrare] MONEY NOT NULL, 
     [IdClient] INT NOT NULL, 
     [CodClasificare] VARCHAR(15) NOT NULL,
     CONSTRAINT [FK_dbo.MijloaceFixe.Clienti_IdClient] FOREIGN KEY ([IdClient]) REFERENCES [dbo].[Clienti] ([IdClient]) ON DELETE CASCADE,

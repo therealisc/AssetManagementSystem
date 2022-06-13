@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace AssetManagement.DesktopUI.ValidationRules 
 {
-    public class NumericTextBoxValidationRule : ValidationRule
+    internal class NumericTextBoxValidationRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {

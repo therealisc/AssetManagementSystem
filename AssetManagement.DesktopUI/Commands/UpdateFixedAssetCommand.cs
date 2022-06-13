@@ -1,5 +1,4 @@
-﻿using AssetManagement.DesktopUI.Models;
-using AssetManagement.DesktopUI.ValidationRules.BusinessValidationRules;
+﻿using AssetManagement.DesktopUI.ValidationRules.BusinessValidationRules;
 using AssetManagement.DesktopUI.ViewModels;
 using AssetManagement.Library.DataAccess;
 using AssetManagement.Library.Models;
@@ -13,25 +12,27 @@ using System.Windows;
 
 namespace AssetManagement.DesktopUI.Commands
 {
-    internal class AddFixedAssetCommand : CommandBase
+    internal class UpdateFixedAssetCommand : CommandBase
     {
         private readonly FixedAssetsViewModel _viewModel;
         private readonly FixedAssetData _fixedAssetData;
         private readonly FixedAssetBusinessValidationRule _fixedAssetValidation;
 
-        public AddFixedAssetCommand(FixedAssetsViewModel viewModel, FixedAssetData fixedAssetData, FixedAssetBusinessValidationRule fixedAssetValidation)
+        public UpdateFixedAssetCommand(FixedAssetsViewModel viewModel, FixedAssetData fixedAssetData, FixedAssetBusinessValidationRule fixedAssetValidation)
         {
             _viewModel = viewModel;
             _viewModel.PropertyChanged += ViewModel_PropertyChanged;
             _fixedAssetData = fixedAssetData;
             _fixedAssetValidation = fixedAssetValidation;
         }
+
         public override void Execute(object parameter)
         {
             try
             {
                 FixedAssetModel fixedAsset = new FixedAssetModel
                 {
+                    InventoryNumber = _viewModel.SelectedFixedAssetInventoryNumber,
                     ClasificationCode = _viewModel.SelectedClasificationCode,
                     Client = _viewModel.SelectedClient,
                     FixedAssetDescription = _viewModel.SelectedFixedAssetDescription,
@@ -45,12 +46,12 @@ namespace AssetManagement.DesktopUI.Commands
 
                 _fixedAssetValidation.FixedAssetBusinessLogicValidation(fixedAsset, _viewModel.AssignedDocuments.ToList());
 
-                _fixedAssetData.AddFixedAsset(fixedAsset, _viewModel.AssignedDocuments.ToList());
+                _fixedAssetData.UpdateFixedAsset(fixedAsset, _viewModel.AssignedDocuments.ToList());
                 _viewModel.DisplayFixedAssets();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Eroare la adaugarea mijlocului fix!", "Atentie!");
+                MessageBox.Show(ex.Message, "Atentie!");
             }
         }
 

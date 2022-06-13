@@ -2,6 +2,7 @@
 using AssetManagement.DesktopUI.Models;
 using AssetManagement.DesktopUI.Services;
 using AssetManagement.DesktopUI.Stores;
+using AssetManagement.DesktopUI.ValidationRules.BusinessValidationRules;
 using AssetManagement.Library.DataAccess;
 using AssetManagement.Library.Models;
 using System;
@@ -29,7 +30,8 @@ namespace AssetManagement.DesktopUI.ViewModels
             DocumentData documentData,
             FixedAssetData fixedAssetData,
             FixedAssetsMappingService fixedAssetsMappingService, 
-            AccountStore accountStore)
+            AccountStore accountStore,
+            FixedAssetBusinessValidationRule fixedAssetValidation)
         {
             _clientData = clientData;
             _clasificationCodeData = clasificationCodeData;
@@ -43,8 +45,9 @@ namespace AssetManagement.DesktopUI.ViewModels
             AssignDocumentCommand = new AssignDocumentCommand(this);
             UnassignDocumentCommand = new UnassignDocumentCommand(this);
 
-            AddFixedAssetCommand = new AddFixedAssetCommand(this, fixedAssetData);
+            AddFixedAssetCommand = new AddFixedAssetCommand(this, fixedAssetData, fixedAssetValidation);
             DeleteFixedAssetCommand = new DeleteFixedAssetCommand(this, fixedAssetData);
+            UpdateFixedAssetCommand = new UpdateFixedAssetCommand(this, fixedAssetData, fixedAssetValidation);
 
             Clients = new BindingList<ClientModel>(_clientData.GetClients(_accountStore.CurrentAccount.UserId).ConvertAll(x => (ClientModel)x));
             ClasificationCodes = new BindingList<ClasificationCodeModel>(_clasificationCodeData.GetClasificationCodes());
@@ -67,6 +70,7 @@ namespace AssetManagement.DesktopUI.ViewModels
 
         public ICommand AddFixedAssetCommand { get; set; }
         public ICommand DeleteFixedAssetCommand { get; set; }
+        public ICommand UpdateFixedAssetCommand { get; set; }
 
         private BindingList<ClientModel> _clients;
 

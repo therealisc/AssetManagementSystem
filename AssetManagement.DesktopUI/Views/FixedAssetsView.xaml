@@ -77,7 +77,7 @@
 
                 <StackPanel Orientation="Vertical" Margin="0 0 5 0">
                     <TextBlock Text="Valoare intrare"/>
-                    <TextBox x:Name="AssetValueTextBox" Text="{Binding SelectedFixedAssetValue, UpdateSourceTrigger=PropertyChanged}" Width="160">
+                    <TextBox x:Name="AssetValueTextBox" Text="{Binding SelectedFixedAssetValue, Delay=500, UpdateSourceTrigger=PropertyChanged}"  Width="160">
                     </TextBox>
                 </StackPanel>
 
@@ -171,15 +171,16 @@
                 </Button.Style>
             </Button>
 
-            <Button Content="Modifica" Command="{Binding UpdateClasificationCodeCommand}">
+            <Button Content="Modifica" Command="{Binding UpdateFixedAssetCommand}">
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource ActionButtonStyle}">
                         <Setter Property="IsEnabled" Value="False"/>
                         <Style.Triggers>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=MinimumLifetimeTextBox}" Value="False"/>
-                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=MaximumLifetimeTextBox}" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=MonthsOfAccountingDepreciationTextBox}" Value="False" />
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=MonthsOfFiscalDepreciationTextBox}" Value="False" />
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=AssetValueTextBox}" Value="False" />                                
                                 </MultiDataTrigger.Conditions>
                                 <Setter Property="IsEnabled" Value="True" />
                             </MultiDataTrigger>

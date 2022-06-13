@@ -25,6 +25,7 @@ namespace AssetManagement.DesktopUI.Commands
         public override void Execute(object parameter)
         {
             _viewModel.SelectedDocument.DocumentNumber = _viewModel.SelectedDocumentNumber;
+            _viewModel.SelectedDocument.DocumentDate = _viewModel.SelectedDocumentDate;
             _viewModel.SelectedDocument.Supplier = _viewModel.SelectedSupplier;
             _viewModel.SelectedDocument.DocumentType = _viewModel.SelectedDocumentType;
             _documentData.UpdateDocument(_viewModel.SelectedDocument);

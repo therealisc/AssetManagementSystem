@@ -14,6 +14,7 @@ using System.Windows;
 using AssetManagement.Library.DataAccess;
 using AssetManagement.DesktopUI.Services.AuthentificationServices;
 using Microsoft.AspNet.Identity;
+using AssetManagement.DesktopUI.ValidationRules.BusinessValidationRules;
 
 namespace AssetManagement.DesktopUI
 {
@@ -30,6 +31,7 @@ namespace AssetManagement.DesktopUI
 
             services.AddSingleton<AccountStore>();
             services.AddSingleton<NavigationStore>();
+            services.AddSingleton<FixedAssetBusinessValidationRule>();
             services.AddSingleton<INavigationService>(CreateLoginNavigationService);
             services.AddTransient<LoginViewModel>(CreateLoginViewModel); //transient pentru avea mereu o noua instanta
             services.AddSingleton<MainWindowViewModel>();

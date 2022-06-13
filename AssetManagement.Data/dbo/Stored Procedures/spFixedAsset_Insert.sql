@@ -1,9 +1,9 @@
 ﻿CREATE PROCEDURE [dbo].[spFixedAsset_Insert]
-	@ClasificationCode varchar(10),
+	@ClasificationCode varchar(15),
 	@ClientId int,
 	@FixedAssetDescription nvarchar(max),
 	@AccountId nvarchar(50),
-	@AssetValue decimal,
+	@AssetValue money,
 	@MonthsOfAccountingDepreciation int,
 	@MonthsOfFiscalDepreciation int,
 	@AccountingDepreciationMethod nvarchar(10),

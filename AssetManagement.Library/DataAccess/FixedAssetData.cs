@@ -30,7 +30,7 @@ namespace AssetManagement.Library.DataAccess
                     MinimumLifetime = item.MinimumLifetime,
                     MaximumLifetime = item.MaximumLifetime
                 },
-                Client = new ClientModel { ClientName = item.ClientName },
+                Client = new ClientModel { Id = item.ClientId, ClientName = item.ClientName },
                 FixedAssetDescription = item.FixedAssetDescription,
                 AccountId = item.AccountId,
                 AssetValue = item.AssetValue,
@@ -87,6 +87,42 @@ namespace AssetManagement.Library.DataAccess
         public void DeleteFixedAsset(int inventoryNumber)
         {
             _sqlData.SaveData("dbo.spFixedAsset_Delete", new { inventoryNumber }, "AssetManagement");
+        }
+
+        public void UpdateFixedAsset(FixedAssetModel fixedAsset, List<DocumentModel> documents)
+        {
+            try
+            {
+                _sqlData.StartTransaction("AssetManagement");
+                var parameters = new
+                {
+                    fixedAsset.InventoryNumber,
+                    fixedAsset.ClasificationCode.ClasificationCode,
+                    ClientId = fixedAsset.Client.Id,
+                    fixedAsset.FixedAssetDescription,
+                    fixedAsset.AccountId,
+                    fixedAsset.AssetValue,
+                    fixedAsset.MonthsOfAccountingDepreciation,
+                    fixedAsset.MonthsOfFiscalDepreciation,
+                    fixedAsset.AccountingDepreciationMethod,
+                    fixedAsset.FiscalDepreciationMethod
+                };
+                _sqlData.SaveDataInTransaction("dbo.spFixedAsset_Update", parameters);
+
+                _sqlData.SaveDataInTransaction("dbo.spFixedAssetDocuments_Delete", new { fixedAsset.InventoryNumber });
+
+                foreach (var document in documents)
+                {
+                    _sqlData.SaveDataInTransaction("dbo.spFixedAssetDocument_Insert", new { fixedAsset.InventoryNumber, DocumentId = document.Id });
+                }
+
+                _sqlData.CommitTransaction();
+            }
+            catch (Exception)
+            {
+                _sqlData.RollbackTransaction();
+                throw;
+            }
         }
     }
 }

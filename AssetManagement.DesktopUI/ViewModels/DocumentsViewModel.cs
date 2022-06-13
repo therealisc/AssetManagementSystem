@@ -128,7 +128,11 @@ namespace AssetManagement.DesktopUI.ViewModels
         public DateTime SelectedDocumentDate
         {
             get { return _selectedDocumentDate; }
-            set { _selectedDocumentDate = value; }
+            set 
+            {
+                _selectedDocumentDate = value;
+                OnPropertyChanged(nameof(SelectedDocumentDate));
+            }
         }
 
         private string _selectedDocumentNumber;
