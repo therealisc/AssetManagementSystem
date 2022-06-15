@@ -101,6 +101,55 @@
                     </StackPanel>
                 </StackPanel>
 
+                <StackPanel Margin="0 20 0 0">
+                    <Expander BorderBrush="LightGray" HorizontalAlignment="Left" Header="Tipuri de documente" ExpandDirection="Down">
+
+                        <Grid Margin="0 5 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Orientation="Vertical" Margin="0 0 5 0 " Grid.Column="0" Grid.Row="0">
+                                <TextBlock Text="Tip document" />
+                                <TextBox Width="150" Text="{Binding SelectedClasificationRank, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0">
+                                <TextBlock Text="Descriere document" />
+                                <TextBox Width="150">
+                                    <TextBox.Text>
+                                        <Binding Path="SelectedClasificationCodeType" UpdateSourceTrigger="PropertyChanged">
+                                            <!--<Binding.ValidationRules>
+                                        <validationrules:TextBoxValidationRule/>
+                                    </Binding.ValidationRules>-->
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2">
+                                <Button Content="Adauga" Style="{StaticResource ActionButtonStyle}" Command="{Binding AddClasificationCodeTypeCommand}"/>
+                                <Button Content="Modifica" Style="{StaticResource ActionButtonStyle}" Command="{Binding UpdateClasificationCodeTypeCommand}"/>
+                                <Button Content="Sterge" Style="{StaticResource ActionButtonStyle}" Command="{Binding DeleteClasificationCodeTypeCommand}"/>
+                            </StackPanel>
+
+                            <ListBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Height="80" Margin="0 5 0 0"
+                                 ItemsSource="{Binding ClasificationCodeTypes}" SelectedItem="{Binding SelectedClasification}" 
+                                 DisplayMemberPath="ClasificationTypeInfo"/>
+
+                        </Grid>
+
+                    </Expander>
+                </StackPanel>
+
+
                 <StackPanel Orientation="Horizontal">
                     <Button Content="Adauga" Style="{StaticResource ActionButtonStyle}" Command="{Binding AddDocumentCommand}"/>
                     <Button Content="Modifica" Style="{StaticResource ActionButtonStyle}" Command="{Binding UpdateDocumentCommand}"/>

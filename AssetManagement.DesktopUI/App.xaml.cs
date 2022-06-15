@@ -44,6 +44,7 @@ namespace AssetManagement.DesktopUI
 
             services.AddTransient<HomeViewModel>();
             services.AddTransient<FixedAssetsViewModel>();
+            services.AddTransient<OperationsViewModel>();
             services.AddTransient<AccountViewModel>();
             services.AddTransient<ClasificationCodesViewModel>();
             services.AddTransient<DocumentsViewModel>(CreateDocumentsViewModel);
@@ -55,6 +56,7 @@ namespace AssetManagement.DesktopUI
             services.AddTransient<SqlDataAccess>();
             services.AddTransient<UserData>();
             services.AddTransient<FixedAssetData>();
+            //services.AddTransient<opera>
             services.AddTransient<ClasificationCodeData>();
             services.AddTransient<SupplierData>();
             services.AddTransient<DocumentData>();
@@ -104,6 +106,14 @@ namespace AssetManagement.DesktopUI
             return new LayoutNavigationService<FixedAssetsViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<FixedAssetsViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+        }
+
+        private INavigationService CreateOperationsNavigationService(IServiceProvider serviceProvider)
+        {
+            return new LayoutNavigationService<OperationsViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<OperationsViewModel>(),
                 () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
         }
 
@@ -174,6 +184,7 @@ namespace AssetManagement.DesktopUI
                 serviceProvider.GetRequiredService<AccountStore>(),
                 CreateHomeNavigationService(serviceProvider),
                 CreateFixedAssetsNavigationService(serviceProvider),
+                CreateOperationsNavigationService(serviceProvider),
                 CreateClasificationCodesNavigationService(serviceProvider),
                 CreateDocumentsNavigationService(serviceProvider),
                 CreateSuppliersNavigationService(serviceProvider),

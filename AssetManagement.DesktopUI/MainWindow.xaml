@@ -23,6 +23,10 @@
                 <views:FixedAssetsView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:OperationsViewModel}">
+                <views:OperationsView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodels:ClasificationCodesViewModel}">
                 <views:ClasificationCodesView/>
             </DataTemplate>

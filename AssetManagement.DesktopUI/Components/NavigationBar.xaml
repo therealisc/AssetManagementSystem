@@ -43,8 +43,9 @@
         <Button Command="{Binding NavigateFixedAssetsCommand}"
                 Content="Mijloace Fixe"                
                 Visibility="{Binding IsAccountant, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-        
-        <Button Content="Operatii"
+
+        <Button Command="{Binding NavigateOperationsCommamd}"
+                Content="Operatii"
                 Visibility="{Binding IsAccountant, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
         <Button Command="{Binding NavigateClasificationCodesCommand}" 
