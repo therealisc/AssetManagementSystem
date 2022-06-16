@@ -22,6 +22,21 @@ namespace AssetManagement.Library.DataAccess
             return output;
         }
 
+        public void AddDocumentType(DocumentTypeModel documentType)
+        {
+            _sqlData.SaveData("dbo.spDocumentType_Insert", new { documentType.DocumentOperationType, documentType.DocumentDescription }, "AssetManagement");
+        }
+
+        public void DeleteDocumentType(DocumentTypeModel documentType)
+        {
+            _sqlData.SaveData("dbo.spDocumentType_Delete", new { documentType.Id }, "AssetManagement");
+        }
+
+        public void UpdateDocumentType(DocumentTypeModel documentType)
+        {
+            _sqlData.SaveData("dbo.spDocumentType_Update", new { documentType.Id, documentType.DocumentOperationType, documentType.DocumentDescription}, "AssetManagement");
+        }
+
         public List<DocumentModel> GetDocuments()
         {
             var dynamicData = _sqlData.LoadData<dynamic, dynamic>("spDocuments_GetAll", new { }, "AssetManagement");

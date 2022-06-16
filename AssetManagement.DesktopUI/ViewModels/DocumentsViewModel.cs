@@ -27,10 +27,14 @@ namespace AssetManagement.DesktopUI.ViewModels
             DeleteDocumentCommand = new DeleteDocumentCommand(this, documentData);
             UpdateDocumentCommand = new UpdateDocumentCommand(this, documentData);
 
-            DisplayDocuments();
-            Suppliers = new BindingList<SupplierModel>(_supplierData.GetSuppliers());
-            DocumentTypes = new BindingList<DocumentTypeModel>(_documentData.GetDocumentTypes());
+            AddDocumentTypeCommand = new AddDocumentTypeCommand(this, documentData);
+            DeleteDocumentTypeCommand = new DeleteDocumentTypeCommand(this, documentData);
+            UpdateDocumentTypeCommand = new UpdateDocumentTypeCommand(this, documentData);
 
+
+            DisplayDocuments();
+            DisplayDocumentTypes();
+            Suppliers = new BindingList<SupplierModel>(_supplierData.GetSuppliers());
         }
 
         internal void DisplayDocuments()
@@ -38,10 +42,19 @@ namespace AssetManagement.DesktopUI.ViewModels
             Documents = new BindingList<DocumentModel>(_documentData.GetDocuments());   
         }
 
+        internal void DisplayDocumentTypes()
+        {
+            DocumentTypes = new BindingList<DocumentTypeModel>(_documentData.GetDocumentTypes());
+        }
+
         public ICommand NavigateSuppliersCommand { get; set; }
         public ICommand AddDocumentCommand { get; set; }
         public ICommand DeleteDocumentCommand { get; set; }
         public ICommand UpdateDocumentCommand { get; set; }
+
+        public ICommand AddDocumentTypeCommand { get; set; }
+        public ICommand DeleteDocumentTypeCommand { get; set; }
+        public ICommand UpdateDocumentTypeCommand { get; set; }
 
         private BindingList<DocumentModel> _documents;
 
@@ -146,5 +159,56 @@ namespace AssetManagement.DesktopUI.ViewModels
                 OnPropertyChanged(nameof(SelectedDocumentNumber));
             }
         }
+
+        private string _documentOperationType;
+
+        public string DocumentOperationType
+        {
+            get { return _documentOperationType; }
+            set 
+            {
+                _documentOperationType = value;
+                OnPropertyChanged(nameof(DocumentOperationType));
+            }
+        }
+
+        public List<string> AvailableDocumentTypes { get; } = new()
+        {
+            "Intrare",
+            "Iesire",
+            "Receptie"
+        };
+
+        private string _documentTypeDescription;
+
+        public string DocumentTypeDescription
+        {
+            get { return _documentTypeDescription; }
+            set 
+            { 
+                _documentTypeDescription = value;
+                OnPropertyChanged(nameof(DocumentTypeDescription));
+            }
+        }
+
+        private DocumentTypeModel _selectedDocumentTypeModel;
+
+        public DocumentTypeModel SelectedDocumentTypeModel
+        {
+            get { return _selectedDocumentTypeModel; }
+            set 
+            {
+                if (value != null)
+                {
+                    _selectedDocumentTypeModel = value;
+                    DocumentTypeDescription = value.DocumentDescription;
+                    DocumentOperationType = value.DocumentOperationType;
+                    OnPropertyChanged(nameof(SelectedDocumentTypeModel));
+                }
+            }
+        }
+
+
+
     }
 }

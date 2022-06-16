@@ -9,29 +9,7 @@
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
         <Grid Background="White">
             <Grid.Resources>
-
-                <!--<Style TargetType="TextBox">
-                    <Setter Property="Margin" Value="0 0 5 0"/>
-                    <Setter Property="Width" Value="200"/>
-                    <Setter Property="VerticalAlignment" Value="Top"/>
-                    <Setter Property="Validation.ErrorTemplate">
-                        <Setter.Value>
-                            <ControlTemplate>
-                                <StackPanel>
-                                    <AdornedElementPlaceholder/>
-                                    <ItemsControl Margin="1" FontSize="10" ItemsSource="{Binding}">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Foreground="Red" Text="{Binding ErrorContent}"/>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-                                </StackPanel>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>-->
-
+                
                 <Style TargetType="Button" x:Key="ActionButtonStyle">
                     <Setter Property="Width" Value="60"/>
                     <Setter Property="Margin" Value="0 20 5 0"/>
@@ -116,33 +94,27 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <StackPanel Orientation="Vertical" Margin="0 0 5 0 " Grid.Column="0" Grid.Row="0">
-                                <TextBlock Text="Tip document" />
-                                <TextBox Width="150" Text="{Binding SelectedClasificationRank, UpdateSourceTrigger=PropertyChanged}"/>
+                            <StackPanel Orientation="Vertical"  Margin="0 0 0 0 " Grid.Column="0" Grid.Row="0">
+                                <TextBlock Text="Descriere document" />
+                                <TextBox Width="160" HorizontalAlignment="Left"
+                                         Text="{Binding DocumentTypeDescription, UpdateSourceTrigger=PropertyChanged}"/>
                             </StackPanel>
 
                             <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0">
-                                <TextBlock Text="Descriere document" />
-                                <TextBox Width="150">
-                                    <TextBox.Text>
-                                        <Binding Path="SelectedClasificationCodeType" UpdateSourceTrigger="PropertyChanged">
-                                            <!--<Binding.ValidationRules>
-                                        <validationrules:TextBoxValidationRule/>
-                                    </Binding.ValidationRules>-->
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
+                                <TextBlock Text="Tip document" />
+                                <ComboBox Width="150" SelectedItem="{Binding DocumentOperationType}" Text="{Binding SelectedDocumentTypeModel.DocumentOperationType}"
+                                          HorizontalAlignment="Left" ItemsSource="{Binding AvailableDocumentTypes}"/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2">
-                                <Button Content="Adauga" Style="{StaticResource ActionButtonStyle}" Command="{Binding AddClasificationCodeTypeCommand}"/>
-                                <Button Content="Modifica" Style="{StaticResource ActionButtonStyle}" Command="{Binding UpdateClasificationCodeTypeCommand}"/>
-                                <Button Content="Sterge" Style="{StaticResource ActionButtonStyle}" Command="{Binding DeleteClasificationCodeTypeCommand}"/>
+                                <Button Content="Adauga" Style="{StaticResource ActionButtonStyle}" Command="{Binding AddDocumentTypeCommand}"/>
+                                <Button Content="Modifica" Style="{StaticResource ActionButtonStyle}" Command="{Binding UpdateDocumentTypeCommand}"/>
+                                <Button Content="Sterge" Style="{StaticResource ActionButtonStyle}" Command="{Binding DeleteDocumentTypeCommand}"/>
                             </StackPanel>
 
                             <ListBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Height="80" Margin="0 5 0 0"
-                                 ItemsSource="{Binding ClasificationCodeTypes}" SelectedItem="{Binding SelectedClasification}" 
-                                 DisplayMemberPath="ClasificationTypeInfo"/>
+                                 ItemsSource="{Binding DocumentTypes}" SelectedItem="{Binding SelectedDocumentTypeModel}" 
+                                 DisplayMemberPath="DocumentTypeInfo"/>
 
                         </Grid>
 
