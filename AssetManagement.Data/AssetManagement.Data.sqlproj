@@ -122,6 +122,10 @@
     <Build Include="dbo\Stored Procedures\spDocumentType_Insert.sql" />
     <Build Include="dbo\Stored Procedures\spDocumentType_Update.sql" />
     <Build Include="dbo\Stored Procedures\spDocumentType_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\spOperationTypes_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spOperationType_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spOperationType_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\spOperationType_Update.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="AssetManagement.Data.refactorlog" />

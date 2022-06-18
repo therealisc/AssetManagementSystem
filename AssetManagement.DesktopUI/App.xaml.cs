@@ -56,7 +56,7 @@ namespace AssetManagement.DesktopUI
             services.AddTransient<SqlDataAccess>();
             services.AddTransient<UserData>();
             services.AddTransient<FixedAssetData>();
-            //services.AddTransient<opera>
+            services.AddTransient<OperationData>();
             services.AddTransient<ClasificationCodeData>();
             services.AddTransient<SupplierData>();
             services.AddTransient<DocumentData>();
