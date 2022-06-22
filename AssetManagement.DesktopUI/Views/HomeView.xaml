@@ -6,7 +6,64 @@
              xmlns:local="clr-namespace:AssetManagement.DesktopUI.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="Home"/>
+    <Grid Background="White">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <TextBlock Text="Pagina principala" 
+                           FontSize="20" 
+                           Margin="0 20 0 10"/>
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Clientul selectat" Width="325"/>
+                    <ComboBox Height="23" ItemsSource="{Binding Clients}"
+                              SelectedItem="{Binding SelectedClient}"
+                              DisplayMemberPath="ClientName"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Margin="5 0 0 0">
+                    <TextBlock Text="Data de referinta" Width="160"/>
+                    <DatePicker SelectedDate="{Binding SelectedDate}"/>
+                </StackPanel>
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                <Button Content="Calcul amortizare" Width="160"/>
+                <Button Content="Registrul nr de inventar" Margin="5 0 0 0" Width="160"/>
+                <Button Content="Fisa mijlocului fix" Margin="5 0 0 0" Width="160"/>
+                <Button Content="Planul de amortizare" Margin="5 0 0 0" Width="160"/>
+            </StackPanel>
+        </StackPanel>
+
+
+        <ListView Grid.Row="1" ItemsSource="{Binding Clientss}" SelectedItem="{Binding SelectedClient}" Margin="0 5 0 0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Numar inventar"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Descriere"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Cod clasificare"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Data intrare"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Data iesire"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=FiscalCode}" Header="Valoare intrare"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=FiscalCode}" Header="Luni amortizare"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=FiscalCode}" Header="Amortizare contabila"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=FiscalCode}" Header="Amortizare fiscala"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=FiscalCode}" Header="Valoare neta contabila"/>
+                    <!--<GridViewColumn Header="Adresa" Width="400">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Address}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>-->
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </UserControl>

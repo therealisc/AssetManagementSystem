@@ -39,8 +39,8 @@
 
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Pentru clientul"/>
-                    <ComboBox Width="250" ItemsSource="{Binding Clients}" 
+                    <TextBlock Text="Clientul selectat"/>
+                    <ComboBox Width="325" ItemsSource="{Binding Clients}" 
                               SelectedItem="{Binding SelectedClient}"
                               Text="{Binding SelectedClient.ClientName}"
                               DisplayMemberPath="ClientName"/>

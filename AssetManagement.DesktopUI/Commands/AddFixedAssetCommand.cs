@@ -48,6 +48,10 @@ namespace AssetManagement.DesktopUI.Commands
                 _fixedAssetData.AddFixedAsset(fixedAsset, _viewModel.AssignedDocuments.ToList());
                 _viewModel.DisplayFixedAssets();
             }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Atentie!");
+            }
             catch (Exception)
             {
                 MessageBox.Show("Eroare la adaugarea mijlocului fix!", "Atentie!");
