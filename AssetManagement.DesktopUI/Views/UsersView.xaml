@@ -7,14 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="White">
-            <Grid.Resources>
-                <Style TargetType="TextBlock">
-                    <Setter Property="Margin" Value="0 0 0 0"/>
-                    <Setter Property="Width" Value="160"/>
-                    <Setter Property="HorizontalAlignment" Value="Left"/>
-                </Style>
+        <Grid.Resources>
 
-                <Style TargetType="TextBox">
+            <!--<Style TargetType="TextBox">
                     <Setter Property="Margin" Value="0 0 5 0"/>
                     <Setter Property="Width" Value="250"/>
                     <Setter Property="VerticalAlignment" Value="Top"/>
@@ -35,18 +30,10 @@
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
-                </Style>
+                </Style>-->
 
-                <Style TargetType="Button">
-                    <Setter Property="Width" Value="60"/>
+                <Style TargetType="Button" BasedOn="{StaticResource ActionButtonStyle}">
                     <Setter Property="Margin" Value="0 20 5 0"/>
-                    <!--
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName=txtDenumire, Path=(Validation.HasError)}" Value="True">
-                            <Setter Property="IsEnabled" Value="False"/>
-                        </DataTrigger>
-                    </Style.Triggers>  -->
-
                 </Style>
             </Grid.Resources>
 
@@ -63,40 +50,15 @@
                 <StackPanel Orientation="Horizontal">
 
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Nume utilizator"/>
-                        <TextBox Text="{Binding SelectedUserUsername}"/>
+                        <TextBlock Text="Nume utilizator" Width="250"/>
+                        <TextBox Text="{Binding SelectedUserUsername}" Style="{StaticResource TextBoxSyle}"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Email"/>
-                        <TextBox Text="{Binding SelectedUserEmail}"/>
-                    </StackPanel>
-
-                    <!--<StackPanel Orientation="Horizontal">
-                        <StackPanel>
-                            <TextBlock Text="Roluri disponibile"/>
-                            <ComboBox Height="18"/>
-                        </StackPanel>
-
-                        <Button Content="Selecteaza" Width="auto" Margin="5 0" VerticalAlignment="Bottom"/>
-
-                        <StackPanel>
-                            <TextBlock Text="Roluri atribuite"/>
-                            <ListBox ItemsSource="{Binding LoggedInUser.Roles}"
-                                     BorderThickness="1"
-                                     IsEnabled="False" Height="18">
-                                <ListBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel IsItemsHost="True"/>
-                                    </ItemsPanelTemplate>
-                                </ListBox.ItemsPanel>
-                            </ListBox>
-                        </StackPanel>
-
-                        <Button Content="Elimina rol" Margin="5 0" VerticalAlignment="Bottom"/>
-
-                    </StackPanel>-->
+                <StackPanel Orientation="Vertical" Margin="5 0 0 0">
+                    <TextBlock Text="Email" Width="250"/>
+                    <TextBox Text="{Binding SelectedUserEmail}" Style="{StaticResource TextBoxSyle}"/>
                 </StackPanel>
+            </StackPanel>
                 <WrapPanel>
                     <Grid Height="100" Margin="0 20 5 0">
                         <Grid.ColumnDefinitions>

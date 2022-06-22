@@ -10,24 +10,13 @@
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
         <Grid Background="White">
             <Grid.Resources>
+
                 <Style TargetType="TextBlock">
-                    <Setter Property="Margin" Value="0 0 0 0"/>
-                    <Setter Property="Width" Value="160"/>
+                    <Setter Property="Width" Value="190"/>
                     <Setter Property="HorizontalAlignment" Value="Left"/>
                 </Style>
 
-                
-
-                <Style TargetType="Button">
-                    <Setter Property="Width" Value="60"/>
-                    <Setter Property="Margin" Value="0 20 5 0"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName=txtDenumire, Path=(Validation.HasError)}" Value="True">
-                            <Setter Property="IsEnabled" Value="False"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                    
-                </Style>
+                <Style TargetType="Button" BasedOn="{StaticResource ActionButtonStyle}"/>
             </Grid.Resources>
 
             <Grid.RowDefinitions>
@@ -43,25 +32,17 @@
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Name="txtDenumire" Text="Denumire"/>
-                        <TextBox>
-                            <TextBox.Text>
-                                <Binding Path="SelectedClientName" UpdateSourceTrigger="PropertyChanged">
-                                    <!--<Binding.ValidationRules>
-                                        <validationrules:NumericTextBoxValidationRule/>
-                                    </Binding.ValidationRules>-->
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
+                        <TextBox Text="{Binding SelectedClientName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxSyle}"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Vertical" Margin="5 0 0 0">
                         <TextBlock Text="Cod Fiscal"/>
-                        <TextBox Text="{Binding SelectedClientFiscalCode}"/>
+                        <TextBox Text="{Binding SelectedClientFiscalCode}" Style="{StaticResource TextBoxSyle}"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Vertical" Margin="5 0 0 0">
                         <TextBlock Text="Adresa"/>
-                        <TextBox Text="{Binding SelectedClientAddress}"/>
+                        <TextBox Text="{Binding SelectedClientAddress}" Style="{StaticResource TextBoxSyle}"/>
                     </StackPanel>
                 </StackPanel>
 

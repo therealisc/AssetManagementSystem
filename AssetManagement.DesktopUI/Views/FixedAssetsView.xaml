@@ -7,23 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="470.8" d:DesignWidth="877.6">
     <Grid Background="White">
-        <Grid.Resources>
-
-            <Style TargetType="Button" x:Key="ActionButtonStyle">
-                <Setter Property="Width" Value="60"/>
-                <Setter Property="Margin" Value="0 20 5 0"/>
-            </Style>
-
-            <Style TargetType="TextBox">
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                <Setter Property="Height" Value="22"/>
-            </Style>
-
-            <Style TargetType="ComboBox">
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                <Setter Property="Height" Value="22"/>
-            </Style>
-        </Grid.Resources>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -50,7 +33,7 @@
             <WrapPanel Orientation="Horizontal" Margin="0 5 0 0">
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Numar inventar" />
-                    <TextBox IsEnabled="False" Width="160" Height="22"
+                    <TextBox IsEnabled="False" Width="160" Style="{StaticResource TextBoxSyle}"
                              Text="{Binding SelectedFixedAssetInventoryNumber}"/>
                 </StackPanel>
 
@@ -67,17 +50,20 @@
 
                 <StackPanel Orientation="Vertical" Margin="0 0 5 0">
                     <TextBlock Text="Descrierea mijlocului fix"/>
-                    <TextBox Text="{Binding SelectedFixedAssetDescription, UpdateSourceTrigger=PropertyChanged}" Width="325" />
+                    <TextBox Text="{Binding SelectedFixedAssetDescription, UpdateSourceTrigger=PropertyChanged}" Width="325"
+                             Style="{StaticResource TextBoxSyle}"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" Margin="0 0 5 0">
                     <TextBlock Text="Cont contabil"/>
-                    <TextBox Text="{Binding SelectedFixedAssetAccountId, UpdateSourceTrigger=PropertyChanged}" Width="160"/>
+                    <TextBox Text="{Binding SelectedFixedAssetAccountId, UpdateSourceTrigger=PropertyChanged}" 
+                             Style="{StaticResource TextBoxSyle}" Width="160"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" Margin="0 0 5 0">
                     <TextBlock Text="Valoare intrare"/>
-                    <TextBox x:Name="AssetValueTextBox" Text="{Binding SelectedFixedAssetValue, Delay=500, UpdateSourceTrigger=PropertyChanged}"  Width="160">
+                    <TextBox x:Name="AssetValueTextBox" Text="{Binding SelectedFixedAssetValue, Delay=500, UpdateSourceTrigger=PropertyChanged}"  
+                             Style="{StaticResource TextBoxSyle}" Width="160">
                     </TextBox>
                 </StackPanel>
 

@@ -25,6 +25,7 @@ namespace AssetManagement.DesktopUI.ViewModels
 
             Clients = new BindingList<FullClientModel>(_clientData.GetClients(_accountStore.CurrentAccount.UserId));
         }
+        public ICommand DepreciationCalculationCommand { get; set; }
 
         private BindingList<FullClientModel> _clients;
 
@@ -61,8 +62,5 @@ namespace AssetManagement.DesktopUI.ViewModels
                 OnPropertyChanged(nameof(SelectedDate));
             }
         }
-
-
-
     }
 }
