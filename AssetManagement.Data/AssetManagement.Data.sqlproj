@@ -127,6 +127,7 @@
     <Build Include="dbo\Stored Procedures\spOperationType_Delete.sql" />
     <Build Include="dbo\Stored Procedures\spOperationType_Update.sql" />
     <Build Include="dbo\Stored Procedures\spDepreciationCalculation.sql" />
+    <Build Include="dbo\Stored Procedures\spDepreciation_StraightLineMethod.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="AssetManagement.Data.refactorlog" />
