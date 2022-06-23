@@ -95,7 +95,7 @@
                             </Grid.RowDefinitions>
 
                             <StackPanel Orientation="Vertical"  Margin="0 0 0 0 " Grid.Column="0" Grid.Row="0">
-                                <TextBlock Text="Descriere document" Width="160"/>
+                                <TextBlock Text="Descriere document" Width="160" HorizontalAlignment="Left"/>
                                 <TextBox Style="{StaticResource TextBoxSyle}" 
                                          Text="{Binding DocumentTypeDescription, UpdateSourceTrigger=PropertyChanged}"/>
                             </StackPanel>

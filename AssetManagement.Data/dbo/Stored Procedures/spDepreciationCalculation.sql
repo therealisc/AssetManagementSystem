@@ -50,14 +50,11 @@ BEGIN
 
 
 
-	SELECT I.NumarInventar, I.DataIntrarii, 
-
-	--(SELECT DATEDIFF(M, I.DataIntrarii, IE.DataIesirii)) [LuniGestiune],
-	
-	IE.DataIesirii, MijloaceFixe.*
-	FROM @TabelIntrari I
-	INNER JOIN @TabelIesiri IE
-		ON I.NumarInventar = IE.NumarInventar
-		INNER JOIN MijloaceFixe ON MijloaceFixe.NumarInventar = I.NumarInventar
+	SELECT INTR.NumarInventar, INTR.DataIntrarii, IESR.DataIesirii, MIFX.* ,OPER.*
+	FROM @TabelIntrari INTR
+	INNER JOIN @TabelIesiri IESR ON INTR.NumarInventar = IESR.NumarInventar
+	INNER JOIN MijloaceFixe MIFX ON MIFX.NumarInventar = INTR.NumarInventar
+	LEFT JOIN Operatii OPER ON OPER.NumarInventar = MIFX.NumarInventar
+	ORDER BY MIFX.NumarInventar
 
 END
