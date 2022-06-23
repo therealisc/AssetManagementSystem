@@ -38,7 +38,7 @@ BEGIN
 			 INNER JOIN DocumenteMijloaceFixe DMF ON MFD.NumarInventar = DMF.NumarInventar
 			 INNER JOIN Documente DOC ON DOC.IdDocument = DMF.IdDocument
 			 INNER JOIN TipuriDocumente TD ON TD.IdTipDocument = DOC.IdTipDocument
-			 WHERE TD.TipOperatieDocument NOT IN ('Intrare','Receptie') AND MFD.NumarInventar = MF.NumarInventar
+			 WHERE TD.TipOperatieDocument IN ('Iesire') AND MFD.NumarInventar = MF.NumarInventar
 			 GROUP BY MFD.NumarInventar)
 		FROM
 			MijloaceFixe MF
