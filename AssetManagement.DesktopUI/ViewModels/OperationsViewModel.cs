@@ -21,7 +21,10 @@ namespace AssetManagement.DesktopUI.ViewModels
         private readonly FixedAssetsMappingService _fixedAssetsMappingService;
         private readonly AccountStore _accountStore;
 
-        public OperationsViewModel(OperationData operationData, FixedAssetData fixedAssetData, FixedAssetsMappingService fixedAssetsMappingService, AccountStore accountStore)
+        public OperationsViewModel(OperationData operationData,
+                                   FixedAssetData fixedAssetData,
+                                   FixedAssetsMappingService fixedAssetsMappingService,
+                                   AccountStore accountStore)
         {
             _operationData = operationData;
             _fixedAssetData = fixedAssetData;
@@ -32,6 +35,10 @@ namespace AssetManagement.DesktopUI.ViewModels
             DeleteOperationTypeCommand = new DeleteOperationTypeCommand(this, operationData);
             UpdateOperationTypeCommand = new UpdateOperationTypeCommand(this, operationData);
 
+            AddOperationCommand = new AddOperationCommand(this, operationData);
+            DeleteOperationCommand = new DeleteOperationCommand(this, operationData);
+            UpdateOperationCommand = new UpdateOperationCommand(this, operationData);
+
             DisplayOperationTypes();
 
             AssignedFixedAssets = new BindingList<FixedAssetDisplayModel>(_fixedAssetsMappingService.MapToFixedAssetDisplayModel(
@@ -41,7 +48,7 @@ namespace AssetManagement.DesktopUI.ViewModels
 
         internal void DisplayOperations()
         {
-
+            Operations = new BindingList<OperationModel>(_operationData.GetOperations(SelectedFixedAsset.InventoryNumber));
         }
 
         internal void DisplayOperationTypes()
@@ -52,6 +59,10 @@ namespace AssetManagement.DesktopUI.ViewModels
         public ICommand AddOperationTypeCommand { get; set; }
         public ICommand DeleteOperationTypeCommand { get; set; }
         public ICommand UpdateOperationTypeCommand { get; set; }
+
+        public ICommand AddOperationCommand { get; set; }
+        public ICommand DeleteOperationCommand { get; set; }
+        public ICommand UpdateOperationCommand { get; set; }
 
         private BindingList<OperationTypeModel> _operationTypes;
 
@@ -94,13 +105,92 @@ namespace AssetManagement.DesktopUI.ViewModels
             }
         }
 
-        private BindingList<FixedAssetDisplayModel> _assignedFixedAssets;
 
-        public BindingList<FixedAssetDisplayModel> AssignedFixedAssets
+        public BindingList<FixedAssetDisplayModel> AssignedFixedAssets { get; set; }
+
+        private FixedAssetDisplayModel _selectedFixedAsset;
+
+        public FixedAssetDisplayModel SelectedFixedAsset
         {
-            get { return _assignedFixedAssets; }
-            set { _assignedFixedAssets = value; }
+            get { return _selectedFixedAsset; }
+            set
+            {
+                _selectedFixedAsset = value;
+                DisplayOperations();
+                OnPropertyChanged(nameof(SelectedFixedAsset));
+            }
         }
+
+        private OperationTypeModel _selectedOperationType;
+
+        public OperationTypeModel SelectedOperationType
+        {
+            get { return _selectedOperationType; }
+            set
+            {
+                _selectedOperationType = value;
+                OnPropertyChanged(nameof(SelectedOperationType));
+            }
+        }
+
+        private decimal _selectedOperationValue;
+
+        public decimal SelectedOperationValue
+        {
+            get { return _selectedOperationValue; }
+            set
+            {
+                _selectedOperationValue = value;
+                OnPropertyChanged(nameof(SelectedOperationValue));
+            }
+        }
+
+        private DateTime _selectedOperationDate = DateTime.Now;
+
+        public DateTime SelectedOperationDate
+        {
+            get { return _selectedOperationDate; }
+            set
+            {
+                _selectedOperationDate = value;
+                OnPropertyChanged(nameof(SelectedOperationDate));
+            }
+        }
+
+        private OperationModel _selectedOperation;
+
+        public OperationModel SelectedOperation
+        {
+            get { return _selectedOperation; }
+            set
+            {
+                if (value != null)
+                {
+                    _selectedOperation = value;
+                    SelectedOperationType = value.OperationType;
+                    SelectedOperationValue = value.OperationValue;
+                    SelectedOperationDate = value.OperationDate;
+                    OnPropertyChanged(nameof(SelectedOperation));
+                }
+            }
+        }
+
+        private BindingList<OperationModel> _operations;
+
+        public BindingList<OperationModel> Operations
+        {
+            get { return _operations; }
+            set
+            {
+                _operations = value;
+                OnPropertyChanged(nameof(Operations));
+            }
+        }
+
+
+
+
+
 
 
 

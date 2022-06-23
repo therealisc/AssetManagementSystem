@@ -31,35 +31,30 @@
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Mijloc fix"/>
                         <ComboBox MinWidth="100" ItemsSource="{Binding AssignedFixedAssets}" 
-                                  SelectedItem="{Binding SelectedAvailableClasification}" 
+                                  SelectedItem="{Binding SelectedFixedAsset}" 
                                   DisplayMemberPath="AssetShortDisplayInfo"
-                                  Text="{Binding SelectedAvailableClasification.ClasificationType}"/>
+                                  Text="{Binding SelectedFixedAsset.AssetShortDisplayInfo, Mode=OneWay}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Margin="5 0">
                         <TextBlock Text="Tip operatie"/>
-                        <ComboBox Width="100" ItemsSource="{Binding OperationTypes}"
-                                  DisplayMemberPath="OperationDescription">
+                        <ComboBox MinWidth="100" ItemsSource="{Binding OperationTypes}"
+                                  SelectedItem="{Binding SelectedOperationType}"                                  
+                                  DisplayMemberPath="OperationDescription"
+                                  Text="{Binding SelectedOperationType.OperationDescription}">
                         </ComboBox>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Valoare"/>
-                        <TextBox Text="{Binding SelectedClasificationCodeDescription, UpdateSourceTrigger=PropertyChanged}" 
+                        <TextBlock Text="Valoare operatie"/>
+                        <TextBox Text="{Binding SelectedOperationValue, Delay=500, UpdateSourceTrigger=PropertyChanged}"
+                                 x:Name="ValueTextBox"
                                  Style="{StaticResource TextBoxSyle}" Width="100"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical"  Margin="5 0">
-                        <TextBlock Text="Data operatiei"/>
-                        <DatePicker x:Name="MinimumLifetimeTextBox" Width="160">
-                            <!--<TextBox.Text>
-                                <Binding Path="SelectedMinimumLifetime" UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
-                                        <validationrules:NumericTextBoxValidationRule/>
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </TextBox.Text>-->
-                        </DatePicker>
+                        <TextBlock Text="Data operatie"/>
+                        <DatePicker Width="160" x:Name="OperationDatePicker" SelectedDate="{Binding SelectedOperationDate, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                 </StackPanel>
                 
@@ -70,10 +65,6 @@
                 <Expander BorderBrush="LightGray" HorizontalAlignment="Left" Header="Tipuri de operatii" ExpandDirection="Down">
 
                     <Grid Margin="0 5 0 0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -81,7 +72,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                        <StackPanel Orientation="Vertical" Margin="0 0 5 0 " Grid.Column="0" Grid.Row="0">
+                        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0">
                             <TextBlock Text="Tip operatie" />
                             <TextBox Width="190" Text="{Binding SelectedOperationDescription, UpdateSourceTrigger=PropertyChanged}"
                                      Style="{StaticResource TextBoxSyle}"/>
@@ -91,7 +82,7 @@
                         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2">
                             <Button Content="Adauga" Style="{StaticResource ActionButtonStyle}" Command="{Binding AddOperationTypeCommand}"/>
                             <Button Content="Modifica" Style="{StaticResource ActionButtonStyle}" Command="{Binding UpdateOperationTypeCommand}"/>
-                            <Button Content="Sterge" Style="{StaticResource ActionButtonStyle}" Command="{Binding DeleteOperationTypeCommand}"/>
+                            <Button Content="Sterge" Style="{StaticResource ActionButtonStyle}" Command="{Binding DeleteOperationTypeCommand}" Margin="0 20 0 0"/>
                         </StackPanel>
 
                         <ListBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Height="80" Margin="0 5 0 0"
@@ -104,33 +95,15 @@
 
 
             <StackPanel Orientation="Horizontal">
-                <Button Content="Adauga" Command="{Binding AddClasificationCodeCommand}">
-                    <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource ActionButtonStyle}">
-                            <Setter Property="IsEnabled" Value="False" />
-                            <Style.Triggers>
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=MinimumLifetimeTextBox}" Value="False" />
-                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=MaximumLifetimeTextBox}" Value="False" />
-                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ClasificationCodeTextBox}" Value="False" />
-                                    </MultiDataTrigger.Conditions>
-                                    <Setter Property="IsEnabled" Value="True" />
-                                </MultiDataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-
-                <Button Content="Modifica" Command="{Binding UpdateClasificationCodeCommand}">
+                <Button Content="Adauga" Command="{Binding AddOperationCommand}">
                     <Button.Style>
                         <Style TargetType="Button" BasedOn="{StaticResource ActionButtonStyle}">
                             <Setter Property="IsEnabled" Value="False"/>
                             <Style.Triggers>
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=MinimumLifetimeTextBox}" Value="False"/>
-                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=MaximumLifetimeTextBox}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ValueTextBox}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=OperationDatePicker}" Value="False"/>
                                     </MultiDataTrigger.Conditions>
                                     <Setter Property="IsEnabled" Value="True" />
                                 </MultiDataTrigger>
@@ -139,31 +112,50 @@
                     </Button.Style>
                 </Button>
 
-                <Button Content="Sterge" Style="{StaticResource ActionButtonStyle}" Command="{Binding DeleteClasificationCodeCommand}"/>
+                <Button Content="Modifica" Command="{Binding UpdateOperationCommand}">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource ActionButtonStyle}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ValueTextBox}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=OperationDatePicker}" Value="False"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="IsEnabled" Value="True" />
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <Button Content="Sterge" Style="{StaticResource ActionButtonStyle}" Command="{Binding DeleteOperationCommand}"/>
             </StackPanel>
 
         </StackPanel>
 
 
-        <ListView Grid.Row="1" ItemsSource="{Binding ClasificationCodes}" SelectedItem="{Binding SelectedClasificationCodeModel}" Margin="0 5 0 0">
+        <ListView Grid.Row="1" ItemsSource="{Binding Operations}" SelectedItem="{Binding SelectedOperation}" Margin="0 5 0 0">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding ClasificationCodeType.ClasificationType}" Header="Tip clasificare"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding ClasificationCode}" Header="Cod clasificare"/>
-                    <GridViewColumn Header="Descriere cod clasificare" Width="600">
+                    <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="Id operatie"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding OperationType.OperationDescription}" Header="Tip operatie"/>
+                    <GridViewColumn Header="Valoare operatie">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding ClasificationCodeDescription}"/>
+                                <TextBlock Text="{Binding OperationValue}" HorizontalAlignment="Right"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-
-                    <GridViewColumn DisplayMemberBinding="{Binding MinimumLifetime}" Header="Durata minima"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding MaximumLifetime}" Header="Durata maxima"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding OperationDate, StringFormat='dd.MM.yyy'}" Header="Data operatie"/>
                 </GridView>
             </ListView.View>
         </ListView>
-
     </Grid>
 
 </UserControl>

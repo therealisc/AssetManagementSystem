@@ -180,6 +180,11 @@
 
 
         <ListView Grid.Row="3" ItemsSource="{Binding FixedAssets}" SelectedItem="{Binding SelectedFixedAsset}" Margin="0 5 0 0">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Client.ClientName}" Header="Client"/>
@@ -187,18 +192,17 @@
                     <GridViewColumn DisplayMemberBinding="{Binding ClasificationCode.ClasificationCode}" Header="Cod clasificare"/>
                     <GridViewColumn DisplayMemberBinding="{Binding FixedAssetDescription}" Header="Descrierea mijlocului fix"/>
                     <GridViewColumn DisplayMemberBinding="{Binding AccountId}" Header="Cont Contabil"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding AssetValue}" Header="Valoare intrare"/>
+                    <GridViewColumn Header="Valoare intrare">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding AssetValue}" TextAlignment="Right"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding MonthsOfAccountingDepreciation}" Header="Luni amortizare ctb."/>
                     <GridViewColumn DisplayMemberBinding="{Binding AccountingDepreciationMethod}" Header="Metoda ctb."/>
                     <GridViewColumn DisplayMemberBinding="{Binding MonthsOfFiscalDepreciation}" Header="Luni amortizare fisc."/>
                     <GridViewColumn DisplayMemberBinding="{Binding FiscalDepreciationMethod}" Header="Metoda fisc."/>
-                    <!--<GridViewColumn Header="Descriere" Width="600">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding FixedAssetDescription}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>-->
                 </GridView>
             </ListView.View>
         </ListView>

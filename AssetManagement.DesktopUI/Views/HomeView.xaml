@@ -55,13 +55,6 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Path=FiscalCode}" Header="Amortizare contabila"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=FiscalCode}" Header="Amortizare fiscala"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=FiscalCode}" Header="Valoare neta contabila"/>
-                    <!--<GridViewColumn Header="Adresa" Width="400">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Address}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>-->
                 </GridView>
             </ListView.View>
         </ListView>
