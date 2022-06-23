@@ -28,7 +28,7 @@
                            Margin="5" 
                            Visibility="{Binding WrongCredentials, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}"/>
                 <TextBlock Text="Nume utilizator"/>
-                <TextBox Text="{Binding Username}"/>
+                <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxSyle}"/>
             </StackPanel>
 
             <StackPanel Width="200">

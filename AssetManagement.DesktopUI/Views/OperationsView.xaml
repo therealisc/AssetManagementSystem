@@ -45,12 +45,13 @@
 
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Valoare"/>
-                        <TextBox Text="{Binding SelectedClasificationCodeDescription, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                        <TextBox Text="{Binding SelectedClasificationCodeDescription, UpdateSourceTrigger=PropertyChanged}" 
+                                 Style="{StaticResource TextBoxSyle}" Width="100"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical"  Margin="5 0">
                         <TextBlock Text="Data operatiei"/>
-                        <DatePicker  x:Name="MinimumLifetimeTextBox">
+                        <DatePicker x:Name="MinimumLifetimeTextBox" Width="160">
                             <!--<TextBox.Text>
                                 <Binding Path="SelectedMinimumLifetime" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
@@ -82,7 +83,8 @@
 
                         <StackPanel Orientation="Vertical" Margin="0 0 5 0 " Grid.Column="0" Grid.Row="0">
                             <TextBlock Text="Tip operatie" />
-                            <TextBox Width="150" Text="{Binding SelectedOperationDescription, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox Width="190" Text="{Binding SelectedOperationDescription, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource TextBoxSyle}"/>
                         </StackPanel>
 
 

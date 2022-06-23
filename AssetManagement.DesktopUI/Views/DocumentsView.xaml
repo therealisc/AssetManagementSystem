@@ -35,7 +35,7 @@
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Name="txtNumarDocument" Text="Numar document"/>
-                        <TextBox Width="150">
+                        <TextBox Style="{StaticResource TextBoxSyle}">
                             <TextBox.Text>
                                 <Binding Path="SelectedDocumentNumber" UpdateSourceTrigger="PropertyChanged">
                                     <!--<Binding.ValidationRules>
@@ -95,12 +95,12 @@
                             </Grid.RowDefinitions>
 
                             <StackPanel Orientation="Vertical"  Margin="0 0 0 0 " Grid.Column="0" Grid.Row="0">
-                                <TextBlock Text="Descriere document" />
-                                <TextBox Width="160" HorizontalAlignment="Left"
+                                <TextBlock Text="Descriere document" Width="160"/>
+                                <TextBox Style="{StaticResource TextBoxSyle}" 
                                          Text="{Binding DocumentTypeDescription, UpdateSourceTrigger=PropertyChanged}"/>
                             </StackPanel>
 
-                            <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0">
+                            <StackPanel Margin="5 0 0 0" Orientation="Vertical" Grid.Column="1" Grid.Row="0">
                                 <TextBlock Text="Tip document" />
                                 <ComboBox Width="150" SelectedItem="{Binding DocumentOperationType}" Text="{Binding SelectedDocumentTypeModel.DocumentOperationType}"
                                           HorizontalAlignment="Left" ItemsSource="{Binding AvailableDocumentTypes}"/>

@@ -54,7 +54,8 @@
 
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Descriere cod clasificare"/>
-                        <TextBox Text="{Binding SelectedClasificationCodeDescription, UpdateSourceTrigger=PropertyChanged}" Width="300" />
+                        <TextBox Text="{Binding SelectedClasificationCodeDescription, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource TextBoxSyle}" Width="300" />
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical"  Margin="5 0">
@@ -104,12 +105,13 @@
 
                         <StackPanel Orientation="Vertical" Margin="0 0 5 0 " Grid.Column="0" Grid.Row="0">
                             <TextBlock Text="Nivel clasificare" />
-                            <TextBox Width="150" Text="{Binding SelectedClasificationRank, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox Width="150" Text="{Binding SelectedClasificationRank, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource TextBoxSyle}"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0">
                             <TextBlock Name="txtNumarDocument" Text="Tip Clasificare" />
-                            <TextBox Width="150">
+                            <TextBox Width="150" Style="{StaticResource TextBoxSyle}">
                                 <TextBox.Text>
                                     <Binding Path="SelectedClasificationCodeType" UpdateSourceTrigger="PropertyChanged">
                                         <!--<Binding.ValidationRules>

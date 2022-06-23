@@ -11,36 +11,13 @@
         <Grid Background="White">
             <Grid.Resources>
                 <Style TargetType="TextBlock">
-                    <Setter Property="Margin" Value="0 0 0 0"/>
-                    <Setter Property="Width" Value="160"/>
+                    <Setter Property="Width" Value="190"/>
                     <Setter Property="HorizontalAlignment" Value="Left"/>
                 </Style>
 
-                <Style TargetType="TextBox">
-                    <Setter Property="Margin" Value="0 0 5 0"/>
-                    <Setter Property="Width" Value="250"/>
-                    <Setter Property="VerticalAlignment" Value="Top"/>
-                    <Setter Property="Validation.ErrorTemplate">
-                        <Setter.Value>
-                            <ControlTemplate>
-                                <StackPanel>
-                                    <AdornedElementPlaceholder/>
-                                    <ItemsControl Margin="1" FontSize="10" ItemsSource="{Binding}">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Foreground="Red" Text="{Binding ErrorContent}"/>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-                                </StackPanel>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
+                <Style TargetType="TextBox" BasedOn="{StaticResource TextBoxSyle}"/>
 
-                <Style TargetType="Button">
-                    <Setter Property="Width" Value="60"/>
-                    <Setter Property="Margin" Value="0 20 5 0"/>
+                <Style TargetType="Button" BasedOn="{StaticResource ActionButtonStyle}">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding ElementName=txtDenumire, Path=(Validation.HasError)}" Value="True">
                             <Setter Property="IsEnabled" Value="False"/>
@@ -74,12 +51,12 @@
                         </TextBox>
                     </StackPanel>
 
-                    <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Vertical" Margin="5 0 0 0">
                         <TextBlock Text="Cod Fiscal"/>
                         <TextBox Text="{Binding SelectedSupplierFiscalCode}"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Vertical" Margin="5 0 0 0">
                         <TextBlock Text="Adresa"/>
                         <TextBox Text="{Binding SelectedSupplierAddress}"/>
                     </StackPanel>
