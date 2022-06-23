@@ -10,12 +10,12 @@ using System.Windows;
 
 namespace AssetManagement.DesktopUI.Commands
 {
-    class DeleteOperationTypeCommand : CommandBase
+    class UpdateOperationTypeCommand :CommandBase
     {
         private readonly OperationsViewModel _viewModel;
         private readonly OperationData _operationData;
 
-        public DeleteOperationTypeCommand(OperationsViewModel viewModel, OperationData operationData)
+        public UpdateOperationTypeCommand(OperationsViewModel viewModel, OperationData operationData)
         {
             _viewModel = viewModel;
             _viewModel.PropertyChanged += ViewModel_PropertyChanged;
@@ -26,23 +26,22 @@ namespace AssetManagement.DesktopUI.Commands
         {
             try
             {
-                MessageBoxResult result = MessageBox.Show("Sigur doresti sa stergi tipul de operatie?", "Atentie!", MessageBoxButton.YesNo);
-                if (result == MessageBoxResult.Yes)
-                {
-                    _operationData.DeleteOperationType(_viewModel.SelectedOperationTypeModel);
-                    _viewModel.DisplayOperationTypes();
-                }
+                _viewModel.SelectedOperationTypeModel.OperationDescription = _viewModel.SelectedOperationDescription;
+                _operationData.UpdateOperationType(_viewModel.SelectedOperationTypeModel);
+                _viewModel.DisplayOperationTypes();
             }
             catch (Exception)
             {
-                MessageBox.Show("Eroare la stergerea tipului de operatie!");
+                MessageBox.Show("Eroare la modificarea tipului de operatie!");
             }
         }
 
         public override bool CanExecute(object parameter)
         {
-            return _viewModel.SelectedOperationTypeModel != null;
-        }
+            return _viewModel.SelectedOperationTypeModel != null &&
+                string.IsNullOrWhiteSpace(_viewModel.SelectedOperationDescription) == false &&
+                _viewModel.OperationTypes.Any(x => x.OperationDescription == _viewModel.SelectedOperationDescription) == false;
+        }        
 
         private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {

@@ -20,5 +20,12 @@ namespace AssetManagement.DesktopUI.Models
         public string AccountingDepreciationMethod { get; set; }
         public string FiscalDepreciationMethod { get; set; }
         public List<DocumentModel> AssignedDocuments { get; set; }
+        public string AssetShortDisplayInfo
+        {
+            get
+            {
+                return $"[{InventoryNumber}] {FixedAssetDescription} - {Client.ClientName}";
+            }
+        }
     }
 }

@@ -30,9 +30,9 @@
 
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Mijloc fix"/>
-                        <ComboBox Width="100" ItemsSource="{Binding ClasificationCodeTypes}" 
+                        <ComboBox MinWidth="100" ItemsSource="{Binding AssignedFixedAssets}" 
                                   SelectedItem="{Binding SelectedAvailableClasification}" 
-                                  DisplayMemberPath="ClasificationType"
+                                  DisplayMemberPath="AssetShortDisplayInfo"
                                   Text="{Binding SelectedAvailableClasification.ClasificationType}"/>
                     </StackPanel>
 
@@ -88,7 +88,7 @@
 
                         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2">
                             <Button Content="Adauga" Style="{StaticResource ActionButtonStyle}" Command="{Binding AddOperationTypeCommand}"/>
-                            <Button Content="Modifica" Style="{StaticResource ActionButtonStyle}" Command="{Binding UpdateClasificationCodeTypeCommand}"/>
+                            <Button Content="Modifica" Style="{StaticResource ActionButtonStyle}" Command="{Binding UpdateOperationTypeCommand}"/>
                             <Button Content="Sterge" Style="{StaticResource ActionButtonStyle}" Command="{Binding DeleteOperationTypeCommand}"/>
                         </StackPanel>
 
