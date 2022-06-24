@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[spDepreciationCalculation]
+﻿CREATE PROCEDURE [dbo].[spDepreciation_Calculation]
 	@ClientId int,
 	@SelectedDate datetime2
 AS
-BEGIN
+BEGIN	
 --------------------------------
 
 	DECLARE @TabelIntrari TABLE (NumarInventar INT, DataIntrarii DATETIME2)
@@ -49,12 +49,27 @@ BEGIN
 
 
 
+	--DECLARE @DateOfReference datetime2 = GETDATE();
+	DECLARE @DateOfReference datetime2 = '2026-07-01';
+	
 
-	SELECT INTR.NumarInventar, INTR.DataIntrarii, IESR.DataIesirii, MIFX.* ,OPER.*
+	SELECT INTR.NumarInventar, INTR.DataIntrarii, IESR.DataIesirii, 
+		   MIFX.DescriereMijlocFix, DurataAmortizareContabila, DurataAmortizareFiscala, MetodaAmortizareContabila, MetodaAmortizareFiscala, ValoareIntrare,
+		   
+		   ValoareOperatie, DataEfectuariiOperatiei,
+
+		   dbo.GetAccumulatedDepreciation(MetodaAmortizareContabila, ValoareIntrare, DurataAmortizareContabila, DataIntrarii, @DateOfReference, DataIesirii, null, 0) AS AmortizareContabilaActiv,
+		   dbo.GetAccumulatedDepreciation(MetodaAmortizareFiscala, ValoareIntrare, DurataAmortizareFiscala, DataIntrarii, @DateOfReference, DataIesirii, null, 0) AS AmortizareFiscalaActiv,
+
+		   dbo.GetAccumulatedDepreciation(MetodaAmortizareContabila, ValoareOperatie, DurataAmortizareContabila, DataIntrarii, @DateOfReference, DataIesirii, DataEfectuariiOperatiei, 1) AS AmortizareContabilaOperatie,
+		   dbo.GetAccumulatedDepreciation(MetodaAmortizareFiscala, ValoareOperatie, DurataAmortizareFiscala, DataIntrarii, @DateOfReference, DataIesirii, DataEfectuariiOperatiei, 1) AS AmortizareFiscalaOperatie
+
 	FROM @TabelIntrari INTR
 	INNER JOIN @TabelIesiri IESR ON INTR.NumarInventar = IESR.NumarInventar
 	INNER JOIN MijloaceFixe MIFX ON MIFX.NumarInventar = INTR.NumarInventar
 	LEFT JOIN Operatii OPER ON OPER.NumarInventar = MIFX.NumarInventar
 	ORDER BY MIFX.NumarInventar
+
+
 
 END
