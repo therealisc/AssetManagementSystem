@@ -135,6 +135,7 @@
     <Build Include="dbo\Functions\GetAccumulatedDepreciation.sql" />
     <Build Include="dbo\Functions\CalculateDepreciation_StraightLineMethod.sql" />
     <Build Include="dbo\Functions\CalculateDepreciation_AcceleratedMethod.sql" />
+    <Build Include="dbo\Functions\CalculateDepreciation_DegressiveMethod.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="AssetManagement.Data.refactorlog" />

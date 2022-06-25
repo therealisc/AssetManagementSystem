@@ -22,7 +22,7 @@ BEGIN
 		END
 	ELSE IF @DepreciationMethod = 'Degresiva'
 		BEGIN
-			RETURN 0;
+			RETURN dbo.CalculateDepreciation_DegressiveMethod(@InitialValue, @MonthsOfDepreciation, @DateOfEntry, @DateOfReference, @DateOfExit, @OperationEntryDate, @IsOperationDepreciation);
 		END
 
 	RETURN -0.1;
