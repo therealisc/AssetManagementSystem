@@ -34,27 +34,55 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
-                <Button Content="Calcul amortizare" Width="160"/>
-                <Button Content="Registrul nr de inventar" Margin="5 0 0 0" Width="160"/>
-                <Button Content="Fisa mijlocului fix" Margin="5 0 0 0" Width="160"/>
-                <Button Content="Planul de amortizare" Margin="5 0 0 0" Width="160"/>
+                <Button Content="Calcul amortizare" Width="160" Command="{Binding DepreciationCalculationCommand}"/>
+                <Button Content="Registrul nr de inventar" Margin="5 0 0 0" Width="160" Command="{Binding GenerateInventoryNumbersReportCommand}"/>
+                <Button Content="Fisa mijlocului fix" Margin="5 0 0 0" Width="160" Command="{Binding GenerateFixedAssetSheetReportCommand}"/>
+                <Button Content="Raport mijloace fixe" Margin="5 0 0 0" Width="160" Command="{Binding GenerateFixedAssetsGeneralReportCommand}"/>
             </StackPanel>
         </StackPanel>
 
 
-        <ListView Grid.Row="1" ItemsSource="{Binding Clientss}" SelectedItem="{Binding SelectedClient}" Margin="0 5 0 0">
+        <ListView Grid.Row="1" ItemsSource="{Binding FixedAssets}" SelectedItem="{Binding SelectedFixedAsset}" Margin="0 5 0 0">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Numar inventar"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Descriere"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Cod clasificare"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Data intrare"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Data iesire"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=FiscalCode}" Header="Valoare intrare"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=FiscalCode}" Header="Luni amortizare"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=FiscalCode}" Header="Amortizare contabila"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=FiscalCode}" Header="Amortizare fiscala"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=FiscalCode}" Header="Valoare neta contabila"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=InventoryNumber}" Header="Numar inventar"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=FixedAssetDescription}" Header="Descriere"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClasificationCode.ClasificationCode}" Header="Cod clasificare"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=EntryDate, StringFormat='dd.MM.yyy'}" Header="Data intrare"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ExitDate, StringFormat='dd.MM.yyy'}" Header="Data iesire"/>
+                    <GridViewColumn Header="Valoare intrare">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding AssetValue}" TextAlignment="Right"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Amortizare contabila">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding TotalAccountingDepreciation}" TextAlignment="Right"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Amortizare fiscala">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding TotalFiscalDepreciation}" TextAlignment="Right"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Valoare neta contabila">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding NetAssetValue}" TextAlignment="Right"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

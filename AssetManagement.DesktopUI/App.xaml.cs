@@ -15,6 +15,7 @@ using AssetManagement.Library.DataAccess;
 using AssetManagement.DesktopUI.Services.AuthentificationServices;
 using Microsoft.AspNet.Identity;
 using AssetManagement.DesktopUI.ValidationRules.BusinessValidationRules;
+using AssetManagement.DesktopUI.Services.ReportServices;
 
 namespace AssetManagement.DesktopUI
 {
@@ -61,9 +62,14 @@ namespace AssetManagement.DesktopUI
             services.AddTransient<SupplierData>();
             services.AddTransient<DocumentData>();
             services.AddTransient<ClientData>();
+            services.AddTransient<DepreciationData>();
             services.AddTransient<AuthentificationService>();
             services.AddTransient<UsersMappingService>();
             services.AddTransient<FixedAssetsMappingService>();
+            services.AddTransient<FixedAssetsOperationsAndDepreciationMappingService>();
+            services.AddTransient<InventoryNumbersReportService>();
+            services.AddTransient<FixedAssetSheetReportService>();
+            services.AddTransient<FixedAssetsGeneralReportService>();
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())

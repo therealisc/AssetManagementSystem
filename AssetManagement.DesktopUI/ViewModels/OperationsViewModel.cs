@@ -169,7 +169,7 @@ namespace AssetManagement.DesktopUI.ViewModels
                     _selectedOperation = value;
                     SelectedOperationType = value.OperationType;
                     SelectedOperationValue = value.OperationValue;
-                    SelectedOperationDate = value.OperationDate;
+                    SelectedOperationDate = value.OperationDate.Value;
                     OnPropertyChanged(nameof(SelectedOperation));
                 }
             }
