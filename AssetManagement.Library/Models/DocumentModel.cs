@@ -17,7 +17,7 @@ namespace AssetManagement.Library.Models
         {
             get
             {
-                return $"{DocumentDate} {DocumentNumber} {Supplier.SupplierName} {DocumentType.DocumentTypeInfo}";
+                return $"{DocumentType.DocumentTypeInfo} nr. {DocumentNumber} din data {DocumentDate:d} - {Supplier.SupplierName}";
             }
         }
     }
