@@ -41,7 +41,7 @@
                 Content="Pagina principala"/>
 
         <Button Command="{Binding NavigateFixedAssetsCommand}"
-                Content="Mijloace Fixe"                
+                Content="Mijloace fixe"                
                 Visibility="{Binding IsAccountant, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
         <Button Command="{Binding NavigateOperationsCommamd}"
