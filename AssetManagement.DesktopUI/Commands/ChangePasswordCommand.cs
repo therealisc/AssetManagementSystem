@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -24,6 +25,7 @@ namespace AssetManagement.DesktopUI.Commands
         {
             try
             {
+                ValidatePassword(_viewModel.ReenteredPassword);
                 _authentificationService.ChangePassword(_viewModel.LoggedInUser.UserId, _viewModel.ReenteredPassword);
                 _viewModel.NewPassword = string.Empty;
                 _viewModel.ReenteredPassword = string.Empty;
@@ -45,6 +47,14 @@ namespace AssetManagement.DesktopUI.Commands
         private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             OnCanExecuteChanged();
+        }
+
+        private void ValidatePassword(string password)
+        {
+            if (Regex.IsMatch(password, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,30}$") == false)
+            {
+                throw new Exception("Parola trebuie sa contina intre 8 si 30 de caractere, un numar si un caracter special!");
+            }
         }
     }
 }
