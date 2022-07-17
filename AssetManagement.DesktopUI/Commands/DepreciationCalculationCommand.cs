@@ -28,7 +28,7 @@ namespace AssetManagement.DesktopUI.Commands
         public override void Execute(object parameter)
         {
             _viewModel.FixedAssets = new BindingList<FixedAssetDepreciationDisplayModel>(_fixedAssetsOperationsAndDepreciationMappingService.MapToFixedAssetDepreciationDisplayModel(
-                _depreciationData.GetFixedAssets(_viewModel.SelectedClient.Id, _viewModel.SelectedDate)));
+                _depreciationData.GetFixedAssets(_viewModel.SelectedClient.Id, _viewModel.SelectedDate).Where(x => _viewModel.SelectedDate >= x.EntryDate).ToList()));
         }
 
         public override bool CanExecute(object parameter)

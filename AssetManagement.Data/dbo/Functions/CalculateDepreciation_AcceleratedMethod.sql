@@ -14,7 +14,7 @@ BEGIN
 	DECLARE @MonthsSinceEntry int = DATEDIFF(M, @DateOfEntry, @DateOfReference);
 	DECLARE @MonthsBetweenEntryAndExit int = DATEDIFF(M, @DateOfEntry, @DateOfExit);
 	DECLARE @MonthlyDepreciationInTheFirstYear money = (@InitialValue * 0.5) / 12; -- 50% IN THE FIRST YEAR
-	DECLARE @MonthlyDepreciationAfterTheFirstYear money = (@InitialValue * 0.5) / @MonthsOfDepreciation - 12;
+	DECLARE @MonthlyDepreciationAfterTheFirstYear money = (@InitialValue * 0.5) / (@MonthsOfDepreciation - 12);
 
 	-- for operation depreciation calculation
 	DECLARE @MonthsOfDepreciationLeft int = @MonthsOfDepreciation - DATEDIFF(M, @DateOfEntry, @OperationEntryDate);
@@ -23,7 +23,7 @@ BEGIN
 		BEGIN
 			DECLARE @MonthsSinceOperationEntry int = DATEDIFF(M, @OperationEntryDate, @DateOfReference);
 			SET @MonthlyDepreciationInTheFirstYear = (@InitialValue * 0.5) / (12 - (@MonthsSinceEntry - @MonthsSinceOperationEntry)); -- 50% IN THE FIRST YEAR
-			SET @MonthlyDepreciationAfterTheFirstYear = (@InitialValue * 0.5) / @MonthsOfDepreciation - 12;
+			SET @MonthlyDepreciationAfterTheFirstYear = (@InitialValue * 0.5) / (@MonthsOfDepreciation - 12);
 			SET @MonthsOfDepreciation = @MonthsOfDepreciationLeft;
 			DECLARE @MonthsBetweenOperationEntryAndExit int = DATEDIFF(M, @OperationEntryDate, @DateOfExit);
 

@@ -44,7 +44,7 @@ namespace AssetManagement.DesktopUI.Services.ReportServices
                 $"Numarul de inventar {fixedAsset.InventoryNumber} {"\n"} " +
                 $"Documentul de provenienta {fixedAsset.AssignedDocument.DocumentNumber} {"\n"}" +
                 $"Valoare de inventar {fixedAsset.AssetValue} {"\n"}" +
-                $"Amortizare lunara {fixedAsset.AssetValue / fixedAsset.MonthsOfAccountingDepreciation} {"\n"}" +
+                $"Amortizare lunara {fixedAsset.AssetValue / fixedAsset.MonthsOfAccountingDepreciation:N2} {"\n"}" +
                 $"{"\n"}" +
                 $"Denumirea mijlocului fix si caracteristicile tehnice {"\n"}" +
                 $"{fixedAsset.FixedAssetDescription}");
@@ -64,7 +64,7 @@ namespace AssetManagement.DesktopUI.Services.ReportServices
                 $"Durata normala de functionare {"\n"}" +
                 $"{fixedAsset.MonthsOfAccountingDepreciation / 12} {"\n"}{"\n"}" +
                 $"Cota de amortizare {"\n"}" +
-                $"{fixedAsset.MonthsOfAccountingDepreciation * 12 / 100 }%");
+                $"{1 / (decimal.Parse(fixedAsset.MonthsOfAccountingDepreciation.ToString()) / 12) * 100:N2}%");
             identificationTable.AddCell(new Cell().Add(fixedAssetDescriptionColumn));
             document.Add(identificationTable);            
 
