@@ -13,7 +13,7 @@ namespace AssetManagement.DesktopUI.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        private string _username = "admin";
+        private string _username;
 
         public string Username
         {
@@ -26,7 +26,7 @@ namespace AssetManagement.DesktopUI.ViewModels
         }
 
 
-        private string _password = "1234";
+        private string _password;
 
         public string Password
         {
